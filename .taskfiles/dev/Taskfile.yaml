@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  init:
+    preconditions:
+      - sh: "! k3d cluster list | grep -q 'lab-config'"
+        msg: "lab-config cluster already exists"
+    cmds:
+      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml
+      - task: write-config
+    silent: true
+
+  reset:
+    cmds:
+      - k3d cluster delete lab-config
+      - task: init
+
+  write-config:
+    cmds:
+      - k3d kubeconfig get lab-config > {{.ROOT_DIR}}/kubeconfig
