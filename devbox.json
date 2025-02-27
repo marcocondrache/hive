@@ -2,13 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
   "packages": [
     "k3d@latest",
-    "go-task@latest"
+    "go-task@latest",
+    "kubernetes-helm@latest",
+    "helmfile@latest",
+    "opentofu@latest"
   ],
   "env": {
     "KUBECONFIG": "$PWD/kubeconfig"
   },
   "shell": {
     "init_hook": [],
-    "scripts": {}
+    "scripts":   {}
   }
 }
