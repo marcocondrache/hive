@@ -10,6 +10,7 @@ vars:
 
 includes:
   dev: .taskfiles/dev
+  infra: .taskfiles/infra
 
 tasks:
   default:

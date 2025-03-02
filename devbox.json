@@ -5,11 +5,14 @@
     "go-task@latest",
     "kubernetes-helm@latest",
     "helmfile@latest",
-    "opentofu@latest"
+    "opentofu@latest",
+    "_1password-cli@latest",
+    "rustscan@latest"
   ],
   "env": {
     "KUBECONFIG": "$PWD/kubeconfig"
   },
+  "env_from": ".env",
   "shell": {
     "init_hook": [],
     "scripts":   {}

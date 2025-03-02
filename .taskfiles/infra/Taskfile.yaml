@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  TF_DIR: "{{.ROOT_DIR}}/infrastructure"
+
+tasks:
+  bootstrap:
+    dir: "{{.TF_DIR}}"
+    cmds:
+      - tofu init
+      - tofu apply
+
+  destroy:
+    dir: "{{.TF_DIR}}"
+    cmds:
+      - tofu destroy -auto-approve -input=false
+
+  apply:
+    dir: "{{.TF_DIR}}"
+    cmds:
+      - tofu apply -auto-approve -input=false

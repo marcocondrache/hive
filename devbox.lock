@@ -1,6 +1,57 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "_1password-cli@latest": {
+      "last_modified": "2025-02-23T09:42:26Z",
+      "resolved": "github:NixOS/nixpkgs/2d068ae5c6516b2d04562de50a58c682540de9bf#_1password-cli",
+      "source": "devbox-search",
+      "version": "2.30.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/dd7ya52ykxhkr6a2nc5820k3wl0c4yql-1password-cli-2.30.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/dd7ya52ykxhkr6a2nc5820k3wl0c4yql-1password-cli-2.30.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fsj213896l8qbqy8ppwl4pf3jbfdmz8f-1password-cli-2.30.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/fsj213896l8qbqy8ppwl4pf3jbfdmz8f-1password-cli-2.30.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/wkz5hpnm56afdn23m7xrfgxfsyjp9pi4-1password-cli-2.30.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/wkz5hpnm56afdn23m7xrfgxfsyjp9pi4-1password-cli-2.30.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nbs29izxl7z0p2l3slk586g2nmmd6j3f-1password-cli-2.30.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nbs29izxl7z0p2l3slk586g2nmmd6j3f-1password-cli-2.30.3"
+        }
+      }
+    },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "resolved": "github:NixOS/nixpkgs/199169a2135e6b864a888e89a2ace345703c025d?lastModified=1740791350&narHash=sha256-igS2Z4tVw5W%2Fx3lCZeeadt0vcU9fxtetZ%2FRyrqsCRQ0%3D"
+    },
     "go-task@latest": {
       "last_modified": "2025-02-07T11:26:36Z",
       "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#go-task",
@@ -238,6 +289,54 @@
             }
           ],
           "store_path": "/nix/store/1gc7dl8bcrks1y98qlblr08aly4b3qry-opentofu-1.9.0"
+        }
+      }
+    },
+    "rustscan@latest": {
+      "last_modified": "2025-02-07T11:26:36Z",
+      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#rustscan",
+      "source": "devbox-search",
+      "version": "2.3.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4s5000b02d9hrxb9z4r4180idngqd75x-rustscan-2.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/4s5000b02d9hrxb9z4r4180idngqd75x-rustscan-2.3.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/93x4ms5xv0b60b1b8l9ajlxrfnq5nbvj-rustscan-2.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/93x4ms5xv0b60b1b8l9ajlxrfnq5nbvj-rustscan-2.3.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6h9bjm6n4q4pam8qs0b30p87grd3mg37-rustscan-2.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6h9bjm6n4q4pam8qs0b30p87grd3mg37-rustscan-2.3.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7bqc1df9n7c9xcd18b4wxggg9vxqxak3-rustscan-2.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7bqc1df9n7c9xcd18b4wxggg9vxqxak3-rustscan-2.3.0"
         }
       }
     }
