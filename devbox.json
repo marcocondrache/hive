@@ -8,7 +8,8 @@
     "opentofu@latest",
     "_1password-cli@latest",
     "rustscan@latest",
-    "kubectl@latest"
+    "kubectl@latest",
+    "fluxcd@latest"
   ],
   "env": {
     "KUBECONFIG": "$PWD/kubeconfig",
