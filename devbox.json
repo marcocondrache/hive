@@ -7,10 +7,12 @@
     "helmfile@latest",
     "opentofu@latest",
     "_1password-cli@latest",
-    "rustscan@latest"
+    "rustscan@latest",
+    "kubectl@latest"
   ],
   "env": {
-    "KUBECONFIG": "$PWD/kubeconfig"
+    "KUBECONFIG": "$PWD/kubeconfig",
+    "ROOT_DIR":   "$PWD"
   },
   "env_from": ".env",
   "shell": {

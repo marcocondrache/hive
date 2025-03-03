@@ -49,7 +49,7 @@ module "nixos" {
   nixos_system_attr      = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.toplevel"
   nixos_partitioner_attr = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.diskoScriptNoDeps"
 
-  extra_files_script = "${path.module}/../../scripts/ssh-keys-provisioning.sh"
+  extra_files_script = "${path.root}/../scripts/ssh-keys-provisioning.sh"
   extra_environment = {
     OP_VAULT = var.onepassword_vault
     OP_ITEM = var.onepassword_item

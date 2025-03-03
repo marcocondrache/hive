@@ -27,8 +27,17 @@ variable "onepassword_vault" {
   type        = string
 }
 
+resource "hcloud_placement_group" "edge" {
+  name = "edge"
+  type = "spread"
+}
+
 # Create Hetzner edge servers
 resource "hcloud_server" "edge" {
+  depends_on = [
+    hcloud_placement_group.edge
+  ]
+
   for_each = var.instances
 
   name        = each.key
@@ -38,6 +47,8 @@ resource "hcloud_server" "edge" {
   keep_disk   = true
   backups     = false
   location    = each.value.location
+
+  placement_group_id = hcloud_placement_group.edge.id
 }
 
 # Install NixOS on each edge server

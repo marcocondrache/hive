@@ -27,8 +27,17 @@ variable "onepassword_vault" {
   type        = string
 }
 
+resource "hcloud_placement_group" "cloud" {
+  name = "cloud"
+  type = "spread"
+}
+
 # Create Hetzner cloud servers
 resource "hcloud_server" "cloud" {
+  depends_on = [
+    hcloud_placement_group.cloud
+  ]
+
   for_each = var.instances
 
   name        = each.key
@@ -38,6 +47,8 @@ resource "hcloud_server" "cloud" {
   keep_disk   = true
   backups     = false
   location    = each.value.location
+
+  placement_group_id = hcloud_placement_group.cloud.id
 }
 
 # Install NixOS on each cloud server
