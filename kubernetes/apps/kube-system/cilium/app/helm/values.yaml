@@ -26,7 +26,7 @@ operator:
   rollOutPods: true
 
   nodeSelector:
-    node-role.kubernetes.io/master: "true"
+    node-role.kubernetes.io/control-plane: "true"
 
 l2announcements:
   enabled: false

@@ -23,9 +23,9 @@ tasks:
     cmds:
       - k3d cluster delete lab-config --config {{.ROOT_DIR}}/cluster.yaml
 
-  # TODO: needed?
   mount-bpf:
     silent: true
+    internal: true
     vars:
       NODES:
         sh: "k3d node list | grep -E 'lab-config-(server|agent)' | grep -v 'serverlb' | awk '{print $1}'"

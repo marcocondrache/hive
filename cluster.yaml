@@ -4,12 +4,17 @@ apiVersion: k3d.io/v1alpha5
 kind: Simple
 metadata:
   name: lab-config
-image: rancher/k3s:latest
+image: docker.io/rancher/k3s:latest
 kubeAPI:
   hostIP: 0.0.0.0
   hostPort: "6443"
 servers: 1
 agents: 2
+registries:
+  # TODO: enable for all registries
+  config: |
+    mirrors:
+      docker.io:
 env:
   - envVar: KUBECONFIG=/var/lib/rancher/k3s/agent/kubelet.kubeconfig
     nodeFilters:
@@ -47,6 +52,9 @@ options:
         nodeFilters:
           - server:*
       - arg: --disable-helm-controller
+        nodeFilters:
+          - server:*
+      - arg: --embedded-registry
         nodeFilters:
           - server:*
   kubeconfig:
