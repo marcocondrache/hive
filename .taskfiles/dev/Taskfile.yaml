@@ -3,20 +3,48 @@
 version: "3"
 
 tasks:
-  init:
+  create-cluster:
+    env:
+      K3D_FIX_DNS: 0
+      K3D_FIX_CGROUPV2: 1
     preconditions:
       - sh: "! k3d cluster list | grep -q 'lab-config'"
         msg: "lab-config cluster already exists"
+    internal: true
     cmds:
-      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml
+      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml --trace
+
+  delete-cluster:
+    internal: true
+    preconditions:
+      - sh: "k3d cluster list | grep -q 'lab-config'"
+        msg: "lab-config cluster doesn't exist"
+    cmds:
+      - k3d cluster delete lab-config --config {{.ROOT_DIR}}/cluster.yaml
+
+  mount-bpf:
+    internal: true
+    cmds:
+      - docker exec -it k3d-lab-config-server-0 mount bpffs /sys/fs/bpf -t bpf
+      - docker exec -it k3d-lab-config-server-0 mount --make-shared /sys/fs/bpf
+      - docker exec -it k3d-lab-config-server-1 mount bpffs /sys/fs/bpf -t bpf
+      - docker exec -it k3d-lab-config-server-1 mount --make-shared /sys/fs/bpf
+      - docker exec -it k3d-lab-config-server-2 mount bpffs /sys/fs/bpf -t bpf
+      - docker exec -it k3d-lab-config-server-2 mount --make-shared /sys/fs/bpf
+      - sudo mount -t bpf bpf /sys/fs/bpf
+
+  write-config:
+    internal: true
+    cmds:
+      - k3d kubeconfig get lab-config > {{.ROOT_DIR}}/kubeconfig
+
+  init:
+    cmds:
+      - task: create-cluster
       - task: write-config
     silent: true
 
   reset:
+    deps: [delete-cluster]
     cmds:
-      - k3d cluster delete lab-config
       - task: init
-
-  write-config:
-    cmds:
-      - k3d kubeconfig get lab-config > {{.ROOT_DIR}}/kubeconfig

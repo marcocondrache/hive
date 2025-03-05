@@ -1,0 +1,42 @@
+---
+# Basic Cilium configuration for K3s
+cluster:
+  id: 1
+  name: lab-config
+
+# K3s specific settings
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 6443
+
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+
+ipv4NativeRoutingCIDR: 10.42.0.0/16 # Default K3s pod CIDR
+
+operator:
+  replicas: 1
+
+l2announcements:
+  enabled: false
+
+externalIPs:
+  enabled: true
+
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList: "10.42.0.0/16"
+
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /run/cilium/cgroupv2
+
+# Disable features not needed for simple clusters
+hubble:
+  enabled: false
+envoy:
+  enabled: false
+bgpControlPlane:
+  enabled: false
+bandwidthManager:
+  enabled: false

@@ -49,6 +49,54 @@
         }
       }
     },
+    "cilium-cli@latest": {
+      "last_modified": "2025-02-07T11:26:36Z",
+      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#cilium-cli",
+      "source": "devbox-search",
+      "version": "0.16.24",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nr4fyxxndryz95k0yb71gwppv3xrazkd-cilium-cli-0.16.24",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nr4fyxxndryz95k0yb71gwppv3xrazkd-cilium-cli-0.16.24"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/im14mdv1gl0acp1yv5iyc0zfjg5j2dcs-cilium-cli-0.16.24",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/im14mdv1gl0acp1yv5iyc0zfjg5j2dcs-cilium-cli-0.16.24"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/711zm3dcggf6v2wdjw8yvrn49hhr24mb-cilium-cli-0.16.24",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/711zm3dcggf6v2wdjw8yvrn49hhr24mb-cilium-cli-0.16.24"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/lraxqg2rk0xxb65nadmr33n6dfgyfix1-cilium-cli-0.16.24",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/lraxqg2rk0xxb65nadmr33n6dfgyfix1-cilium-cli-0.16.24"
+        }
+      }
+    },
     "fluxcd@latest": {
       "last_modified": "2025-02-07T11:26:36Z",
       "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#fluxcd",
@@ -373,6 +421,54 @@
             }
           ],
           "store_path": "/nix/store/jnff4f0rfxp13bj7wld1yx6r26y4why7-kubernetes-helm-3.17.1"
+        }
+      }
+    },
+    "kubernetes-helmPlugins.helm-diff@latest": {
+      "last_modified": "2025-02-07T11:26:36Z",
+      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#kubernetes-helmPlugins.helm-diff",
+      "source": "devbox-search",
+      "version": "3.10.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hvqrlkv9ijdpgqkdmcxkpph2r6lycsjl-helm-diff-3.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hvqrlkv9ijdpgqkdmcxkpph2r6lycsjl-helm-diff-3.10.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/l2yr387drixmnkmi233nrcw4jqp7jz1a-helm-diff-3.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/l2yr387drixmnkmi233nrcw4jqp7jz1a-helm-diff-3.10.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/a7wbhjk5sjxqzpqf9xzl9zlz9ypqxwa5-helm-diff-3.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/a7wbhjk5sjxqzpqf9xzl9zlz9ypqxwa5-helm-diff-3.10.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/3528c5w46h4ap4bs58xsbj6h5isa69jx-helm-diff-3.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/3528c5w46h4ap4bs58xsbj6h5isa69jx-helm-diff-3.10.0"
         }
       }
     },

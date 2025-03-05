@@ -5,29 +5,55 @@ kind: Simple
 metadata:
   name: lab-config
 image: rancher/k3s:latest
-servers: 1
-agents: 2
+kubeAPI:
+  hostPort: "6443"
+network: lab-config-network
+servers: 3
 options:
-  # k3s:
-  #   extraArgs:
-  #     - arg: --disable=traefik
-  #       nodeFilters:
-  #         - server:*
-  #     - arg: --disable=coredns
-  #       nodeFilters:
-  #         - server:*
-  #     - arg: --disable=servicelb
-  #       nodeFilters:
-  #         - server:*
-  #     - arg: --flannel-backend=none
-  #       nodeFilters:
-  #         - server:*
-  #     - arg: --disable-network-policy
-  #       nodeFilters:
-  #         - server:*
-  #     - arg: --disable-kube-proxy
-  #       nodeFilters:
-  #         - server:*
+  k3s:
+    extraArgs:
+      - arg: --tls-san=127.0.0.1
+        nodeFilters:
+          - server:*
+      - arg: --disable=local-storage
+        nodeFilters:
+          - server:*
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+      - arg: --disable=metrics-server
+        nodeFilters:
+          - server:*
+      - arg: --disable=coredns
+        nodeFilters:
+          - server:*
+      - arg: --disable=servicelb
+        nodeFilters:
+          - server:*
+      - arg: --flannel-backend=none
+        nodeFilters:
+          - server:*
+      - arg: --disable-network-policy
+        nodeFilters:
+          - server:*
+      - arg: --disable-kube-proxy
+        nodeFilters:
+          - server:*
+      - arg: --disable-helm-controller
+        nodeFilters:
+          - server:*
+      - arg: --cluster-cidr=10.42.0.0/16
+        nodeFilters:
+          - server:*
+      - arg: --service-cidr=10.43.0.0/16
+        nodeFilters:
+          - server:*
+      - arg: --kube-controller-manager-arg=bind-address=0.0.0.0
+        nodeFilters:
+          - server:*
+      - arg: --kube-scheduler-arg=bind-address=0.0.0.0
+        nodeFilters:
+          - server:*
   kubeconfig:
     updateDefaultKubeconfig: false
     switchCurrentContext: false

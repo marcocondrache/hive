@@ -3,17 +3,20 @@
   "packages": [
     "k3d@latest",
     "go-task@latest",
-    "kubernetes-helm@latest",
     "helmfile@latest",
     "opentofu@latest",
     "_1password-cli@latest",
     "rustscan@latest",
     "kubectl@latest",
-    "fluxcd@latest"
+    "fluxcd@latest",
+    "kubernetes-helm@latest",
+    "kubernetes-helmPlugins.helm-diff@latest",
+    "cilium-cli@latest"
   ],
   "env": {
-    "KUBECONFIG": "$PWD/kubeconfig",
-    "ROOT_DIR":   "$PWD"
+    "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
+    "KUBECONFIG":   "$PWD/kubeconfig",
+    "ROOT_DIR":     "$PWD"
   },
   "env_from": ".env",
   "shell": {
