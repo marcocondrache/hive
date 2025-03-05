@@ -6,23 +6,36 @@ cluster:
 
 kubeProxyReplacement: true
 k8sServiceHost: 127.0.0.1
-k8sServicePort: 6443
+k8sServicePort: 6444
+
+# TODO: investigate
+autoDirectNodeRoutes: true
 
 routingMode: "native"
 ipv4NativeRoutingCIDR: 10.42.0.0/16
+
+rollOutCiliumPods: true
+
+cgroup:
+  automount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
 
 operator:
   replicas: 1
   rollOutPods: true
 
+  nodeSelector:
+    node-role.kubernetes.io/master: "true"
+
 l2announcements:
   enabled: false
 
-externalIPs:
-  enabled: true
-
 bpf:
   masquerade: true
+
+externalIPs:
+  enabled: true
 
 ipam:
   mode: kubernetes
