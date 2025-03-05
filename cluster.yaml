@@ -6,10 +6,17 @@ metadata:
   name: lab-config
 image: rancher/k3s:latest
 kubeAPI:
+  hostIP: 0.0.0.0
   hostPort: "6443"
-network: lab-config-network
-servers: 3
+servers: 1
+agents: 2
+env:
+  - envVar: KUBECONFIG=/var/lib/rancher/k3s/agent/kubelet.kubeconfig
+    nodeFilters:
+      - agent:*
 options:
+  k3d:
+    disableLoadbalancer: false
   k3s:
     extraArgs:
       - arg: --tls-san=127.0.0.1
@@ -40,18 +47,6 @@ options:
         nodeFilters:
           - server:*
       - arg: --disable-helm-controller
-        nodeFilters:
-          - server:*
-      - arg: --cluster-cidr=10.42.0.0/16
-        nodeFilters:
-          - server:*
-      - arg: --service-cidr=10.43.0.0/16
-        nodeFilters:
-          - server:*
-      - arg: --kube-controller-manager-arg=bind-address=0.0.0.0
-        nodeFilters:
-          - server:*
-      - arg: --kube-scheduler-arg=bind-address=0.0.0.0
         nodeFilters:
           - server:*
   kubeconfig:

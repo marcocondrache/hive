@@ -12,7 +12,8 @@ tasks:
         msg: "lab-config cluster already exists"
     internal: true
     cmds:
-      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml --trace
+      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml
+      - task: mount-bpf
 
   delete-cluster:
     internal: true
@@ -22,16 +23,17 @@ tasks:
     cmds:
       - k3d cluster delete lab-config --config {{.ROOT_DIR}}/cluster.yaml
 
+  # TODO: needed?
   mount-bpf:
-    internal: true
+    silent: true
+    vars:
+      NODES:
+        sh: "k3d node list | grep -E 'lab-config-(server|agent)' | grep -v 'serverlb' | awk '{print $1}'"
     cmds:
-      - docker exec -it k3d-lab-config-server-0 mount bpffs /sys/fs/bpf -t bpf
-      - docker exec -it k3d-lab-config-server-0 mount --make-shared /sys/fs/bpf
-      - docker exec -it k3d-lab-config-server-1 mount bpffs /sys/fs/bpf -t bpf
-      - docker exec -it k3d-lab-config-server-1 mount --make-shared /sys/fs/bpf
-      - docker exec -it k3d-lab-config-server-2 mount bpffs /sys/fs/bpf -t bpf
-      - docker exec -it k3d-lab-config-server-2 mount --make-shared /sys/fs/bpf
-      - sudo mount -t bpf bpf /sys/fs/bpf
+      - for: { var: NODES }
+        cmd: |
+          docker exec -it {{.ITEM}} mount bpffs /sys/fs/bpf -t bpf
+          docker exec -it {{.ITEM}} mount --make-shared /sys/fs/bpf
 
   write-config:
     internal: true
