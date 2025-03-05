@@ -3,6 +3,7 @@
 
 helmDefaults:
   wait: true
+  timeout: 600
   waitForJobs: true
   cleanupOnFail: true
   # waitRetries: 3 # Not supported by Helm yet
