@@ -27,10 +27,6 @@ repositories:
   - name: jetstack
     url: https://charts.jetstack.io
 
-  - name: spegel
-    url: ghcr.io/spegel-org/helm-charts
-    oci: true
-
 releases:
   - name: cilium
     namespace: kube-system
@@ -82,16 +78,16 @@ releases:
   #     ]
   #   needs: ["kube-system/spegel"]
 
-  # - name: external-secrets
-  #   namespace: external-secrets
-  #   atomic: true
-  #   chart: external-secrets/external-secrets
-  #   version: 0.14.3
-  #   values:
-  #     [
-  #       '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/external-secrets/external-secrets/app/helm/values.yaml',
-  #     ]
-  #   needs: ["cert-manager/cert-manager"]
+  - name: external-secrets
+    namespace: external-secrets
+    atomic: true
+    chart: external-secrets/external-secrets
+    version: 0.14.3
+    values:
+      [
+        '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/external-secrets/external-secrets/app/helm/values.yaml',
+      ]
+    needs: ["kube-system/coredns"]
 
   - name: flux-operator
     namespace: flux-system
@@ -102,7 +98,7 @@ releases:
       [
         '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/app/helm/values.yaml',
       ]
-    needs: ["kube-system/coredns"]
+    needs: ["external-secrets/external-secrets"]
 
   - name: flux-instance
     namespace: flux-system

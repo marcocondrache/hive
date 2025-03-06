@@ -6,7 +6,7 @@ resources:
   - ./helmrelease.yaml
   - ./helmrepository.yaml
 configMapGenerator:
-  - name: coredns-values
+  - name: external-secrets-values
     files:
       - values.yaml=./helm/values.yaml
 configurations:

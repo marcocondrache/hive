@@ -472,6 +472,54 @@
         }
       }
     },
+    "minijinja@latest": {
+      "last_modified": "2025-02-07T11:26:36Z",
+      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#minijinja",
+      "source": "devbox-search",
+      "version": "2.7.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6q481xqhl10s7a3c8qnnflg2yrjlrw9q-minijinja-2.7.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6q481xqhl10s7a3c8qnnflg2yrjlrw9q-minijinja-2.7.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/1yhsjsk5cv5pad9yqm79mylz25cxz22p-minijinja-2.7.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/1yhsjsk5cv5pad9yqm79mylz25cxz22p-minijinja-2.7.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/p9wl3qfp0p2pg49xahdfqs0wh4paswy2-minijinja-2.7.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/p9wl3qfp0p2pg49xahdfqs0wh4paswy2-minijinja-2.7.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9b1bm3wz9fb5h2hip91xl1lnji6v82dq-minijinja-2.7.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9b1bm3wz9fb5h2hip91xl1lnji6v82dq-minijinja-2.7.0"
+        }
+      }
+    },
     "opentofu@latest": {
       "last_modified": "2025-02-07T11:26:36Z",
       "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#opentofu",

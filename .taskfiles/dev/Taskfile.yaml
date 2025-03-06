@@ -12,7 +12,7 @@ tasks:
         msg: "lab-config cluster already exists"
     internal: true
     cmds:
-      - k3d cluster create --config {{.ROOT_DIR}}/cluster.yaml
+      - k3d cluster create --config {{.K3D_CONFIG}}
       - task: mount-bpf
 
   delete-cluster:
@@ -21,7 +21,7 @@ tasks:
       - sh: "k3d cluster list | grep -q 'lab-config'"
         msg: "lab-config cluster doesn't exist"
     cmds:
-      - k3d cluster delete lab-config --config {{.ROOT_DIR}}/cluster.yaml
+      - k3d cluster delete lab-config --config {{.K3D_CONFIG}}
 
   mount-bpf:
     silent: true
@@ -38,7 +38,7 @@ tasks:
   write-config:
     internal: true
     cmds:
-      - k3d kubeconfig get lab-config > {{.ROOT_DIR}}/kubeconfig
+      - k3d kubeconfig get lab-config > {{.KUBECONFIG}}
 
   init:
     cmds:

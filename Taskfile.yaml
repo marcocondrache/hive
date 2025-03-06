@@ -6,11 +6,18 @@ set: [pipefail]
 shopt: [globstar]
 
 vars:
+  SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
+  BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
+
+  K3D_CONFIG: "{{.KUBERNETES_DIR}}/cluster.yaml"
+  KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
 
 includes:
   dev: .taskfiles/dev
   infra: .taskfiles/infra
+  bootstrap: .taskfiles/bootstrap
 
 tasks:
   default:

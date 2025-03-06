@@ -1,0 +1,25 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  apply-resources:
+    silent: true
+    internal: true
+    vars:
+      RESOURCES:
+        sh: minijinja-cli {{.BOOTSTRAP_DIR}}/resources.yaml.j2 | op inject
+    cmds:
+      - echo "{{.RESOURCES}}" | kubectl apply --server-side -f -
+
+  apply-helmfile:
+    internal: true
+    cmds:
+      - helmfile apply -f {{.BOOTSTRAP_DIR}}/helmfile.yaml --skip-diff-on-install --suppress-diff
+    silent: true
+
+  cluster:
+    cmds:
+      - task: apply-resources
+      - task: apply-helmfile
+    silent: true
