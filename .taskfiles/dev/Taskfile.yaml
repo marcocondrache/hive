@@ -11,11 +11,13 @@ tasks:
       - sh: "! k3d cluster list | grep -q 'lab-config'"
         msg: "lab-config cluster already exists"
     internal: true
+    silent: true
     cmds:
       - k3d cluster create --config {{.K3D_CONFIG}}
       - task: mount-bpf
 
   delete-cluster:
+    silent: true
     internal: true
     preconditions:
       - sh: "k3d cluster list | grep -q 'lab-config'"
