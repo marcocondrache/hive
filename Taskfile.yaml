@@ -11,8 +11,8 @@ vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
 
-  K3D_CONFIG: "{{.KUBERNETES_DIR}}/cluster.yaml"
-  KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
+  K3D_CONFIG: "{{.ROOT_DIR}}/cluster.yaml"
+  KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
 includes:
   dev: .taskfiles/dev
