@@ -19,29 +19,14 @@ module "cloud" {
       host = "atlas"
       location = "fsn1"
     }
-  }
 
-  nix_repo = var.nix_repo
-  nix_user = var.nix_user
-
-  ssh_key = hcloud_ssh_key.master.id
-  onepassword_vault = var.onepassword_vault
-}
-
-# Edge module for edge instances in Hetzner
-module "edge" {
-  source = "./modules/edge"
-
-  depends_on = [ module.cloud ]
-  
-  instances = {
     athena = {
       type = "cax11"
       host = "athena"
       location = "fsn1"
     }
   }
-  
+
   nix_repo = var.nix_repo
   nix_user = var.nix_user
 
@@ -53,7 +38,7 @@ module "edge" {
 module "local" {
   source = "./modules/local"
 
-  depends_on = [ module.cloud, module.edge ]
+  depends_on = [ module.cloud]
   
   instances = {}
 

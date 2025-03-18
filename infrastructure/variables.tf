@@ -19,3 +19,9 @@ variable "nix_user" {
   description = "Nix user"
   type        = string
 }
+
+variable "tailscale_token" {
+  description = "Tailscale token"
+  type        = string
+  sensitive   = true
+}
