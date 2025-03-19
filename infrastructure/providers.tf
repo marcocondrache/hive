@@ -19,7 +19,7 @@ terraform {
 
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 5"
+      version = "~> 5.1.0"
     }
 
     github = {
@@ -37,6 +37,10 @@ terraform {
       version = "~> 2.4.0"
     }
   }
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_token
 }
 
 provider "tailscale" {

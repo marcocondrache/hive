@@ -25,3 +25,14 @@ variable "tailscale_token" {
   type        = string
   sensitive   = true
 }
+
+variable "cloudflare_token" {
+  description = "Cloudflare token"
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_zone" {
+  description = "Cloudflare zone"
+  type        = string
+}

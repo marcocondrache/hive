@@ -1,8 +1,10 @@
 data "cloudflare_ip_ranges" "cloudflare" {}
 
-data "tailscale_device" "tailscale" {
+data "tailscale_device" "cloud" {
   for_each = var.instances
   hostname = each.value.host
+
+  wait_for = "4h"
 }
 
 variable "instances" {
@@ -137,7 +139,7 @@ module "nixos" {
   install_user = "root"
 
   target_user = var.nix_user
-  target_host = coalesce(data.tailscale_device.tailscale[each.key].addresses[0], hcloud_server.cloud[each.key].ipv4_address)
+  target_host = coalesce(data.tailscale_device.cloud[each.key].addresses[0], hcloud_server.cloud[each.key].ipv4_address)
   
   nix_repo = var.nix_repo
   host_name = each.value.host

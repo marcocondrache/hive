@@ -9,6 +9,17 @@ resource "hcloud_ssh_key" "master" {
   public_key = data.github_repository_file.master.content
 }
 
+resource "cloudflare_dns_record" "connect" {
+  zone_id = var.cloudflare_zone
+  type = "A"
+  name = "connect"
+  proxied = false
+  content = module.cloud.cloud_servers["atlas"].tailscale_address
+  ttl = 60
+
+  depends_on = [ module.cloud ]
+}
+
 # Cloud module for Hetzner cloud instances
 module "cloud" {
   source = "./modules/cloud"
