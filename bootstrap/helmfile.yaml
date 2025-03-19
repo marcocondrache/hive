@@ -7,30 +7,11 @@ helmDefaults:
   cleanupOnFail: true
   # waitRetries: 3 # Not supported by Helm yet
 
-repositories:
-  - name: controlplaneio
-    url: ghcr.io/controlplaneio-fluxcd/charts
-    oci: true
-
-  - name: coredns
-    url: ghcr.io/coredns/charts
-    oci: true
-
-  - name: cilium
-    url: https://helm.cilium.io
-
-  - name: external-secrets
-    url: ghcr.io/external-secrets/charts
-    oci: true
-
-  - name: jetstack
-    url: https://charts.jetstack.io
-
 releases:
   - name: cilium
     namespace: kube-system
     atomic: true
-    chart: cilium/cilium
+    chart: oci://ghcr.io/home-operations/charts-mirror/cilium
     version: 1.17.1
     values:
       [
@@ -58,7 +39,7 @@ releases:
   - name: coredns
     namespace: kube-system
     atomic: true
-    chart: coredns/coredns
+    chart: ghcr.io/coredns/charts/coredns
     version: 1.39.1
     values:
       [
@@ -66,21 +47,21 @@ releases:
       ]
     needs: ["kube-system/cilium"]
 
-  # - name: cert-manager
-  #   namespace: cert-manager
-  #   atomic: true
-  #   chart: jetstack/cert-manager
-  #   version: v1.17.1
-  #   values:
-  #     [
-  #       '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm/values.yaml',
-  #     ]
-  #   needs: ["kube-system/spegel"]
+  - name: cert-manager
+    namespace: cert-manager
+    atomic: true
+    chart: oci://ghcr.io/home-operations/charts-mirror/cert-manager
+    version: v1.17.1
+    values:
+      [
+        '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm/values.yaml',
+      ]
+    needs: ["kube-system/coredns"]
 
   - name: external-secrets
     namespace: external-secrets
     atomic: true
-    chart: external-secrets/external-secrets
+    chart: ghcr.io/external-secrets/charts/external-secrets
     version: 0.14.3
     values:
       [
@@ -104,12 +85,12 @@ releases:
           - --field-manager=kustomize-controller
           - --filename={{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/external-secrets/external-secrets/app/clustersecretstore.yaml
         showlogs: true
-    needs: ["kube-system/coredns"]
+    needs: ["cert-manager/cert-manager"]
 
   - name: flux-operator
     namespace: flux-system
     atomic: true
-    chart: controlplaneio/flux-operator
+    chart: ghcr.io/controlplaneio-fluxcd/charts/flux-operator
     version: 0.17.0
     values:
       [
@@ -120,7 +101,7 @@ releases:
   - name: flux-instance
     namespace: flux-system
     atomic: true
-    chart: controlplaneio/flux-instance
+    chart: ghcr.io/controlplaneio-fluxcd/charts/flux-instance
     version: 0.17.0
     values:
       [
