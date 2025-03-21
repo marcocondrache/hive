@@ -44,16 +44,3 @@ module "cloud" {
   ssh_key = hcloud_ssh_key.master.id
   onepassword_vault = var.onepassword_vault
 }
-
-# Local module for local instances
-module "local" {
-  source = "./modules/local"
-
-  depends_on = [ module.cloud]
-  
-  instances = {}
-
-  nix_repo = var.nix_repo
-  nix_user = var.nix_user
-  onepassword_vault = var.onepassword_vault
-}

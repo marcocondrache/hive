@@ -9,6 +9,11 @@ variable "install_user" {
   default     = "root"
 }
 
+variable "install_host" {
+  description = "Host to use for installation"
+  type        = string
+}
+
 variable "target_user" {
   description = "User to use for SSH access after installation"
   type        = string
@@ -39,27 +44,54 @@ variable "onepassword_item" {
   type        = string
 }
 
-module "nixos" {
-  source = "github.com/nix-community/nixos-anywhere//terraform/all-in-one"
-
+locals {
   nix_options = {
     "tarball-ttl" = 0
   }
+}
 
-  nixos_system_attr      = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.toplevel"
-  nixos_partitioner_attr = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.diskoScriptNoDeps"
+module "system-build" {
+  source = "github.com/nix-community/nixos-anywhere//terraform/nix-build"
+  attribute = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.toplevel"
+  nix_options = local.nix_options
+}
 
-  extra_files_script = "${path.root}/../scripts/ssh-keys-provisioning.sh"
-  extra_environment = {
+module "partitioner-build" {
+  source = "github.com/nix-community/nixos-anywhere//terraform/nix-build"
+  attribute = "github:${var.nix_repo}#nixosConfigurations.${var.host_name}.config.system.build.diskoScriptNoDeps"
+  nix_options = local.nix_options
+}
+
+module "install" {
+  source                       = "github.com/nix-community/nixos-anywhere//terraform/install"
+  
+  target_user                  = var.install_user
+  target_host                  = var.install_host
+
+  nixos_partitioner            = module.partitioner-build.result.out
+  nixos_system                 = module.system-build.result.out
+
+  extra_files_script           = "${path.root}/../scripts/ssh-keys-provisioning.sh"
+  extra_environment            = {
     OP_VAULT = var.onepassword_vault
     OP_ITEM = var.onepassword_item
   }
 
-  instance_id = var.instance_id
-  install_user = var.install_user
+  instance_id                  = var.instance_id
   
-  target_user = var.target_user
-  target_host = var.target_host
+  build_on_remote              = true
+  debug_logging                = true
+}
 
-  debug_logging = true
-} 
+module "configuration" {
+  source = "github.com/nix-community/nixos-anywhere//terraform/nixos-rebuild"
+
+  depends_on = [
+    module.install
+  ]
+
+  nixos_system = module.system-build.result.out
+
+  target_host = var.target_host
+  target_user = var.target_user
+}

@@ -1,10 +1,14 @@
 data "cloudflare_ip_ranges" "cloudflare" {}
 
-data "tailscale_device" "cloud" {
-  for_each = var.instances
-  hostname = each.value.host
+data "tailscale_devices" "cloud" {
+  depends_on = [ module.nixos.install ]
+}
 
-  wait_for = "4h"
+locals {  
+  tailscale_ip_map = {
+    for idx, hostname in data.tailscale_devices.cloud.devices.*.hostname
+      : hostname => data.tailscale_devices.cloud.devices[idx].addresses[0]
+  }
 }
 
 variable "instances" {
@@ -46,14 +50,6 @@ resource "hcloud_firewall" "cloud" {
 
   rule {
     direction = "in"
-    protocol = "tcp"
-    port = "443"
-    source_ips = concat(data.cloudflare_ip_ranges.cloudflare.ipv4_cidrs, data.cloudflare_ip_ranges.cloudflare.ipv6_cidrs)
-    description = "Allow Cloudflare IPs"
-  }
-
-  rule {
-    direction = "in"
     protocol = "udp"
     port = "41641"
     source_ips = ["0.0.0.0/0", "::/0"]
@@ -74,6 +70,14 @@ resource "hcloud_firewall" "cloud" {
     port = "443"
     destination_ips = ["0.0.0.0/0", "::/0"]
     description = "Allow HTTPS"
+  }
+
+  rule {
+    direction = "out"
+    protocol = "tcp"
+    port = "53"
+    destination_ips = ["0.0.0.0/0", "::/0"]
+    description = "Allow DNS"
   }
 
   rule {
@@ -99,7 +103,6 @@ resource "hcloud_firewall" "cloud" {
     description = "Allow ICMP outbound"
   }
 }
-
 
 resource "hcloud_server" "cloud" {
   depends_on = [
@@ -134,12 +137,13 @@ module "nixos" {
   depends_on = [
     hcloud_server.cloud
   ]
-
+  
   instance_id = hcloud_server.cloud[each.key].id
   install_user = "root"
+  install_host = hcloud_server.cloud[each.key].ipv4_address
 
   target_user = var.nix_user
-  target_host = coalesce(data.tailscale_device.cloud[each.key].addresses[0], hcloud_server.cloud[each.key].ipv4_address)
+  target_host = lookup(local.tailscale_ip_map, each.value.host, hcloud_server.cloud[each.key].ipv4_address)
   
   nix_repo = var.nix_repo
   host_name = each.value.host
