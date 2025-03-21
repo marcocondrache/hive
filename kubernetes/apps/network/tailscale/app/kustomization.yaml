@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - externalsecret.yaml
+  - helmrelease.yaml
+
+replacements:
+  - source:
+      kind: Secret
+      name: tailscale-oauth
+      fieldPath: data.clientId
+    targets:
+      - select:
+          kind: HelmRelease
+          name: tailscale
+        fieldPaths:
+          - spec.values.oauth.clientId
+        options:
+          create: true
+  - source:
+      kind: Secret
+      name: tailscale-oauth
+      fieldPath: data.clientSecret
+    targets:
+      - select:
+          kind: HelmRelease
+          name: tailscale
+        fieldPaths:
+          - spec.values.oauth.clientSecret
+        options:
+          create: true
