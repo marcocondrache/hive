@@ -32,3 +32,15 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  values:
+    oauthSecretVolume:
+      secret:
+        secretName: tailscale-oauth
+
+    operatorConfig:
+      hostname: "hive-operator"
+      defaultTags:
+        - "tag:hive-operator"
+
+    proxyConfig:
+      defaultTags: "tag:hive"
