@@ -62,7 +62,5 @@ spec:
     txtOwnerId: default
     txtPrefix: hive.
     domainFilters: ["hive.marcocondrache.com"]
-    serviceMonitor:
-      enabled: true
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
