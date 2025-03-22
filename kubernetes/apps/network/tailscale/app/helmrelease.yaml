@@ -13,7 +13,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tailscale
+  name: &app tailscale
 spec:
   interval: 1h
   chart:
@@ -33,7 +33,8 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    fullnameOverride: "tailscale"
+    # TODO: currently not supported by the operator
+    fullnameOverride: *app
 
     oauthSecretVolume:
       secret:
@@ -41,6 +42,8 @@ spec:
 
     operatorConfig:
       hostname: "hive-operator"
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
       defaultTags:
         - "tag:hive-operator"
 
