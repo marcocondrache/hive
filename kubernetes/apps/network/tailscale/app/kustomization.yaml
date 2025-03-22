@@ -9,7 +9,7 @@ resources:
 
 replacements:
   - source:
-      kind: ExternalSecret
+      kind: Secret
       name: tailscale-oauth
       fieldPath: data.clientId
     targets:
@@ -21,7 +21,7 @@ replacements:
         options:
           create: true
   - source:
-      kind: ExternalSecret
+      kind: Secret
       name: tailscale-oauth
       fieldPath: data.clientSecret
     targets:
