@@ -21,6 +21,10 @@ cgroup:
     enabled: false
   hostRoot: /sys/fs/cgroup
 
+gatewayAPI:
+  enabled: true
+  enableAlpn: true
+
 operator:
   replicas: 1
   rollOutPods: true
@@ -34,15 +38,10 @@ l2announcements:
 bpf:
   masquerade: true
 
-externalIPs:
-  enabled: true
-
 ipam:
   mode: kubernetes
 
 hubble:
   enabled: true
   ui:
-    enabled: true
-  relay:
     enabled: true
