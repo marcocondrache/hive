@@ -12,14 +12,27 @@ tasks:
     cmds:
       - echo "{{.RESOURCES}}" | kubectl apply --server-side -f -
 
+  apply-cdrs:
+    silent: true
+    internal: true
+    vars:
+      CDRS:
+        - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/experimental-install.yaml
+        - https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/tags/v0.16.1/docs/sources/crd/crd-manifest.yaml
+    cmds:
+      - for: { var: CDRS }
+        cmd: |
+          kubectl apply --server-side --filename {{.ITEM}}
+
   apply-helmfile:
     internal: true
     cmds:
-      - helmfile apply -f {{.BOOTSTRAP_DIR}}/helmfile.yaml --skip-diff-on-install --suppress-diff
+      - helmfile apply -f {{.BOOTSTRAP_DIR}}/helmfile.yaml --skip-diff-on-install --suppress-diff --debug
     silent: true
 
   cluster:
     cmds:
+      - task: apply-cdrs
       - task: apply-resources
       - task: apply-helmfile
     silent: true
