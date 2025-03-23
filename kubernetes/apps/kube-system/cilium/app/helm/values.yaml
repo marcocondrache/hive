@@ -23,13 +23,14 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+  hostNetwork:
+    enabled: true
+    matchLabels:
+      kubernetes.io/hostname: athena
 
 bandwidthManager:
   enabled: true
   bbr: true
-
-loadBalancer:
-  algorithm: maglev
 
 envoy:
   enabled: true
@@ -45,7 +46,7 @@ operator:
     node-role.kubernetes.io/control-plane: "true"
 
 l2announcements:
-  enabled: true
+  enabled: false
 
 bpf:
   masquerade: true
