@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "${APP}"
+spec:
+  accessModes: ["${ACCESS_MODES:=ReadWriteOnce}"]
+  resources:
+    requests:
+      storage: "${CAPACITY:=3Gi}"

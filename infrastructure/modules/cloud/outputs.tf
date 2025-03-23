@@ -6,7 +6,7 @@ output "cloud_servers" {
       name = server.name
       ipv4_address = server.ipv4_address
       ipv6_address = server.ipv6_address
-      tailscale_address = lookup(local.tailscale_ip_map, name)
+      tailscale_address = lookup(local.tailscale_ip_map, name, null)
       status = server.status
     }
   }
