@@ -51,6 +51,7 @@ spec:
                 cpu: 10m
               limits:
                 memory: 256Mi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -58,6 +59,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+
     service:
       app:
         controller: pdf
@@ -79,7 +81,8 @@ spec:
                 port: 8080
 
     persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
+      storage:
+        type: emptyDir
+        globalMounts:
+          - path: /
+            readOnly: false
