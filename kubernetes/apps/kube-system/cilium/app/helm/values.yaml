@@ -45,7 +45,7 @@ operator:
     node-role.kubernetes.io/control-plane: "true"
 
 l2announcements:
-  enabled: false
+  enabled: true
 
 bpf:
   masquerade: true
