@@ -32,7 +32,7 @@ module "cloud" {
     }
 
     athena = {
-      type = "cax11"
+      type = "cax21"
       host = "athena"
       location = "fsn1"
     }
