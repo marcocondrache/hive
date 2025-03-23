@@ -23,6 +23,10 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+  hostNetwork:
+    enabled: true
+    matchLabels:
+      kubernetes.io/hostname: athena
 
 bandwidthManager:
   enabled: true
@@ -34,6 +38,8 @@ loadBalancer:
 envoy:
   enabled: true
   rollOutPods: true
+
+localRedirectPolicy: true
 
 operator:
   replicas: 1
