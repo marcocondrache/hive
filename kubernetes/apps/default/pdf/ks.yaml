@@ -10,15 +10,10 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 1h
-  components:
-    - ../../../components/common/pvc.yaml
   dependsOn:
     - name: longhorn
       namespace: longhorn
   path: ./kubernetes/apps/default/pdf/app
-  postBuild:
-    substitute:
-      APP: *app
   prune: true
   retryInterval: 2m
   sourceRef:

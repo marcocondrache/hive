@@ -77,3 +77,9 @@ spec:
           - backendRefs:
               - name: *app
                 port: 8080
+
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 3Gi
