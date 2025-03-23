@@ -5,5 +5,3 @@ kind: Kustomization
 namespace: longhorn
 components:
   - ../../components/common
-resources:
-  - ./longhorn/ks.yaml
