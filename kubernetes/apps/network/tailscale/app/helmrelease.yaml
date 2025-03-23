@@ -41,6 +41,7 @@ spec:
         secretName: tailscale-oauth
 
     operatorConfig:
+      logging: debug
       hostname: "hive-operator"
       podAnnotations:
         reloader.stakater.com/auto: "true"
