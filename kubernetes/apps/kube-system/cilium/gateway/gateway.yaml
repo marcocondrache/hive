@@ -11,6 +11,9 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
+  addresses:
+    - type: IPAddress
+      value: 172.30.200.1
   listeners:
     - name: http
       protocol: HTTP

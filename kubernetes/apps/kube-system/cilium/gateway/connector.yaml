@@ -1,0 +1,9 @@
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: hive-connector
+spec:
+  hostname: hive-connector
+  subnetRouter:
+    advertiseRoutes:
+      - "172.30.200.0/24"
