@@ -8,7 +8,7 @@ tasks:
     internal: true
     vars:
       RESOURCES:
-        sh: minijinja-cli {{.BOOTSTRAP_DIR}}/resources.yaml.j2 | op inject
+        sh: minijinja-cli {{.BOOTSTRAP_DIR}}/templates/resources.yaml.j2 | op inject
     cmds:
       - echo "{{.RESOURCES}}" | kubectl apply --server-side -f -
 
