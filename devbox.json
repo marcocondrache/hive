@@ -12,7 +12,8 @@
     "kubernetes-helm@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "cilium-cli@latest",
-    "minijinja@latest"
+    "minijinja@latest",
+    "hcloud@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",

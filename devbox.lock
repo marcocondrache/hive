@@ -196,6 +196,54 @@
         }
       }
     },
+    "hcloud@latest": {
+      "last_modified": "2025-03-21T17:37:26Z",
+      "resolved": "github:NixOS/nixpkgs/94c4dbe77c0740ebba36c173672ca15a7926c993#hcloud",
+      "source": "devbox-search",
+      "version": "1.50.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/3mcgrbdva87czzjh60i2dd9hwrgynsdl-hcloud-1.50.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/3mcgrbdva87czzjh60i2dd9hwrgynsdl-hcloud-1.50.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nzx332fwd2x5kgfv5vm2z90qpxw0h9lq-hcloud-1.50.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nzx332fwd2x5kgfv5vm2z90qpxw0h9lq-hcloud-1.50.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/r28v0r0s8m7vfq3i918jprbm6v6w48qk-hcloud-1.50.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/r28v0r0s8m7vfq3i918jprbm6v6w48qk-hcloud-1.50.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/3hkf55d6ayvgpx6fv7wxs6vkg6l8byhp-hcloud-1.50.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/3hkf55d6ayvgpx6fv7wxs6vkg6l8byhp-hcloud-1.50.0"
+        }
+      }
+    },
     "helmfile@latest": {
       "last_modified": "2025-02-16T00:50:12Z",
       "resolved": "github:NixOS/nixpkgs/1dcdd535fef84d4671129a10e7072d56dca9a4d3#helmfile",

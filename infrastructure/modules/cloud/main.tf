@@ -74,7 +74,7 @@ resource "hcloud_firewall" "cloud" {
 
   rule {
     direction = "out"
-    protocol = "tcp"
+    protocol = "udp"
     port = "53"
     destination_ips = ["0.0.0.0/0", "::/0"]
     description = "Allow DNS"
