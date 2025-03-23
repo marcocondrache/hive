@@ -8,7 +8,6 @@ kubeProxyReplacement: true
 k8sServiceHost: 127.0.0.1
 k8sServicePort: 6444
 
-# TODO: investigate
 autoDirectNodeRoutes: true
 
 routingMode: "native"
@@ -24,6 +23,17 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+
+bandwidthManager:
+  enabled: true
+  bbr: true
+
+loadBalancer:
+  algorithm: maglev
+
+envoy:
+  enabled: true
+  rollOutPods: true
 
 operator:
   replicas: 1
@@ -42,8 +52,4 @@ ipam:
   mode: kubernetes
 
 hubble:
-  enabled: true
-  ui:
-    enabled: true
-  relay:
-    enabled: true
+  enabled: false
