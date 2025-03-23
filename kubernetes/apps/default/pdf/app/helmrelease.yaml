@@ -81,8 +81,10 @@ spec:
                 port: 8080
 
     persistence:
-      storage:
-        type: emptyDir
+      pdf:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 2Gi
         globalMounts:
           - path: /
             readOnly: false
