@@ -31,6 +31,9 @@ envoy:
   enabled: true
   rollOutPods: true
 
+endpointRoutes:
+  enabled: true
+
 operator:
   replicas: 1
   rollOutPods: true
