@@ -49,7 +49,7 @@ ipam:
   mode: kubernetes
 
 bpf:
-  masquerade: true
+  hostLegacyRouting: true
 
 hubble:
   enabled: true
