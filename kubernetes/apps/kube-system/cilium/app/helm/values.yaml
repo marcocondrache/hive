@@ -8,6 +8,7 @@ kubeProxyReplacement: true
 k8sServiceHost: "127.0.0.1"
 k8sServicePort: "6444"
 
+# TODO: investigate why native routing is not working (probably nix issues)
 routingMode: "tunnel"
 tunnelProtocol: "vxlan"
 
