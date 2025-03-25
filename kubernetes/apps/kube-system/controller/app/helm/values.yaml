@@ -1,7 +1,7 @@
 nameOverride: controller
 
 networking:
-  enabled: true
+  enabled: false
   clusterCIDR: 10.42.0.0/16
   network:
     valueFrom:

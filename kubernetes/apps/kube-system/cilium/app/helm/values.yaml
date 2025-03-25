@@ -8,9 +8,9 @@ kubeProxyReplacement: true
 k8sServiceHost: "127.0.0.1"
 k8sServicePort: "6444"
 
-# TODO: investigate why native routing is not working (probably nix issues)
-routingMode: "tunnel"
-tunnelProtocol: "vxlan"
+routingMode: "native"
+ipv4NativeRoutingCIDR: 10.0.1.0/24
+autoDirectNodeRoutes: true
 
 rollOutCiliumPods: true
 
@@ -22,16 +22,15 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
-  enableAppProtocol: true
-
-endpointRoutes:
-  enabled: true
 
 envoy:
   enabled: true
   rollOutPods: true
 
 localRedirectPolicy: true
+
+bpf:
+  masquerade: true
 
 operator:
   replicas: 1
