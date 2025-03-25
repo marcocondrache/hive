@@ -12,6 +12,7 @@ spec:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
       load-balancer.hetzner.cloud/location: fsn1
+      load-balancer.hetzner.cloud/use-private-ip: "true"
   listeners:
     - name: http
       protocol: HTTP
