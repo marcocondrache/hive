@@ -24,18 +24,15 @@ cgroup:
 
 gatewayAPI:
   enabled: true
+  enableAlpn: true
+  enableAppProtocol: true
 
 endpointRoutes:
   enabled: true
 
 envoy:
   enabled: true
-  debug:
-    admin:
-      enabled: true
   rollOutPods: true
-  log:
-    defaultLevel: debug
 
 localRedirectPolicy: true
 
