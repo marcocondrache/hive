@@ -8,9 +8,14 @@ kubeProxyReplacement: true
 k8sServiceHost: "127.0.0.1"
 k8sServicePort: "6444"
 
+debug:
+  enabled: true
+
 routingMode: "native"
-ipv4NativeRoutingCIDR: 10.0.1.0/24
-autoDirectNodeRoutes: true
+ipv4NativeRoutingCIDR: "10.0.0.0/16"
+
+endpointRoutes:
+  enabled: true
 
 rollOutCiliumPods: true
 
@@ -27,8 +32,6 @@ envoy:
   enabled: true
   rollOutPods: true
 
-localRedirectPolicy: true
-
 bpf:
   masquerade: true
 
@@ -44,7 +47,9 @@ encryption:
   type: wireguard
 
 ipam:
-  mode: kubernetes
+  operator:
+    clusterPoolIPv4PodCIDRList:
+      - 10.42.0.0/16
 
 hubble:
   enabled: true
