@@ -12,7 +12,7 @@ debug:
   enabled: true
 
 routingMode: "native"
-ipv4NativeRoutingCIDR: "10.42.0.0/16"
+ipv4NativeRoutingCIDR: "10.0.1.0/24"
 
 endpointRoutes:
   enabled: true
@@ -36,7 +36,6 @@ envoy:
 
 bpf:
   masquerade: true
-  hostLegacyRouting: true
 
 operator:
   replicas: 1
