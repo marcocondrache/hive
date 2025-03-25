@@ -27,10 +27,6 @@ gatewayAPI:
   enableAlpn: true
   xffNumTrustedHops: 1
 
-envoy:
-  enabled: true
-  rollOutPods: true
-
 endpointRoutes:
   enabled: true
 
