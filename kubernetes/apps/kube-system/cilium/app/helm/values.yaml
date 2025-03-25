@@ -25,6 +25,7 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+  xffNumTrustedHops: 1
 
 envoy:
   enabled: true
