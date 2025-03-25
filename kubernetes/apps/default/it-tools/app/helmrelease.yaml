@@ -47,6 +47,7 @@ spec:
 
     service:
       app:
+        type: LoadBalancer
         controller: it-tools
         ports:
           http:
