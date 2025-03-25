@@ -34,6 +34,7 @@ envoy:
 
 bpf:
   masquerade: true
+  hostLegacyRouting: true
 
 operator:
   replicas: 1
