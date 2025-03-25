@@ -17,6 +17,7 @@ variable "instances" {
     type     = string
     host     = string
     location = string
+    address  = string
   }))
 }
 
@@ -43,6 +44,22 @@ variable "onepassword_vault" {
 resource "hcloud_placement_group" "cloud" {
   name = "cloud"
   type = "spread"
+}
+
+resource "hcloud_network" "cloud" {
+  name     = "cloud"
+  ip_range = "10.0.0.0/16"
+}
+
+resource "hcloud_network_subnet" "cloud" {
+  depends_on = [
+    hcloud_network.cloud
+  ]
+
+  type         = "cloud"
+  network_id   = hcloud_network.cloud.id
+  network_zone = "eu-central"
+  ip_range     = "10.0.1.0/24"
 }
 
 resource "hcloud_firewall" "cloud" {
@@ -106,7 +123,8 @@ resource "hcloud_firewall" "cloud" {
 
 resource "hcloud_server" "cloud" {
   depends_on = [
-    hcloud_placement_group.cloud
+    hcloud_placement_group.cloud,
+    hcloud_network_subnet.cloud
   ]
 
   for_each = var.instances
@@ -118,6 +136,11 @@ resource "hcloud_server" "cloud" {
   keep_disk   = true
   backups     = false
   location    = each.value.location
+
+  network {
+    network_id = hcloud_network.cloud.id
+    ip = each.value.address
+  }
 
   placement_group_id = hcloud_placement_group.cloud.id
 }

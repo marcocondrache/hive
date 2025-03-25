@@ -11,3 +11,8 @@ output "cloud_servers" {
     }
   }
 }
+
+output "cloud_network" {
+  description = "Cloud network"
+  value = hcloud_network.cloud.id
+}

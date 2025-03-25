@@ -7,6 +7,10 @@ helmDefaults:
   cleanupOnFail: true
   # waitRetries: 3 # Not supported by Helm yet
 
+repositories:
+  - name: hcloud
+    url: https://charts.hetzner.cloud
+
 releases:
   - name: cilium
     namespace: kube-system
@@ -17,24 +21,35 @@ releases:
       [
         '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/cilium/app/helm/values.yaml',
       ]
-    hooks:
-      - # Wait for cilium CRDs to be available
-        events: ["postsync"]
-        command: bash
-        args:
-          - -c
-          - until kubectl get crd ciliumloadbalancerippools.cilium.io &>/dev/null; do sleep 10; done
-        showlogs: true
-      - # Apply cilium network configuration
-        events: ["postsync"]
-        command: kubectl
-        args:
-          - apply
-          - --namespace=kube-system
-          - --server-side
-          - --field-manager=kustomize-controller
-          - --filename={{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/cilium/app/networks.yaml
-        showlogs: true
+    # hooks:
+    #   - # Wait for cilium CRDs to be available
+    #     events: ["postsync"]
+    #     command: bash
+    #     args:
+    #       - -c
+    #       - until kubectl get crd ciliumloadbalancerippools.cilium.io &>/dev/null; do sleep 10; done
+    #     showlogs: true
+    #   - # Apply cilium network configuration
+    #     events: ["postsync"]
+    #     command: kubectl
+    #     args:
+    #       - apply
+    #       - --namespace=kube-system
+    #       - --server-side
+    #       - --field-manager=kustomize-controller
+    #       - --filename={{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/cilium/app/networks.yaml
+    #     showlogs: true
+
+  - name: controller
+    namespace: kube-system
+    atomic: true
+    chart: hcloud/hcloud-cloud-controller-manager
+    version: 1.23.0
+    values:
+      [
+        '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/controller/app/helm/values.yaml',
+      ]
+    needs: ["kube-system/cilium"]
 
   - name: coredns
     namespace: kube-system
@@ -45,7 +60,7 @@ releases:
       [
         '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/coredns/app/helm/values.yaml',
       ]
-    needs: ["kube-system/cilium"]
+    needs: ["kube-system/controller"]
 
   - name: cert-manager
     namespace: cert-manager

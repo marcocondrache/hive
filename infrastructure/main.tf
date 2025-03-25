@@ -9,32 +9,23 @@ resource "hcloud_ssh_key" "master" {
   public_key = data.github_repository_file.master.content
 }
 
-resource "cloudflare_dns_record" "connect" {
-  zone_id = var.cloudflare_zone
-  type = "A"
-  name = "connect"
-  proxied = false
-  content = module.cloud.cloud_servers["atlas"].tailscale_address
-  ttl = 60
-
-  depends_on = [ module.cloud ]
-}
-
 # Cloud module for Hetzner cloud instances
 module "cloud" {
   source = "./modules/cloud"
   
   instances = {
     atlas = {
-      type = "cax11"
+      type = "cax21"
       host = "atlas"
       location = "fsn1"
+      address = "10.0.1.1"
     }
 
     athena = {
-      type = "cax21"
+      type = "cax11"
       host = "athena"
       location = "fsn1"
+      address = "10.0.1.2"
     }
   }
 

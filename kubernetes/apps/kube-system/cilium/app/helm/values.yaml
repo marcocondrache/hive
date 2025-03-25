@@ -5,13 +5,11 @@ cluster:
   name: lab-config
 
 kubeProxyReplacement: true
-k8sServiceHost: 127.0.0.1
-k8sServicePort: 6444
+k8sServiceHost: "127.0.0.1"
+k8sServicePort: "6444"
 
-autoDirectNodeRoutes: true
-
-routingMode: "native"
-ipv4NativeRoutingCIDR: 10.42.0.0/16
+routingMode: "tunnel"
+tunnelProtocol: "vxlan"
 
 rollOutCiliumPods: true
 
@@ -23,20 +21,10 @@ cgroup:
 gatewayAPI:
   enabled: true
   enableAlpn: true
-  hostNetwork:
-    enabled: true
-    matchLabels:
-      kubernetes.io/hostname: athena
-
-bandwidthManager:
-  enabled: true
-  bbr: true
 
 envoy:
   enabled: true
   rollOutPods: true
-
-localRedirectPolicy: true
 
 operator:
   replicas: 1
@@ -45,14 +33,16 @@ operator:
   nodeSelector:
     node-role.kubernetes.io/control-plane: "true"
 
-l2announcements:
-  enabled: false
-
-bpf:
-  masquerade: true
+encryption:
+  enabled: true
+  type: wireguard
 
 ipam:
   mode: kubernetes
 
 hubble:
-  enabled: false
+  enabled: true
+  ui:
+    enabled: true
+  relay:
+    enabled: true
