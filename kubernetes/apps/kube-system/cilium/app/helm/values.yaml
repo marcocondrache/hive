@@ -48,6 +48,9 @@ encryption:
 ipam:
   mode: kubernetes
 
+bpf:
+  masquerade: true
+
 hubble:
   enabled: true
   ui:
