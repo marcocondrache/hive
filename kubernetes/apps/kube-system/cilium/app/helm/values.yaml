@@ -14,9 +14,6 @@ tunnelProtocol: "vxlan"
 
 rollOutCiliumPods: true
 
-nodePort:
-  enabled: true
-
 cgroup:
   automount:
     enabled: false
@@ -26,6 +23,7 @@ gatewayAPI:
   enabled: true
   enableAlpn: true
   enableAppProtocol: true
+  externalTrafficPolicy: Local
 
 endpointRoutes:
   enabled: true
@@ -33,10 +31,6 @@ endpointRoutes:
 envoy:
   enabled: true
   rollOutPods: true
-
-loadBalancer:
-  algorithm: maglev
-  mode: dsr
 
 localRedirectPolicy: true
 
