@@ -23,7 +23,6 @@ gatewayAPI:
   enabled: true
   enableAlpn: true
   enableAppProtocol: true
-  externalTrafficPolicy: Local
 
 endpointRoutes:
   enabled: true
@@ -47,9 +46,6 @@ encryption:
 
 ipam:
   mode: kubernetes
-
-bpf:
-  hostLegacyRouting: true
 
 hubble:
   enabled: true
