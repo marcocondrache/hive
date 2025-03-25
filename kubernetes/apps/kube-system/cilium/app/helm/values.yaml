@@ -14,6 +14,9 @@ tunnelProtocol: "vxlan"
 
 rollOutCiliumPods: true
 
+debug:
+  enabled: true
+
 nodePort:
   enabled: true
 
@@ -24,11 +27,15 @@ cgroup:
 
 gatewayAPI:
   enabled: true
-  enableAlpn: true
-  xffNumTrustedHops: 1
 
 endpointRoutes:
   enabled: true
+
+envoy:
+  enabled: true
+  rollOutPods: true
+
+localRedirectPolicy: true
 
 operator:
   replicas: 1
