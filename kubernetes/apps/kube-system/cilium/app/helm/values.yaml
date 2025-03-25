@@ -14,9 +14,6 @@ tunnelProtocol: "vxlan"
 
 rollOutCiliumPods: true
 
-debug:
-  enabled: true
-
 nodePort:
   enabled: true
 
@@ -33,7 +30,12 @@ endpointRoutes:
 
 envoy:
   enabled: true
+  debug:
+    admin:
+      enabled: true
   rollOutPods: true
+  log:
+    defaultLevel: debug
 
 localRedirectPolicy: true
 
