@@ -19,6 +19,8 @@ endpointRoutes:
 
 rollOutCiliumPods: true
 
+devices: "enp7s0"
+
 cgroup:
   automount:
     enabled: false
