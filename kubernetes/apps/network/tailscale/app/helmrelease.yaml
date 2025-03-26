@@ -36,6 +36,11 @@ spec:
     # TODO: currently not supported by the operator
     fullnameOverride: *app
 
+    installCRDs: true
+
+    ingressClass:
+      enabled: false
+
     oauthSecretVolume:
       secret:
         secretName: tailscale-oauth
