@@ -53,8 +53,17 @@ spec:
 
     MTU: 1450
 
+    bpfClockProbe: true
+
     bpf:
       masquerade: true
+      datapathMode: netdev
+      mapDynamicSizeRatio: 0.08
+      distributedLRU:
+        enabled: true
+
+    enableIPv4BIGTCP: true
+    enableIPv6BIGTCP: true
 
     loadBalancer:
       acceleration: native
