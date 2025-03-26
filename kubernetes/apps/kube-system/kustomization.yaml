@@ -7,5 +7,4 @@ components:
   - ../../components/common
 resources:
   - ./cilium/ks.yaml
-  - ./coredns/ks.yaml
   - ./reloader/ks.yaml

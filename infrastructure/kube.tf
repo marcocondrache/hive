@@ -11,7 +11,6 @@ module "kube-hetzner" {
   ssh_private_key = null
 
   network_region = "eu-central"
-
   network_ipv4_cidr = "10.0.0.0/8"
 
   cluster_ipv4_cidr = "10.42.0.0/16"
@@ -51,7 +50,7 @@ module "kube-hetzner" {
       server_type = "cax11",
       location    = "fsn1",
       labels      = [],
-      taints      = ["node.cilium.io/agent-not-ready:NoExecute"],
+      taints      = [],
       count       = 2
     },
   ]
@@ -63,7 +62,6 @@ module "kube-hetzner" {
   control_plane_lb_enable_public_interface = true
 
   enable_cert_manager = false
-  enable_metrics_server = false
 
   etcd_s3_backup = {
     etcd-s3-endpoint        = "https://a1a4a1f168c2ac3ef604fe82c0758ae7.eu.r2.cloudflarestorage.com"
@@ -82,11 +80,12 @@ module "kube-hetzner" {
   disable_network_policy = true
   disable_hetzner_csi = true
 
-  k3s_exec_server_args = join(" ", [
-    "--disable=coredns",
-    "--disable-helm-controller",
-    "--flannel-backend=none",
-  ])
+  cni_plugin = "cilium"
+  cilium_version = "1.17.2"
+  cilium_routing_mode = "native"
+  cilium_ipv4_native_routing_cidr = "10.0.0.0/8"
+  cilium_hubble_enabled = true
+  cilium_values = file("${path.module}/cilium/values.yaml")
 
   dns_servers = [
     "1.1.1.1",
