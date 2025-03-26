@@ -85,7 +85,6 @@ module "kube-hetzner" {
   cilium_routing_mode = "native"
   cilium_ipv4_native_routing_cidr = "10.0.0.0/8"
   cilium_hubble_enabled = true
-  cilium_values = file("${path.module}/cilium/values.yaml")
 
   dns_servers = [
     "1.1.1.1",
