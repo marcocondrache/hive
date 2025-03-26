@@ -64,10 +64,9 @@ module "kube-hetzner" {
   enable_cert_manager = false
 
   etcd_s3_backup = {
-    etcd-s3-endpoint        = "https://a1a4a1f168c2ac3ef604fe82c0758ae7.eu.r2.cloudflarestorage.com"
+    etcd-s3-endpoint        = "https://a1a4a1f168c2ac3ef604fe82c0758ae7.r2.cloudflarestorage.com"
     etcd-s3-access-key      = var.r2_access_key
     etcd-s3-secret-key      = var.r2_secret_key
-    etcd-s3-bucket          = "hive"
   }
 
   allow_scheduling_on_control_plane = true
