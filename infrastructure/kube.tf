@@ -79,6 +79,25 @@ module "kube-hetzner" {
   disable_network_policy = true
   disable_hetzner_csi = true
 
+  extra_firewall_rules = [
+    {
+      direction       = "in"
+      protocol        = "udp"
+      port            = "41641"
+      description     = "Allow tailscale"
+      source_ips      = ["0.0.0.0/0", "::/0"]
+      destination_ips = []
+    }, 
+    {
+      direction       = "out"
+      protocol        = "udp"
+      port            = "3478"
+      description     = "Allow tailscale"
+      source_ips      = []
+      destination_ips = ["0.0.0.0/0", "::/0"]
+    }
+  ]
+
   cni_plugin = "cilium"
   cilium_version = "1.17.2"
   cilium_routing_mode = "native"
