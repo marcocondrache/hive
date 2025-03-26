@@ -1,0 +1,77 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: cilium
+spec:
+  interval: 1h
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  ref:
+    tag: 1.17.2
+  url: oci://ghcr.io/home-operations/charts-mirror/cilium
+  verify:
+    provider: cosign
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: cilium
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    kubeProxyReplacement: true
+    kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
+    k8sServiceHost: "127.0.0.1"
+    k8sServicePort: "6444"
+
+    routingMode: native
+    ipv4NativeRoutingCIDR: "10.0.0.0/8"
+    installNoConntrackIptablesRules: true
+
+    endpointRoutes:
+      enabled: true
+
+    gatewayAPI:
+      enabled: true
+      enableAlpn: true
+
+    MTU: 1450
+
+    bpf:
+      masquerade: true
+
+    loadBalancer:
+      acceleration: native
+
+    encryption:
+      enabled: true
+      type: wireguard
+
+    ipam:
+      mode: kubernetes
+
+    k8s:
+      requireIPv4PodCIDR: true
+
+    hubble:
+      enabled: true
+      ui:
+        enabled: true
+      relay:
+        enabled: true
