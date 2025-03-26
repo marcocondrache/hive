@@ -1,13 +1,24 @@
-variable "onepassword_vault" {
-  description = "1Password vault"
-  type        = string
+variable "hcloud_token" {
   sensitive = true
+  default   = ""
 }
 
 variable "encryption_passphrase" {
-  description = "Passphrase for the encryption"
+  description = "Passphrase for encryption"
+  sensitive = true
   type        = string
-  sensitive   = true
+}
+
+variable "r2_access_key" {
+  description = "R2 access key"
+  sensitive = true
+  type        = string
+}
+
+variable "r2_secret_key" {
+  description = "R2 secret key"
+  sensitive = true
+  type        = string
 }
 
 variable "nix_repo" {
@@ -17,22 +28,5 @@ variable "nix_repo" {
 
 variable "nix_user" {
   description = "Nix user"
-  type        = string
-}
-
-variable "tailscale_token" {
-  description = "Tailscale token"
-  type        = string
-  sensitive   = true
-}
-
-variable "cloudflare_token" {
-  description = "Cloudflare token"
-  type        = string
-  sensitive   = true
-}
-
-variable "cloudflare_zone" {
-  description = "Cloudflare zone"
   type        = string
 }

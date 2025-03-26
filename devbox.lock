@@ -616,6 +616,54 @@
         }
       }
     },
+    "packer@latest": {
+      "last_modified": "2025-03-23T05:31:05Z",
+      "resolved": "github:NixOS/nixpkgs/dd613136ee91f67e5dba3f3f41ac99ae89c5406b#packer",
+      "source": "devbox-search",
+      "version": "1.12.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/64z3pxwvnln27i0ib8x4pzbhg019dpsz-packer-1.12.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/64z3pxwvnln27i0ib8x4pzbhg019dpsz-packer-1.12.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fc6w1djf7gi1h44cz0yw3yp83jnywyw4-packer-1.12.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/fc6w1djf7gi1h44cz0yw3yp83jnywyw4-packer-1.12.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/f20ngh1bg7pwq13l1kxggnad88c85bzc-packer-1.12.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/f20ngh1bg7pwq13l1kxggnad88c85bzc-packer-1.12.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/h6kwbd4ndpdr7jfd8jgh5gcqfvrvmwkn-packer-1.12.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/h6kwbd4ndpdr7jfd8jgh5gcqfvrvmwkn-packer-1.12.0"
+        }
+      }
+    },
     "rustscan@latest": {
       "last_modified": "2025-02-07T11:26:36Z",
       "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#rustscan",

@@ -1,17 +1,16 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/refs/tags/v1.17.1/install/kubernetes/cilium/values.schema.json
-cluster:
-  id: 0
-  name: lab-config
+ipam:
+  mode: kubernetes
+
+k8s:
+  requireIPv4PodCIDR: true
 
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 
 k8sServiceHost: "127.0.0.1"
 k8sServicePort: "6444"
-
-debug:
-  enabled: true
 
 routingMode: native
 ipv4NativeRoutingCIDR: "10.0.0.0/8"
@@ -22,45 +21,19 @@ rollOutCiliumPods: true
 endpointRoutes:
   enabled: true
 
-devices: "enp+"
+loadBalancer:
+  acceleration: native
 
-MTU: 1450
-
-cgroup:
-  automount:
-    enabled: false
-  hostRoot: /sys/fs/cgroup
+bpf:
+  masquerade: true
 
 gatewayAPI:
   enabled: true
   enableAlpn: true
 
-envoy:
-  enabled: true
-  rollOutPods: true
-
-bpf:
-  masquerade: true
-
-loadBalancer:
-  acceleration: native
-
-operator:
-  replicas: 1
-  rollOutPods: true
-
-  nodeSelector:
-    node-role.kubernetes.io/control-plane: "true"
-
 encryption:
   enabled: true
   type: wireguard
-
-ipam:
-  mode: kubernetes
-
-k8s:
-  requireIPv4PodCIDR: true
 
 hubble:
   enabled: true
@@ -68,3 +41,5 @@ hubble:
     enabled: true
   relay:
     enabled: true
+
+MTU: 1450

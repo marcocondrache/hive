@@ -1,4 +1,4 @@
-{% for namespace in ["external-secrets", "flux-system", "network"] %}
+{% for namespace in ["external-secrets", "flux-system"] %}
 ---
 apiVersion: v1
 kind: Namespace
@@ -13,12 +13,3 @@ metadata:
   namespace: external-secrets
 stringData:
   token: op://kubernetes/1password/OP_CONNECT_TOKEN
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: controller-secret
-  namespace: kube-system
-stringData:
-  token: op://kubernetes/hetzner/HETZNER_API_TOKEN
-  network-id: 'op://kubernetes/hetzner/HETZNER_NETWORK_ID'
