@@ -21,7 +21,6 @@ releases:
       [
         '{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm/values.yaml',
       ]
-    needs: ["kube-system/coredns"]
 
   - name: external-secrets
     namespace: external-secrets
