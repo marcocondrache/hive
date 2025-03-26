@@ -41,6 +41,9 @@ spec:
     ingressClass:
       enabled: false
 
+    apiServerProxyConfig:
+      mode: true
+
     oauthSecretVolume:
       secret:
         secretName: tailscale-oauth

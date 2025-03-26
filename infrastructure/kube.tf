@@ -83,7 +83,7 @@ module "kube-hetzner" {
     {
       direction       = "in"
       protocol        = "udp"
-      port            = "41641"
+      port            = "44569" # understand this
       description     = "Allow tailscale"
       source_ips      = ["0.0.0.0/0", "::/0"]
       destination_ips = []
