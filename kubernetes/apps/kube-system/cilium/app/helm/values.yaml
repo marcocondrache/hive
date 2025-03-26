@@ -14,9 +14,6 @@ debug:
 routingMode: "native"
 ipv4NativeRoutingCIDR: "10.0.1.0/24"
 
-endpointRoutes:
-  enabled: true
-
 rollOutCiliumPods: true
 
 devices: "enp+"
