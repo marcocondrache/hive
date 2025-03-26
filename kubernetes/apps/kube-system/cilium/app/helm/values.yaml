@@ -5,18 +5,26 @@ cluster:
   name: lab-config
 
 kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
 k8sServiceHost: "127.0.0.1"
 k8sServicePort: "6444"
 
 debug:
   enabled: true
 
-routingMode: "native"
-ipv4NativeRoutingCIDR: "10.0.1.0/24"
+routingMode: native
+ipv4NativeRoutingCIDR: "10.0.0.0/8"
+installNoConntrackIptablesRules: true
 
 rollOutCiliumPods: true
 
+endpointRoutes:
+  enabled: true
+
 devices: "enp+"
+
+MTU: 1450
 
 cgroup:
   automount:
@@ -34,6 +42,9 @@ envoy:
 bpf:
   masquerade: true
 
+loadBalancer:
+  acceleration: native
+
 operator:
   replicas: 1
   rollOutPods: true
@@ -46,9 +57,10 @@ encryption:
   type: wireguard
 
 ipam:
-  operator:
-    clusterPoolIPv4PodCIDRList:
-      - 10.42.0.0/16
+  mode: kubernetes
+
+k8s:
+  requireIPv4PodCIDR: true
 
 hubble:
   enabled: true

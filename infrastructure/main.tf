@@ -19,6 +19,7 @@ module "cloud" {
       host = "atlas"
       location = "fsn1"
       address = "10.0.1.1"
+      master = true
     }
 
     athena = {
@@ -26,6 +27,7 @@ module "cloud" {
       host = "athena"
       location = "fsn1"
       address = "10.0.1.2"
+      master = false
     }
   }
 

@@ -9,6 +9,8 @@ locals {
     for idx, hostname in data.tailscale_devices.cloud.devices.*.hostname
       : hostname => data.tailscale_devices.cloud.devices[idx].addresses[0]
   }
+
+  subnets = [for index in range(256) : cidrsubnet("10.0.0.0/8", 8, index)]
 }
 
 variable "instances" {
@@ -18,6 +20,7 @@ variable "instances" {
     host     = string
     location = string
     address  = string
+    master   = bool
   }))
 }
 
@@ -48,10 +51,10 @@ resource "hcloud_placement_group" "cloud" {
 
 resource "hcloud_network" "cloud" {
   name     = "cloud"
-  ip_range = "10.0.0.0/16"
+  ip_range = "10.0.0.0/8"
 }
 
-resource "hcloud_network_subnet" "cloud" {
+resource "hcloud_network_subnet" "masters" {
   depends_on = [
     hcloud_network.cloud
   ]
@@ -59,7 +62,18 @@ resource "hcloud_network_subnet" "cloud" {
   type         = "cloud"
   network_id   = hcloud_network.cloud.id
   network_zone = "eu-central"
-  ip_range     = "10.0.1.0/24"
+  ip_range     = local.subnets[255]
+}
+
+resource "hcloud_network_subnet" "workers" {
+  depends_on = [
+    hcloud_network.cloud
+  ]
+
+  network_id   = hcloud_network.cloud.id
+  type         = "cloud"
+  network_zone = "eu-central"
+  ip_range     = local.subnets[0]
 }
 
 resource "hcloud_firewall" "cloud" {
@@ -124,7 +138,8 @@ resource "hcloud_firewall" "cloud" {
 resource "hcloud_server" "cloud" {
   depends_on = [
     hcloud_placement_group.cloud,
-    hcloud_network_subnet.cloud
+    hcloud_network_subnet.masters,
+    hcloud_network_subnet.workers
   ]
 
   for_each = var.instances
@@ -139,7 +154,7 @@ resource "hcloud_server" "cloud" {
 
   network {
     network_id = hcloud_network.cloud.id
-    ip = each.value.address
+    ip = each.value.master ? cidrhost(hcloud_network_subnet.masters.ip_range, 1) : cidrhost(hcloud_network_subnet.workers.ip_range, 1)
   }
 
   placement_group_id = hcloud_placement_group.cloud.id
