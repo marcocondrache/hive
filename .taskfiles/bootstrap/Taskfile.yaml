@@ -5,7 +5,6 @@ version: "3"
 tasks:
   apply-resources:
     silent: true
-    internal: true
     vars:
       RESOURCES:
         sh: minijinja-cli {{.BOOTSTRAP_DIR}}/templates/resources.yaml.j2 | op inject

@@ -6,5 +6,5 @@ namespace: network
 components:
   - ../../components/common
 resources:
-  # - ./tailscale/ks.yaml
+  - ./tailscale/ks.yaml
   - ./cloudflare-dns/ks.yaml
