@@ -52,6 +52,7 @@ spec:
     extraArgs:
       - --zone-id-filter=$(CF_ZONE_ID)
       - --cloudflare-dns-records-per-page=1000
+      - --cloudflare-proxied
       - --gateway-namespace=kube-system
     triggerLoopOnEvent: true
     policy: sync
