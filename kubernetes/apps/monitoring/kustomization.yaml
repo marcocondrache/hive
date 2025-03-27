@@ -6,4 +6,4 @@ namespace: monitoring
 resources:
   - ./prometheus-operator/ks.yaml
 components:
-  - ../../components/namespace
+  - ../../components/common/namespace
