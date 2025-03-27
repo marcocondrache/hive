@@ -55,20 +55,13 @@ module "kube-hetzner" {
     },
   ]
 
-  ingress_controller = "none"
-
-  use_control_plane_lb = true
-  control_plane_lb_type = "lb11"
-  control_plane_lb_enable_public_interface = true
-
-  enable_cert_manager = false
-
   etcd_s3_backup = {
     etcd-s3-endpoint        = "https://a1a4a1f168c2ac3ef604fe82c0758ae7.r2.cloudflarestorage.com"
     etcd-s3-access-key      = var.r2_access_key
     etcd-s3-secret-key      = var.r2_secret_key
   }
 
+  use_control_plane_lb = false
   allow_scheduling_on_control_plane = true
   system_upgrade_use_drain = true
 
@@ -78,6 +71,9 @@ module "kube-hetzner" {
   disable_kube_proxy = true
   disable_network_policy = true
   disable_hetzner_csi = true
+
+  ingress_controller = "none"
+  enable_cert_manager = false
 
   extra_firewall_rules = [
     {
