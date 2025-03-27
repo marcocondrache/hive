@@ -47,7 +47,7 @@ module "kube-hetzner" {
   agent_nodepools = [
     {
       name        = "athena",
-      server_type = "cax11",
+      server_type = "cax21",
       location    = "fsn1",
       labels      = [],
       taints      = [],
@@ -83,7 +83,7 @@ module "kube-hetzner" {
     {
       direction       = "in"
       protocol        = "udp"
-      port            = "44569" # understand this
+      port            = "41641"
       description     = "Allow tailscale"
       source_ips      = ["0.0.0.0/0", "::/0"]
       destination_ips = []
@@ -98,11 +98,12 @@ module "kube-hetzner" {
     }
   ]
 
+  enable_wireguard = true
+
   cni_plugin = "cilium"
   cilium_version = "1.17.2"
-  cilium_routing_mode = "native"
-  cilium_ipv4_native_routing_cidr = "10.0.0.0/8"
-  cilium_hubble_enabled = true
+
+  cilium_values = file("${var.kubernetes_path}/apps/kube-system/cilium/app/helm/values.yaml")
 
   dns_servers = [
     "1.1.1.1",

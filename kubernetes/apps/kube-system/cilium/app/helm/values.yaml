@@ -1,0 +1,47 @@
+ipam:
+  mode: kubernetes
+
+k8s:
+  requireIPv4PodCIDR: true
+
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
+k8sServiceHost: "127.0.0.1"
+k8sServicePort: "6444"
+
+routingMode: "native"
+ipv4NativeRoutingCIDR: "10.0.0.0/8"
+installNoConntrackIptablesRules: true
+
+endpointRoutes:
+  enabled: true
+
+loadBalancer:
+  acceleration: native
+
+bandwidthManager:
+  enabled: true
+  bbr: true
+
+bpfClockProbe: true
+
+bpf:
+  masquerade: true
+  datapathMode: netkit
+  preallocateMaps: true
+
+encryption:
+  enabled: true
+  type: wireguard
+
+enableIPv4BIGTCP: true
+enableIPv6BIGTCP: true
+
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+
+MTU: 1450

@@ -33,54 +33,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  values:
-    kubeProxyReplacement: true
-    kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
-
-    k8sServiceHost: "127.0.0.1"
-    k8sServicePort: "6444"
-
-    routingMode: native
-    ipv4NativeRoutingCIDR: "10.0.0.0/8"
-    installNoConntrackIptablesRules: true
-
-    endpointRoutes:
-      enabled: true
-
-    gatewayAPI:
-      enabled: true
-      enableAlpn: true
-
-    MTU: 1450
-
-    bpfClockProbe: true
-
-    bpf:
-      masquerade: true
-      datapathMode: netdev
-      mapDynamicSizeRatio: 0.08
-      distributedLRU:
-        enabled: true
-
-    enableIPv4BIGTCP: true
-    enableIPv6BIGTCP: true
-
-    loadBalancer:
-      acceleration: native
-
-    encryption:
-      enabled: true
-      type: wireguard
-
-    ipam:
-      mode: kubernetes
-
-    k8s:
-      requireIPv4PodCIDR: true
-
-    hubble:
-      enabled: true
-      ui:
-        enabled: true
-      relay:
-        enabled: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: cilium-values

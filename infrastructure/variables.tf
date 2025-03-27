@@ -30,3 +30,8 @@ variable "nix_user" {
   description = "Nix user"
   type        = string
 }
+
+variable "kubernetes_path" {
+  description = "Path to kubernetes directory"
+  type        = string
+}

@@ -17,13 +17,14 @@
     "packer@latest"
   ],
   "env": {
+    "TF_VAR_kubernetes_path": "$PWD/kubernetes",
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
-    "KUBECONFIG":   "$PWD/kubeconfig",
-    "ROOT_DIR":     "$PWD"
+    "KUBECONFIG": "$PWD/kubeconfig",
+    "ROOT_DIR": "$PWD"
   },
   "env_from": ".env",
   "shell": {
     "init_hook": [],
-    "scripts":   {}
+    "scripts": {}
   }
 }
