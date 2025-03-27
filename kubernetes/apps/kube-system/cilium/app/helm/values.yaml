@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/values.schema.json
 ipam:
   mode: kubernetes
 
@@ -20,9 +22,18 @@ endpointRoutes:
 loadBalancer:
   acceleration: native
 
+rollOutCiliumPods: true
+
 bandwidthManager:
   enabled: true
   bbr: true
+
+envoy:
+  enabled: true
+  rollOutEnvoyPods: true
+
+operator:
+  rollOutPods: true
 
 bpfClockProbe: true
 
@@ -41,7 +52,8 @@ enableIPv6BIGTCP: true
 hubble:
   relay:
     enabled: true
+    rollOutPods: true
   ui:
     enabled: true
-
+    rollOutPods: true
 MTU: 1450
