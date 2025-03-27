@@ -1,60 +1,42 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1beta2.json
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: tailscale
-  namespace: network
-spec:
-  interval: 1h
-  url: https://pkgs.tailscale.com/helmcharts
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app tailscale
+  name: tailscale
 spec:
-  interval: 1h
-  chart:
-    spec:
-      chart: tailscale-operator
-      version: 1.80.3
-      sourceRef:
-        kind: HelmRepository
-        name: tailscale
-        namespace: network
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+
   values:
-    # TODO: currently not supported by the operator
-    fullnameOverride: *app
+    serviceAccount:
+      create: true
+      name: tailscale
 
-    installCRDs: true
+    controllers:
+      tailscale:
+        replicas: 1
+        strategy: RollingUpdate
 
-    ingressClass:
-      enabled: false
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    oauthSecretVolume:
-      secret:
-        secretName: tailscale-oauth
-
-    operatorConfig:
-      logging: debug
-      hostname: "hive-operator"
-      podAnnotations:
-        reloader.stakater.com/auto: "true"
-      defaultTags:
-        - "tag:hive-operator"
-      extraEnv:
-        - name: PORT
-          value: "41641"
-
-    proxyConfig:
-      defaultTags: "tag:hive"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/tailscale/tailscale
+              tag: latest
+            env:
+              TS_HOSTNAME: hive
+              TS_USERSPACE: false
+              TS_KUBE_SECRET: tailscale-oauth
+              TS_ROUTES: 10.0.0.0/8
+              TS_ENABLE_HEALTH_CHECK: true
+              TS_TAILSCALED_EXTRA_ARGS: "--port=41641"
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
