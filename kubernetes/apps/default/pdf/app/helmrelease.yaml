@@ -79,6 +79,11 @@ spec:
                 port: *port
 
     persistence:
+      configs:
+        type: emptyDir
+        globalMounts:
+          - path: /configs
+
       logs:
         type: emptyDir
         globalMounts:
