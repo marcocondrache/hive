@@ -62,8 +62,8 @@ module "kube-hetzner" {
   }
 
   use_control_plane_lb = false
-  allow_scheduling_on_control_plane = true
   system_upgrade_use_drain = true
+  allow_scheduling_on_control_plane = false
 
   cluster_name = "hive"
   use_cluster_name_in_node_name = false
