@@ -48,12 +48,6 @@ spec:
                 memory: 32Mi
               limits:
                 memory: 256Mi
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
-              readOnlyRootFilesystem: false
 
     service:
       app:
