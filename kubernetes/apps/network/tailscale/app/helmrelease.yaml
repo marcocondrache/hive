@@ -22,7 +22,9 @@ spec:
             kind: Role
             name: tailscale
           subjects:
-            - identifier: tailscale
+            - kind: ServiceAccount
+              name: tailscale
+              namespace: network
 
       roles:
         tailscale:
@@ -46,6 +48,7 @@ spec:
                 - patch
 
     serviceAccount:
+      create: true
       name: tailscale
 
     controllers:
