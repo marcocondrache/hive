@@ -12,6 +12,43 @@ spec:
     namespace: flux-system
 
   values:
+    rbac:
+      bindings:
+        tailscale:
+          type: RoleBinding
+          enabled: true
+          forceRename: tailscale
+          roleRef:
+            kind: Role
+            name: tailscale
+          subjects:
+            - kind: ServiceAccount
+              name: tailscale
+
+      roles:
+        tailscale:
+          type: Role
+          enabled: true
+          forceRename: tailscale
+          rules:
+            - apiGroups:
+                - ""
+              resources:
+                - secrets
+              verbs:
+                - create
+            - apiGroups:
+                - ""
+              resources:
+                - secrets
+              verbs:
+                - get
+                - update
+                - patch
+
+    serviceAccount:
+      name: tailscale
+
     controllers:
       tailscale:
         replicas: 1
