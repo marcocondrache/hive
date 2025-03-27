@@ -54,9 +54,10 @@ spec:
       - --cloudflare-dns-records-per-page=1000
       - --cloudflare-proxied
       - --gateway-namespace=kube-system
+      - --service-type-filter=LoadBalancer
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["gateway-httproute"]
+    sources: ["service", "gateway-httproute"]
     txtOwnerId: default
     txtPrefix: hive.
     domainFilters: ["hive.marcocondrache.com", "h.marcocondrache.com"]
