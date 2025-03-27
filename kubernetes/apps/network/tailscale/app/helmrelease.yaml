@@ -22,8 +22,7 @@ spec:
             kind: Role
             name: tailscale
           subjects:
-            - kind: ServiceAccount
-              name: tailscale
+            - identifier: tailscale
 
       roles:
         tailscale:
