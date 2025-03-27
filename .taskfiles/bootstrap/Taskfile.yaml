@@ -16,7 +16,6 @@ tasks:
     internal: true
     vars:
       CDRS:
-        - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/experimental-install.yaml
         - https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/tags/v0.16.1/docs/sources/crd/crd-manifest.yaml
     cmds:
       - for: { var: CDRS }
