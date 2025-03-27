@@ -46,6 +46,14 @@ spec:
                 - get
                 - update
                 - patch
+            - apiGroups:
+                - ""
+              resources:
+                - events
+              verbs:
+                - get
+                - create
+                - patch
 
     serviceAccount:
       create: true
@@ -67,10 +75,15 @@ spec:
             env:
               TS_HOSTNAME: hive
               TS_USERSPACE: false
-              TS_KUBE_SECRET: tailscale-oauth
+              TS_KUBE_SECRET: tailscale
               TS_ROUTES: 10.0.0.0/8
               TS_ENABLE_HEALTH_CHECK: true
               TS_TAILSCALED_EXTRA_ARGS: "--port=41641"
+              TS_AUTH_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: tailscale-oauth
+                    key: client_secret
             securityContext:
               capabilities:
                 add:
