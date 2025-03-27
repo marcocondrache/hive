@@ -20,6 +20,19 @@ spec:
   values:
     controllers:
       pdf:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+
         containers:
           app:
             image:
@@ -29,62 +42,39 @@ spec:
               DOCKER_ENABLE_SECURITY: "false"
               LANGS: en_US
               TZ: Europe/Rome
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /
-                    port: 8080
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 10m
+                cpu: 5m
+                memory: 32Mi
               limits:
                 memory: 256Mi
-
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: true
 
     service:
       app:
         controller: pdf
         ports:
           http:
-            primary: true
-            port: 8080
+            port: &port 8080
+
+    persistence:
+      tmp:
+        type: emptyDir
+
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.hive.marcocondrache.com"
+          - "pdf.h.marcocondrache.com"
         parentRefs:
-          - name: hive
+          - name: internal
             namespace: kube-system
             sectionName: https
         rules:
           - backendRefs:
               - name: *app
-                port: 8080
-
-    persistence:
-      pdf:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 2Gi
-        globalMounts:
-          - path: /tmp
-            readOnly: false
+                port: *port
