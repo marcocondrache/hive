@@ -10,8 +10,8 @@ spec:
   gatewayClassName: cilium
   infrastructure:
     annotations:
-      load-balancer.hetzner.cloud/enabled: "false"
       external-dns.alpha.kubernetes.io/hostname: *hostname
+      load-balancer.hetzner.cloud/disable-public-network: "true"
   listeners:
     - name: http
       protocol: HTTP
