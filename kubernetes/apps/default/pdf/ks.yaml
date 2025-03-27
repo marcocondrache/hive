@@ -10,9 +10,6 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 1h
-  dependsOn:
-    - name: longhorn
-      namespace: longhorn
   path: ./kubernetes/apps/default/pdf/app
   prune: true
   retryInterval: 2m
