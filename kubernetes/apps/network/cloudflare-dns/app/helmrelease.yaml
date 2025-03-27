@@ -26,15 +26,9 @@ spec:
     kind: OCIRepository
     name: cloudflare-dns
   install:
-    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
-    remediation:
-      retries: 3
+    crds: CreateReplace
   upgrade:
-    cleanupOnFail: true
-    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
-    remediation:
-      strategy: rollback
-      retries: 3
+    crds: CreateReplace
   values:
     fullnameOverride: *app
     provider: cloudflare
@@ -58,7 +52,7 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     sources: ["service", "gateway-httproute"]
-    txtOwnerId: default
+    txtOwnerId: hive
     txtPrefix: hive.
     domainFilters: ["marcocondrache.com"]
     podAnnotations:
