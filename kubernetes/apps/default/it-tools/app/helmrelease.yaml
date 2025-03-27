@@ -61,7 +61,7 @@ spec:
         hostnames:
           - tools.h.marcocondrache.com
         parentRefs:
-          - name: hive-external
+          - name: external
             namespace: kube-system
             sectionName: https
         rules:
