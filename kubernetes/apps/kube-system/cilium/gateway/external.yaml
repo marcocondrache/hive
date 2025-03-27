@@ -11,9 +11,8 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-      load-balancer.hetzner.cloud/name: "hive-external"
+      load-balancer.hetzner.cloud/name: "external"
       load-balancer.hetzner.cloud/disable-public-network: "false"
-      load-balancer.hetzner.cloud/use-private-ip: "true"
   listeners:
     - name: http
       protocol: HTTP
