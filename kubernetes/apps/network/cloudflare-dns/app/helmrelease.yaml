@@ -50,16 +50,15 @@ spec:
             name: *secret
             key: *name
     extraArgs:
-      - --cloudflare-dns-records-per-page=1000
-      - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
-      - --crd-source-kind=DNSEndpoint
-      - --gateway-name=external
       - --zone-id-filter=$(CF_ZONE_ID)
+      - --cloudflare-dns-records-per-page=1000
+      - --gateway-name=external
+      - --gateway-name=internal
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["crd", "gateway-httproute"]
+    sources: ["gateway-httproute"]
     txtOwnerId: default
-    txtPrefix: hive.external.
-    domainFilters: ["marcocondrache.com"]
+    txtPrefix: hive.
+    domainFilters: ["hive.marcocondrache.com", "h.marcocondrache.com"]
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
