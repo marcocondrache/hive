@@ -60,6 +60,6 @@ spec:
     sources: ["service", "gateway-httproute"]
     txtOwnerId: default
     txtPrefix: hive.
-    domainFilters: ["hive.marcocondrache.com", "h.marcocondrache.com"]
+    domainFilters: ["marcocondrache.com"]
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
