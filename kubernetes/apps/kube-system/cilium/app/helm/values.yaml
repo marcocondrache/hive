@@ -22,6 +22,10 @@ endpointRoutes:
 loadBalancer:
   acceleration: native
 
+gatewayAPI:
+  enabled: true
+  enableAlpn: true
+
 rollOutCiliumPods: true
 
 bandwidthManager:
