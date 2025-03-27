@@ -59,9 +59,9 @@ spec:
     route:
       app:
         hostnames:
-          - tools.hive.marcocondrache.com
+          - tools.h.marcocondrache.com
         parentRefs:
-          - name: hive
+          - name: hive-external
             namespace: kube-system
             sectionName: https
         rules:
