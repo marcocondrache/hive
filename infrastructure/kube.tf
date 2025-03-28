@@ -70,7 +70,7 @@ module "kube-hetzner" {
 
   disable_kube_proxy = true
   disable_network_policy = true
-  disable_hetzner_csi = true
+  disable_hetzner_csi = false
 
   ingress_controller = "none"
   enable_cert_manager = false
