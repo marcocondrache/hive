@@ -47,7 +47,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: n8n-secret
-                    key: N8N_ENCRYPTION_KEY
+                    key: encryptionKey
             resources:
               requests:
                 cpu: 5m
