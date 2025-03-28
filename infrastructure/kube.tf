@@ -51,8 +51,16 @@ module "kube-hetzner" {
       location    = "fsn1",
       labels      = [],
       taints      = [],
-      count       = 2
+      count       = 1
     },
+    {
+      name        = "notus",
+      server_type = "cax31",
+      location    = "fsn1",
+      labels      = [],
+      taints      = [],
+      count       = 1
+    }
   ]
 
   etcd_s3_backup = {
