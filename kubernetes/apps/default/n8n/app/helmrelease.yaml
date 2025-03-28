@@ -73,7 +73,7 @@ spec:
               - path: /home/node/.n8n
 
     route:
-      app:
+      n8n:
         hostnames:
           - *hostName
         parentRefs:
@@ -84,6 +84,7 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
+
       webhooks:
         hostnames:
           - n8n-webhook.h.marcocondrache.com
