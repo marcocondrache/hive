@@ -25,6 +25,7 @@ loadBalancer:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+  xffNumTrustedHops: 1
 
 rollOutCiliumPods: true
 
