@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: hass
+  name: home-assistant
 spec:
   accessModes: ["ReadWriteOnce"]
   resources:
