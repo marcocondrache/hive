@@ -48,8 +48,8 @@ spec:
               VENV_FOLDER: /venv
             resources:
               requests:
-                cpu: 47m
-                memory: 2Gi
+                cpu: 10m
+                memory: 512Mi
               limits:
                 memory: 2Gi
             securityContext:
@@ -81,7 +81,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 1Gi
+                memory: 512Mi
 
     service:
       app:
