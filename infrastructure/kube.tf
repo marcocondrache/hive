@@ -78,10 +78,13 @@ module "kube-hetzner" {
 
   disable_kube_proxy = true
   disable_network_policy = true
-  disable_hetzner_csi = false
+  disable_hetzner_csi = true
 
   ingress_controller = "none"
   enable_cert_manager = false
+  
+  enable_longhorn = true
+  longhorn_helmchart_bootstrap = true
 
   extra_firewall_rules = [
     {
