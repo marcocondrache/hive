@@ -11,12 +11,9 @@ vars:
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/kubernetes/bootstrap"
   INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
 
-  K3D_CONFIG: "{{.ROOT_DIR}}/cluster.yaml"
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
 includes:
-  dev: .taskfiles/dev
-  infra: .taskfiles/infra
   bootstrap: .taskfiles/bootstrap
 
 tasks:

@@ -7,10 +7,6 @@ helmDefaults:
   cleanupOnFail: true
   # waitRetries: 3 # Not supported by Helm yet
 
-repositories:
-  - name: hcloud
-    url: https://charts.hetzner.cloud
-
 releases:
   - name: cert-manager
     namespace: cert-manager
