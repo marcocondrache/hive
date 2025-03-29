@@ -20,6 +20,8 @@ endpointRoutes:
   enabled: true
 
 loadBalancer:
+  mode: dsr
+  algorithm: maglev
   acceleration: native
 
 gatewayAPI:
