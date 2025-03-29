@@ -11,8 +11,8 @@ spec:
     name: app-template
     namespace: flux-system
   dependsOn:
-    - name: hcloud-csi
-      namespace: kube-system
+    - name: longhorn
+      namespace: longhorn-system
   values:
     controllers:
       home-assistant:
