@@ -22,14 +22,6 @@ spec:
         kind: HelmRepository
         name: longhorn
       version: 1.8.1
-  values:
-    persistence:
-      defaultClass: true
-      defaultFsType: ext4
-      defaultClassReplicaCount: 2
-      defaultDataLocality: best-effort
-    defaultSettings:
-      defaultDataPath: /var/longhorn
-      storageOverProvisioningPercentage: 100
-      storageMinimalAvailablePercentage: 25
-      allowCollectingLonghornUsageMetrics: false
+  valuesFrom:
+    - kind: ConfigMap
+      name: longhorn-values

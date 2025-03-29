@@ -1,0 +1,10 @@
+persistence:
+  defaultClass: true
+  defaultFsType: ext4
+  defaultClassReplicaCount: 2
+  defaultDataLocality: best-effort
+defaultSettings:
+  defaultDataPath: /var/longhorn
+  storageOverProvisioningPercentage: 100
+  storageMinimalAvailablePercentage: 25
+  allowCollectingLonghornUsageMetrics: false
