@@ -83,8 +83,8 @@ module "kube-hetzner" {
   ingress_controller = "none"
   enable_cert_manager = false
   
-  enable_longhorn = true
-  longhorn_helmchart_bootstrap = true
+  enable_longhorn = false
+  longhorn_helmchart_bootstrap = false
   longhorn_values = file("${var.kubernetes_path}/apps/longhorn-system/longhorn/app/helm/values.yaml")
 
   extra_firewall_rules = [
