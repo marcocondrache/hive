@@ -31,9 +31,6 @@ gatewayAPI:
 
 rollOutCiliumPods: true
 
-egressGateway:
-  enabled: true
-
 bandwidthManager:
   enabled: true
   bbr: true

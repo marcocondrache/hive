@@ -12,6 +12,7 @@ spec:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
 
+      # TODO: This is higly redundant since internal must be exposed from tailscale
       load-balancer.hetzner.cloud/name: "internal"
       load-balancer.hetzner.cloud/disable-public-network: "true"
       load-balancer.hetzner.cloud/disable-private-ingress: "false"
