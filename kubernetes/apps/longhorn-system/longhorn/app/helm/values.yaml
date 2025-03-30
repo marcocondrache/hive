@@ -11,5 +11,5 @@ defaultSettings:
   allowCollectingLonghornUsageMetrics: false
 
 defaultBackupStore:
-  backupTarget: "cifs://u454285.your-storagebox.de/backup"
-  backupTargetCredentialSecret: longhorn-cifs
+  backupTarget: "s3://fsn1.your-objectstorage.com/cluster"
+  backupTargetCredentialSecret: longhorn-s3
