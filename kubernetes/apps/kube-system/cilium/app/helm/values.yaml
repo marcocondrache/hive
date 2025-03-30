@@ -39,11 +39,6 @@ envoy:
   enabled: true
   rollOutEnvoyPods: true
 
-l2announcements:
-  enabled: true
-
-defaultLBServiceIPAM: none
-
 operator:
   rollOutPods: true
 
