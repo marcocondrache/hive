@@ -21,6 +21,8 @@ endpointRoutes:
 
 loadBalancer:
   mode: dsr
+  # Breaks with v1.18.0-pre.0
+  # algorithm: maglev
   acceleration: native
 
 gatewayAPI:

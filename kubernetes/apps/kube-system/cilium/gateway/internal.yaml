@@ -12,6 +12,8 @@ spec:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
 
+      tailscale.com/hostname: "hive-gateway"
+
   listeners:
     - name: http
       protocol: HTTP
