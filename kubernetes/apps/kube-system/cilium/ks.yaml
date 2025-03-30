@@ -31,7 +31,7 @@ spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
+      app.kubernetes.io/name: cilium
       app.kubernetes.io/component: config
   interval: 30m
   timeout: 5m
@@ -52,7 +52,7 @@ metadata:
 spec:
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
+      app.kubernetes.io/name: cilium
       app.kubernetes.io/component: gateway
   dependsOn:
     - name: cert-manager-issuers
