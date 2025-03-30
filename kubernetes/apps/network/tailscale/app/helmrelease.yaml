@@ -61,4 +61,4 @@ spec:
       defaultProxyClass: "default"
 
     apiServerProxyConfig:
-      mode: "noauth"
+      mode: "true"
