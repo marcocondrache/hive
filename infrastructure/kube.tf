@@ -46,20 +46,12 @@ module "kube-hetzner" {
 
   agent_nodepools = [
     {
-      name        = "athena",
-      server_type = "cax21",
-      location    = "fsn1",
-      labels      = [],
-      taints      = [],
-      count       = 1
-    },
-    {
       name        = "notus",
       server_type = "cax31",
       location    = "fsn1",
       labels      = [],
       taints      = [],
-      count       = 1
+      count       = 2
     }
   ]
 
