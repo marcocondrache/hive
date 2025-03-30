@@ -3,8 +3,13 @@ persistence:
   defaultFsType: ext4
   defaultClassReplicaCount: 2
   defaultDataLocality: best-effort
+
 defaultSettings:
   defaultDataPath: /var/longhorn
   storageOverProvisioningPercentage: 100
   storageMinimalAvailablePercentage: 25
   allowCollectingLonghornUsageMetrics: false
+
+defaultBackupStore:
+  backupTarget: "cifs://u454285.your-storagebox.de/backup"
+  backupTargetCredentialSecret: longhorn-cifs
