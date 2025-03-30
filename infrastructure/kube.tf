@@ -55,12 +55,6 @@ module "kube-hetzner" {
     }
   ]
 
-  etcd_s3_backup = {
-    etcd-s3-endpoint        = "https://a1a4a1f168c2ac3ef604fe82c0758ae7.r2.cloudflarestorage.com"
-    etcd-s3-access-key      = var.r2_access_key
-    etcd-s3-secret-key      = var.r2_secret_key
-  }
-
   use_control_plane_lb = false
   system_upgrade_use_drain = true
   allow_scheduling_on_control_plane = false
