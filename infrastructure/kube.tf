@@ -90,6 +90,8 @@ module "kube-hetzner" {
     }
   ]
 
+  firewall_kube_api_source = ["100.64.0.0/10"]
+
   enable_wireguard = true
 
   cni_plugin = "cilium"
