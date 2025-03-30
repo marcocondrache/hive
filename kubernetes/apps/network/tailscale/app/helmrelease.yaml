@@ -58,3 +58,4 @@ spec:
 
     proxyConfig:
       defaultTags: "tag:hive"
+      defaultProxyClass: "default"
