@@ -7,15 +7,10 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname internal.hive.marcocondrache.com
 spec:
-  gatewayClassName: cilium
+  gatewayClassName: cilium-internal
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-
-    parametersRef:
-      group: cilium.io
-      kind: CiliumGatewayClassConfig
-      name: cilium-internal-gateway-config
 
   listeners:
     - name: http
