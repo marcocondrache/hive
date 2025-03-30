@@ -12,8 +12,7 @@ spec:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
 
-      # TODO: try to disable hetzner loadbalancer
-      load-balancer.hetzner.cloud/network-zone: "xxx"
+      load-balancer.hetzner.cloud/name: "ingress"
 
       tailscale.com/expose: "true"
       tailscale.com/hostname: "hive-gateway"

@@ -13,8 +13,11 @@ spec:
       external-dns.alpha.kubernetes.io/hostname: *hostname
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 
-      load-balancer.hetzner.cloud/name: "external"
+      load-balancer.hetzner.cloud/name: "ingress"
       load-balancer.hetzner.cloud/disable-public-network: "false"
+      load-balancer.hetzner.cloud/disable-private-ingress: "false"
+      load-balancer.hetzner.cloud/use-private-ip: "true"
+      load-balancer.hetzner.cloud/algorithm-type: "least-connections"
   listeners:
     - name: http
       protocol: HTTP
