@@ -102,12 +102,6 @@ module "kube-hetzner" {
   cilium_version = "1.17.2"
 
   cilium_values = file("${var.kubernetes_path}/apps/kube-system/cilium/app/helm/values.yaml")
-
-  dns_servers = [
-    "1.1.1.1",
-    "8.8.8.8",
-    "2606:4700:4700::1111",
-  ]
   
   create_kubeconfig = false
   create_kustomization = false
