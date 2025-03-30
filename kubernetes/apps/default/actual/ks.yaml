@@ -20,7 +20,7 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
-    - name: onepassword-store
+    - name: onepassword
       namespace: external-secrets
     - name: longhorn
       namespace: longhorn-system
