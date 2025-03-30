@@ -6,7 +6,7 @@ namespace: default
 components:
   - ../../components/common
 resources:
-  - ./actual/ks.yaml
+  # - ./actual/ks.yaml
   - ./it-tools/ks.yaml
   - ./pdf/ks.yaml
-  - ./n8n/ks.yaml
+  # - ./n8n/ks.yaml
