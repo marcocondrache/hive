@@ -39,6 +39,9 @@ envoy:
   enabled: true
   rollOutEnvoyPods: true
 
+l2announcements:
+  enabled: true
+
 operator:
   rollOutPods: true
 
