@@ -99,6 +99,7 @@ spec:
         enabled: true
         accessMode: ReadWriteOnce
         size: 10Gi
+        storageClass: longhorn-crypto
         globalMounts:
           - path: /config
       logs:
