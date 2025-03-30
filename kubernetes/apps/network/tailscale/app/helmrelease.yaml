@@ -1,91 +1,60 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: tailscale
+  namespace: network
+spec:
+  interval: 1h
+  url: https://pkgs.tailscale.com/helmcharts
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tailscale
+  name: &app tailscale
 spec:
-  interval: 30m
-  chartRef:
-    kind: OCIRepository
-    name: app-template
-    namespace: flux-system
-
+  interval: 1h
+  chart:
+    spec:
+      chart: tailscale-operator
+      version: 1.80.3
+      sourceRef:
+        kind: HelmRepository
+        name: tailscale
+        namespace: network
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
-    rbac:
-      bindings:
-        tailscale:
-          type: RoleBinding
-          enabled: true
-          forceRename: tailscale
-          roleRef:
-            kind: Role
-            name: tailscale
-          subjects:
-            - kind: ServiceAccount
-              name: tailscale
-              namespace: network
+    # TODO: currently not supported by the operator
+    fullnameOverride: *app
 
-      roles:
-        tailscale:
-          type: Role
-          enabled: true
-          forceRename: tailscale
-          rules:
-            - apiGroups:
-                - ""
-              resources:
-                - secrets
-              verbs:
-                - create
-            - apiGroups:
-                - ""
-              resources:
-                - secrets
-              verbs:
-                - get
-                - update
-                - patch
-            - apiGroups:
-                - ""
-              resources:
-                - events
-              verbs:
-                - get
-                - create
-                - patch
+    installCRDs: true
 
-    serviceAccount:
-      create: true
-      name: tailscale
+    ingressClass:
+      enabled: false
 
-    controllers:
-      tailscale:
-        replicas: 1
-        strategy: RollingUpdate
+    oauthSecretVolume:
+      secret:
+        secretName: tailscale-oauth
 
-        annotations:
-          reloader.stakater.com/auto: "true"
+    operatorConfig:
+      logging: debug
+      hostname: "hive-operator"
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
+      defaultTags:
+        - "tag:hive-operator"
+      extraEnv:
+        - name: PORT
+          value: "41641"
 
-        containers:
-          app:
-            image:
-              repository: ghcr.io/tailscale/tailscale
-              tag: latest
-            env:
-              TS_HOSTNAME: hive
-              TS_USERSPACE: false
-              TS_KUBE_SECRET: tailscale
-              TS_ROUTES: 10.0.0.0/8
-              TS_ENABLE_HEALTH_CHECK: true
-              TS_EXTRA_ARGS: "--advertise-tags=tag:hive"
-              TS_TAILSCALED_EXTRA_ARGS: "--port=41641"
-              TS_AUTH_KEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: tailscale-oauth
-                    key: client_secret
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
+    proxyConfig:
+      defaultTags: "tag:hive"
