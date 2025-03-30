@@ -11,5 +11,5 @@ defaultSettings:
   allowCollectingLonghornUsageMetrics: false
 
 defaultBackupStore:
-  backupTarget: "s3://hive@weur/cluster"
+  backupTarget: "s3://hvolumes@weur/cluster"
   backupTargetCredentialSecret: longhorn-s3
