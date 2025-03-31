@@ -5,5 +5,5 @@ kind: Kustomization
 namespace: laboratory
 components:
   - ../../components/common
-# resources:
-#   - ./website/ks.yaml
+resources:
+  - ./website/ks.yaml
