@@ -12,9 +12,9 @@ spec:
     namespace: flux-system
   values:
     controllers:
-      main:
+      speedtest:
         containers:
-          main:
+          speedtest:
             image:
               repository: docker.io/openspeedtest/latest
               tag: latest
