@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marcocondrache/marcocondrache.com
-              tag: sha-bc548ae428bf0bf0942d6e7fbdbad5a350d8c6a2@sha256:51076946811a51c7c7b82a5815fe96858b6413d94f280497d94a06c24979acab
+              tag: 1.0.1@sha256:159512dd305f0a5d595e6d94d6a860b6dfcf64ea64165dcd752a8d5495390a48
             resources:
               requests:
                 cpu: 5m
