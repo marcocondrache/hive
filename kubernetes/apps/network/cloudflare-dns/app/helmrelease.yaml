@@ -54,6 +54,7 @@ spec:
     extraArgs:
       - --zone-id-filter=$(CF_ZONE_ID)
       - --cloudflare-dns-records-per-page=1000
+      - --cloudflare-proxied
       - --gateway-namespace=kube-system
       - --service-type-filter=LoadBalancer
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
