@@ -27,6 +27,30 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: &appname cloudflare-dns-services
+  namespace: &namespace network
+spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  interval: 30m
+  timeout: 5m
+  path: "./kubernetes/apps/network/cloudflare-dns/services"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  wait: false
+  dependsOn:
+    - name: cloudflare-dns-config
+      namespace: network
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: &appname cloudflare-dns-external
   namespace: &namespace network
 spec:
@@ -44,7 +68,7 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
-    - name: cloudflare-dns-config
+    - name: cloudflare-dns-services
       namespace: network
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -68,5 +92,5 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
-    - name: cloudflare-dns-config
+    - name: cloudflare-dns-services
       namespace: network

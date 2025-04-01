@@ -18,13 +18,18 @@ spec:
       load-balancer.hetzner.cloud/disable-private-ingress: "true"
       load-balancer.hetzner.cloud/use-private-ip: "true"
   listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-      hostname: "*.marcocondrache.com"
+    - name: default
+      protocol: HTTPS
+      port: 443
+      hostname: "marcocondrache.com"
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: hive-marcocondrache-com-tls
+
     - name: https
       protocol: HTTPS
       port: 443

@@ -10,18 +10,9 @@ spec:
   gatewayClassName: cilium-internal
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: *hostname
-
       tailscale.com/hostname: "hive-gateway"
-
+      external-dns.alpha.kubernetes.io/hostname: *hostname
   listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-      hostname: "*.marcocondrache.com"
-      allowedRoutes:
-        namespaces:
-          from: Same
     - name: https
       protocol: HTTPS
       port: 443

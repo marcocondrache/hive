@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app cloudflare-dns-external
+  name: &app cloudflare-dns-services
 spec:
   interval: 1h
   chartRef:
@@ -38,14 +38,12 @@ spec:
     extraArgs:
       - --zone-id-filter=$(CF_ZONE_ID)
       - --cloudflare-dns-records-per-page=1000
-      - --cloudflare-proxied
-      - --gateway-name=external
-      - --gateway-namespace=kube-system
+      - --service-type-filter=LoadBalancer
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["gateway-httproute"]
-    txtOwnerId: external
-    txtPrefix: he.
+    sources: ["service"]
+    txtOwnerId: service
+    txtPrefix: hs.
     domainFilters: ["marcocondrache.com"]
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
