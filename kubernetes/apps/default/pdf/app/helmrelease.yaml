@@ -68,7 +68,7 @@ spec:
     route:
       app:
         hostnames:
-          - pdf.h.marcocondrache.com
+          - pdf.marcocondrache.com
         parentRefs:
           - name: internal
             namespace: kube-system

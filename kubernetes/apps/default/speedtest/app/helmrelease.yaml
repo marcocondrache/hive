@@ -29,7 +29,7 @@ spec:
     route:
       speedtest:
         hostnames:
-          - speedtest.h.marcocondrache.com
+          - speedtest.marcocondrache.com
         parentRefs:
           - name: internal
             namespace: kube-system

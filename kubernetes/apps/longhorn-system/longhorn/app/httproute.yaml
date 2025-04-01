@@ -8,7 +8,7 @@ spec:
       namespace: kube-system
       sectionName: https
   hostnames:
-    - "longhorn.h.marcocondrache.com"
+    - "longhorn.marcocondrache.com"
   rules:
     - backendRefs:
         - name: longhorn-frontend

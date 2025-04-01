@@ -72,7 +72,7 @@ spec:
     route:
       app:
         hostnames:
-          - actual.h.marcocondrache.com
+          - actual.marcocondrache.com
         parentRefs:
           - name: internal
             namespace: kube-system

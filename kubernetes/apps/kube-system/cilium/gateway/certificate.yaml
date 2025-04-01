@@ -9,10 +9,5 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: hive.marcocondrache.com
-  dnsNames:
-    [
-      "hive.marcocondrache.com",
-      "*.hive.marcocondrache.com",
-      "*.h.marcocondrache.com",
-    ]
+  commonName: marcocondrache.com
+  dnsNames: ["marcocondrache.com", "*.marcocondrache.com"]
