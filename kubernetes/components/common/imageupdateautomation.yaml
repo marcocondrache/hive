@@ -11,10 +11,10 @@ spec:
     name: flux-system
     namespace: flux-system
   git:
-    checkout:
-      ref:
-        branch: main
     commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
       messageTemplate: "chore(deps): update container images\n\n{{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}"
     push:
       branch: main
