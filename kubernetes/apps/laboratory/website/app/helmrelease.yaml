@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marcocondrache/marcocondrache.com
-              tag: 1.0.3@sha256:3bdfb7718fa980785debb6cde8bc7bf7afffec3ca3b5453bcb722ac0ecdc00b0
+              repository: ghcr.io/marcocondrache/marcocondrache.com # {"$imagepolicy": "laboratory:website:name"}
+              tag: 1.0.3@sha256:3bdfb7718fa980785debb6cde8bc7bf7afffec3ca3b5453bcb722ac0ecdc00b0 # {"$imagepolicy": "laboratory:website:tag"}
             resources:
               requests:
                 cpu: 5m
