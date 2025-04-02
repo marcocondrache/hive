@@ -14,9 +14,11 @@ instance:
     - image-automation-controller
   sync:
     kind: GitRepository
-    url: https://github.com/marcocondrache/lab-config
+    provider: github
+    url: https://github.com/marcocondrache/hive
     ref: refs/heads/main
     path: kubernetes/flux/cluster
+    pullSecret: github-app-secret
     interval: 1h
   commonMetadata:
     labels:
