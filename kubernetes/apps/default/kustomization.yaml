@@ -12,3 +12,4 @@ resources:
   - ./pdf/ks.yaml
   - ./n8n/ks.yaml
   - ./speedtest/ks.yaml
+  - ./webcheck/ks.yaml
