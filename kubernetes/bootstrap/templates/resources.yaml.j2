@@ -13,8 +13,8 @@ metadata:
   namespace: external-secrets
 stringData:
   1password-credentials.json: |
-    op://kubernetes/1password/OP_CREDENTIALS_JSON
-  token: op://kubernetes/1password/OP_CONNECT_TOKEN
+    op://hive/1password/OP_CREDENTIALS_JSON
+  token: op://hive/1password/OP_CONNECT_TOKEN
 ---
 apiVersion: v1
 kind: Secret
@@ -22,8 +22,8 @@ metadata:
   name: github-app-secret
   namespace: flux-system
 stringData:
-  githubAppID: 'op://kubernetes/github/APP_ID'
-  githubAppInstallationID: 'op://kubernetes/github/APP_INSTALLATION_ID'
+  githubAppID: 'op://hive/github/APP_ID'
+  githubAppInstallationID: 'op://hive/github/APP_INSTALLATION_ID'
   # TODO: Fix since it's a multiline string without indent
   githubAppPrivateKey: |
-    op://kubernetes/github/private_key
+    op://hive/github/private_key
