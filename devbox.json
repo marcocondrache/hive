@@ -4,17 +4,15 @@
     "k3d@latest",
     "go-task@latest",
     "helmfile@latest",
-    "opentofu@latest",
     "_1password-cli@latest",
-    "rustscan@latest",
     "kubectl@latest",
     "fluxcd@latest",
     "kubernetes-helm@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "cilium-cli@latest",
     "minijinja@latest",
-    "hcloud@latest",
-    "packer@latest"
+    "tpi@latest",
+    "github:budimanjojo/talhelper"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
