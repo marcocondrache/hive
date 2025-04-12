@@ -1,0 +1,88 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
+clusterName: &clusterName hive
+
+endpoint: https://hive.internal:6443
+
+# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
+talosVersion: v1.9.5
+# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
+kubernetesVersion: v1.32.3
+
+additionalApiServerCertSans: &sans
+  - hive.internal
+  - &vip 192.168.0.60
+  - 127.0.0.1
+
+additionalMachineCertSans: *sans
+
+cniConfig:
+  name: none
+
+nodes:
+  - hostname: queen.hive.internal # leadership
+    ipAddress: 192.168.0.51
+    controlPlane: true
+    installDisk: /dev/mmcblk0 # eMMC
+    networkInterfaces:
+      - interface: end0
+        dhcp: true
+        vip:
+          ip: *vip
+
+  # missing hardware
+  # - hostname: royal-jelly.hive.internal # sustenance
+  #   ipAddress: 192.168.0.52
+  #   controlPlane: true
+  #   installDisk: /dev/mmcblk0 # eMMC
+  #   networkInterfaces:
+  #     - interface: end0
+  #       dhcp: true
+  #       vip:
+  #         ip: *vip
+
+  # missing hardware
+  # - hostname: royal-guard.hive.internal # protection
+  #   ipAddress: 192.168.0.53
+  #   controlPlane: true
+  #   installDisk: /dev/mmcblk0 # eMMC
+  #   networkInterfaces:
+  #     - interface: end0
+  #       dhcp: true
+  #       vip:
+  #         ip: *vip
+
+  # missing hardware
+  # - hostname: forager.hive.internal
+  #   ipAddress: 192.168.0.59
+  #   installDisk: /dev/mmcblk0 # eMMC
+  #   networkInterfaces:
+  #     - interface: end0
+  #       dhcp: true
+
+patches:
+  - "@./patches/common/machine-files.yaml"
+  - "@./patches/common/machine-kubelet.yaml"
+  - "@./patches/common/machine-network.yaml"
+  - "@./patches/common/machine-features.yaml"
+
+controlPlane:
+  nodeLabels: &nodeLabels
+    topology.kubernetes.io/region: *clusterName
+    topology.kubernetes.io/zone: m
+
+  schematic: &schematic
+    customization:
+      extraKernelArgs:
+        - apparmor=0 # Less security, more speed
+        - init_on_alloc=0 # Less security, more speed
+        - init_on_free=0 # Less security, more speed
+        - mitigations=off # Less security, more speed
+        - security=none # Less security, more speed
+
+  patches:
+    - "@./patches/controlplane/cluster.yaml"
+    - "@./patches/controlplane/machine-features.yaml"
+worker:
+  nodeLabels: *nodeLabels
+  schematic: *schematic

@@ -1,0 +1,7 @@
+machine:
+  network:
+    disableSearchDomain: true
+    extraHostEntries:
+      - ip: 192.168.0.60
+        aliases:
+          - hive.internal
