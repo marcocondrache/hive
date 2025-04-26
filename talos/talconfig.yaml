@@ -1,17 +1,13 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: &clusterName hive
 
-endpoint: https://hive.internal:6443
+endpoint: https://192.168.0.51:6443
 
-# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
 talosVersion: v1.9.5
-# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
 kubernetesVersion: v1.32.3
 
 additionalApiServerCertSans: &sans
-  - hive.internal
-  - &vip 192.168.0.60
+  - 192.168.0.51
   - 127.0.0.1
 
 additionalMachineCertSans: *sans
@@ -20,15 +16,25 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: queen.hive.internal # leadership
+  - hostname: 192.168.0.51 # queen leadership
     ipAddress: 192.168.0.51
     controlPlane: true
     installDisk: /dev/mmcblk0 # eMMC
+    userVolumes:
+      - name: DATA
+        provisioning:
+          diskSelector:
+            match: disk.transport == "nvme"
+          grow: true
+    volumes:
+      - name: EPHEMERAL
+        provisioning:
+          diskSelector:
+            match: disk.transport == "nvme"
+          maxSize: 100GiB
     networkInterfaces:
       - interface: end0
         dhcp: true
-        vip:
-          ip: *vip
 
   # missing hardware
   # - hostname: royal-jelly.hive.internal # sustenance
@@ -79,10 +85,15 @@ controlPlane:
         - init_on_free=0 # Less security, more speed
         - mitigations=off # Less security, more speed
         - security=none # Less security, more speed
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
 
   patches:
     - "@./patches/controlplane/cluster.yaml"
     - "@./patches/controlplane/machine-features.yaml"
+
 worker:
   nodeLabels: *nodeLabels
   schematic: *schematic

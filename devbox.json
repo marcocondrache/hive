@@ -12,11 +12,15 @@
     "cilium-cli@latest",
     "minijinja@latest",
     "tpi@latest",
-    "github:budimanjojo/talhelper"
+    "github:budimanjojo/talhelper",
+    "kubefetch@latest",
+    "ipmitool@latest",
+    "talosctl@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
     "KUBECONFIG": "$PWD/kubeconfig",
+    "TALOSCONFIG": "$PWD/talos/clusterconfig/talosconfig",
     "ROOT_DIR": "$PWD"
   },
   "env_from": ".env",

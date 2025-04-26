@@ -9,12 +9,13 @@ vars:
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/kubernetes/bootstrap"
-  INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
+  TALOS_DIR: "{{.ROOT_DIR}}/talos"
 
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
 includes:
   bootstrap: .taskfiles/bootstrap
+  talos: .taskfiles/talos
 
 tasks:
   default:
