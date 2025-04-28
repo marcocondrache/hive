@@ -13,6 +13,7 @@ clusterSvcNets:
   - "10.43.0.0/16"
 
 additionalApiServerCertSans: &sans
+  - queen.local
   - 192.168.0.51
   - 127.0.0.1
 
@@ -22,7 +23,8 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: 192.168.0.51 # queen leadership
+  # TODO: Change hostname to queen.hive.internal
+  - hostname: queen.local # queen leadership
     ipAddress: 192.168.0.51
     installDisk: /dev/mmcblk0 # eMMC
     controlPlane: true
@@ -71,8 +73,6 @@ nodes:
   #   networkInterfaces:
   #     - interface: end0
   #       dhcp: true
-  #       vip:
-  #         ip: *vip
 
   # missing hardware
   # - hostname: royal-guard.hive.internal # protection

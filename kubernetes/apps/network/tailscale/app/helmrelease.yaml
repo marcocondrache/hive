@@ -52,9 +52,6 @@ spec:
         reloader.stakater.com/auto: "true"
       defaultTags:
         - "tag:hive-operator"
-      extraEnv:
-        - name: PORT
-          value: "41641"
 
     proxyConfig:
       defaultTags: "tag:hive"

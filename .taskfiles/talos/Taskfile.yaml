@@ -21,20 +21,20 @@ tasks:
   apply-clusterconfig:
     desc: Apply clusterconfig for a Talos cluster
     vars:
-      CLUSTERCONFIG_FILES:
-        sh: ls {{.TALOS_DIR}}/clusterconfig/*.yaml
+      NODES:
+        sh: |
+          yq '.nodes[] | .hostname + "," + .ipAddress' {{.TALOS_DIR}}/talconfig.yaml
     preconditions:
       - which ls
       - test -f "${TALOSCONFIG}"
     cmds:
       - for:
-          var: CLUSTERCONFIG_FILES
+          var: NODES
         task: _apply-machineconfig
         vars:
-          FILENAME: "{{.ITEM}}"
-          HOSTNAME: |-
-            {{ trimPrefix (printf "hive-") (base .ITEM) | trimSuffix ".yaml" }}
+          NODE: '{{ splitList "," .ITEM | last }}'
           DRY_RUN: "{{ .DRY_RUN }}"
+          FILENAME: '{{.TALOS_DIR}}/clusterconfig/hive-{{splitList "," .ITEM | first}}.yaml'
           INSECURE: "{{ .INSECURE }}"
 
   reset-node:
@@ -104,13 +104,13 @@ tasks:
       - test -f "{{.FILENAME}}"
     requires:
       vars:
-        - HOSTNAME
+        - NODE
         - FILENAME
     vars:
       MODE: '{{.MODE | default "auto"}}'
     cmds:
       - talosctl apply-config
-        --nodes "{{.HOSTNAME}}"
+        --nodes "{{.NODE}}"
         --file "{{.FILENAME}}"
         --mode="{{.MODE}}"
         {{ if eq "true" .INSECURE }}--insecure{{ end }}

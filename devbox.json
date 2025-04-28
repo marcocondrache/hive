@@ -15,7 +15,8 @@
     "github:budimanjojo/talhelper",
     "kubefetch@latest",
     "ipmitool@latest",
-    "talosctl@latest"
+    "talosctl@latest",
+    "yq-go@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
