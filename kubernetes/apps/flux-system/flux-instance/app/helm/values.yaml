@@ -10,15 +10,11 @@ instance:
     - kustomize-controller
     - helm-controller
     - notification-controller
-    - image-reflector-controller
-    - image-automation-controller
   sync:
     kind: GitRepository
-    provider: github
     url: https://github.com/marcocondrache/hive
     ref: refs/heads/main
     path: kubernetes/flux/cluster
-    pullSecret: github-app-secret
     interval: 1h
   commonMetadata:
     labels:

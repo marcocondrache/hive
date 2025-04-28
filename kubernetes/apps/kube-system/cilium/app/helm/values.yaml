@@ -7,23 +7,26 @@ k8s:
   requireIPv4PodCIDR: true
 
 kubeProxyReplacement: true
-kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 
-k8sServiceHost: "127.0.0.1"
-k8sServicePort: "6444"
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 7445
 
-routingMode: "native"
-ipv4NativeRoutingCIDR: "10.0.0.0/8"
+routingMode: native
+ipv4NativeRoutingCIDR: 10.42.0.0/16
 installNoConntrackIptablesRules: true
+
+autoDirectNodeRoutes: true
+
+l2announcements:
+  enabled: true
 
 endpointRoutes:
   enabled: true
 
 loadBalancer:
   mode: dsr
-  # Breaks with v1.18.0-pre.0
-  # algorithm: maglev
-  acceleration: native
+  algorithm: maglev
 
 gatewayAPI:
   enabled: true
@@ -41,7 +44,7 @@ envoy:
   rollOutEnvoyPods: true
 
 operator:
-  replicas: 3
+  replicas: 2
   rollOutPods: true
 
 bpfClockProbe: true
@@ -61,4 +64,23 @@ enableIPv6BIGTCP: true
 hubble:
   enabled: false
 
-MTU: 1450
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - IPC_LOCK
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - PERFMON
+      - BPF
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE

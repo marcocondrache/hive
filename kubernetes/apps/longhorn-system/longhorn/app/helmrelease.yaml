@@ -22,6 +22,11 @@ spec:
         kind: HelmRepository
         name: longhorn
       version: 1.8.1
-  valuesFrom:
-    - kind: ConfigMap
-      name: longhorn-values
+  values:
+    persistence:
+      defaultClass: true
+      defaultDataLocality: best-effort
+
+    defaultSettings:
+      defaultDataPath: /var/mnt/DATA
+      allowCollectingLonghornUsageMetrics: false

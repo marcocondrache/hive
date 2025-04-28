@@ -1,0 +1,8 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: DATA
+provisioning:
+  diskSelector:
+    match: disk.transport == 'nvme'
+  grow: true
+  minSize: 500Gi

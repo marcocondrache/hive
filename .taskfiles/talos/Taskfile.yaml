@@ -16,6 +16,7 @@ tasks:
         --secret-file {{.TALOS_DIR}}/talsecret.yaml
         --config-file {{.TALOS_DIR}}/talconfig.yaml
         --out-dir {{.TALOS_DIR}}/clusterconfig
+        --debug
 
   apply-clusterconfig:
     desc: Apply clusterconfig for a Talos cluster
@@ -35,6 +36,17 @@ tasks:
             {{ trimPrefix (printf "hive-") (base .ITEM) | trimSuffix ".yaml" }}
           DRY_RUN: "{{ .DRY_RUN }}"
           INSECURE: "{{ .INSECURE }}"
+
+  reset-node:
+    desc: Reset a Talos node
+    preconditions:
+      - which talosctl
+      - test -f "${TALOSCONFIG}"
+      - talosctl --nodes {{.NODE}} get machineconfig
+    vars:
+      NODE: "{{.NODE}}"
+    cmds:
+      - talosctl --nodes {{.NODE}} reset --graceful=false --reboot
 
   apply-node:
     desc: Apply Talos config to a node [NODE=required]
@@ -72,6 +84,17 @@ tasks:
     cmds:
       - talosctl --nodes {{.NODE}} upgrade --image="{{.TALOS_IMAGE}}" --timeout=10m
       - talosctl --nodes {{.NODE}} health
+
+  _download-image:
+    desc: Download a Talos image
+    vars:
+      TALOS_IMAGE: "{{.TALOS_DIR}}/image.raw.xz"
+      TALOS_IMAGE_URL:
+        sh: cd {{.TALOS_DIR}} && talhelper genurl image
+    cmds:
+      - curl -sSL -o {{.TALOS_IMAGE}} "{{.TALOS_IMAGE_URL}}"
+      - xz -d {{.TALOS_IMAGE}}
+      - rm -f {{.TALOS_IMAGE}}
 
   _apply-machineconfig:
     internal: true

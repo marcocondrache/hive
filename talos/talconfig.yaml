@@ -3,8 +3,14 @@ clusterName: &clusterName hive
 
 endpoint: https://192.168.0.51:6443
 
-talosVersion: v1.9.5
-kubernetesVersion: v1.32.3
+talosVersion: v1.10.0-beta.1
+kubernetesVersion: v1.33.0-rc.1
+
+clusterPodNets:
+  - "10.42.0.0/16"
+
+clusterSvcNets:
+  - "10.43.0.0/16"
 
 additionalApiServerCertSans: &sans
   - 192.168.0.51
@@ -18,23 +24,44 @@ cniConfig:
 nodes:
   - hostname: 192.168.0.51 # queen leadership
     ipAddress: 192.168.0.51
-    controlPlane: true
     installDisk: /dev/mmcblk0 # eMMC
-    userVolumes:
-      - name: DATA
-        provisioning:
-          diskSelector:
-            match: disk.transport == "nvme"
-          grow: true
+    controlPlane: true
+
+    machineSpec: &turingrk1-machineSpec
+      mode: metal
+      arch: arm64
+      secureboot: false
+      useUKI: false
+      bootMethod: disk-image
+      imageSuffix: raw.xz
+
+    # Enable when talhelper is released
+    # userVolumes:
+    #   - name: DATA
+    #     provisioning:
+    #       diskSelector:
+    #         match: disk.transport == "nvme"
+    #       grow: true
+
     volumes:
       - name: EPHEMERAL
         provisioning:
           diskSelector:
             match: disk.transport == "nvme"
           maxSize: 100GiB
+
     networkInterfaces:
       - interface: end0
         dhcp: true
+
+    schematic: &turingrk1-schematic
+      overlay:
+        name: turingrk1
+        image: siderolabs/sbc-rockchip
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/iscsi-tools
 
   # missing hardware
   # - hostname: royal-jelly.hive.internal # sustenance
@@ -77,23 +104,10 @@ controlPlane:
     topology.kubernetes.io/region: *clusterName
     topology.kubernetes.io/zone: m
 
-  schematic: &schematic
-    customization:
-      extraKernelArgs:
-        - apparmor=0 # Less security, more speed
-        - init_on_alloc=0 # Less security, more speed
-        - init_on_free=0 # Less security, more speed
-        - mitigations=off # Less security, more speed
-        - security=none # Less security, more speed
-      systemExtensions:
-        officialExtensions:
-          - siderolabs/iscsi-tools
-          - siderolabs/util-linux-tools
-
   patches:
     - "@./patches/controlplane/cluster.yaml"
     - "@./patches/controlplane/machine-features.yaml"
 
-worker:
-  nodeLabels: *nodeLabels
-  schematic: *schematic
+  # TODO: Remove this once talhelper is released
+  extraManifests:
+    - /Users/marcocondrache/Personal/hive/talos/manifests/data-volume.yaml
