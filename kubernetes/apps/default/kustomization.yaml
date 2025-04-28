@@ -6,8 +6,6 @@ namespace: default
 components:
   - ../../components/common
 resources:
-  - ./atuin/ks.yaml
-  - ./actual/ks.yaml
   - ./it-tools/ks.yaml
   - ./pdf/ks.yaml
   - ./n8n/ks.yaml

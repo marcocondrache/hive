@@ -21,7 +21,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cilium
-      version: 1.18.0-pre.1
+      version: 1.17.3
   install:
     remediation:
       retries: 3
