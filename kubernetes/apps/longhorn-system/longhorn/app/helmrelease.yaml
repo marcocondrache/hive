@@ -26,7 +26,9 @@ spec:
     persistence:
       defaultClass: true
       defaultDataLocality: best-effort
+      defaultClassReplicaCount: 1
 
     defaultSettings:
       defaultDataPath: /var/mnt/DATA
+      defaultReplicaCount: 1
       allowCollectingLonghornUsageMetrics: false
