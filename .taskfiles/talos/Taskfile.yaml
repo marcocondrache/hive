@@ -46,7 +46,7 @@ tasks:
     vars:
       NODE: "{{.NODE}}"
     cmds:
-      - talosctl --nodes {{.NODE}} reset --graceful=false --reboot
+      - talosctl --nodes {{.NODE}} reset --graceful=false --reboot --system-labels-to-wipe=EPHEMERAL
 
   apply-node:
     desc: Apply Talos config to a node [NODE=required]
