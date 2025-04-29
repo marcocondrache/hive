@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: network
 components:
   - ../../components/common
-resources:
-  - ./tailscale/ks.yaml
-  - ./cloudflare-dns/ks.yaml
+# resources:
+#   - ./tailscale/ks.yaml
+#   - ./cloudflare-dns/ks.yaml

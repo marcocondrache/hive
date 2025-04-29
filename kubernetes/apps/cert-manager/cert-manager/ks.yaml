@@ -53,5 +53,3 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
-    - name: onepassword
-      namespace: external-secrets
