@@ -29,6 +29,6 @@ spec:
       defaultClassReplicaCount: 1
 
     defaultSettings:
-      defaultDataPath: /var/mnt/DATA
+      defaultDataPath: /var/mnt/data
       defaultReplicaCount: 1
       allowCollectingLonghornUsageMetrics: false

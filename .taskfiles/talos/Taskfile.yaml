@@ -37,6 +37,20 @@ tasks:
           FILENAME: '{{.TALOS_DIR}}/clusterconfig/hive-{{splitList "," .ITEM | first}}.yaml'
           INSECURE: "{{ .INSECURE }}"
 
+  flash-node:
+    desc: Flash a Talos node
+    preconditions:
+      - which talosctl
+      - test -f "${TALOSCONFIG}"
+    vars:
+      NODE: "{{.NODE}}"
+      TALOS_IMAGE: "{{.TALOS_DIR}}/image.raw.xz"
+    cmds:
+      - task: _download-image
+        vars:
+          TALOS_IMAGE: "{{.TALOS_IMAGE}}"
+      - tpi flash -n {{.NODE}} -i {{.TALOS_DIR}}/image.raw
+
   reset-node:
     desc: Reset a Talos node
     preconditions:
@@ -46,7 +60,7 @@ tasks:
     vars:
       NODE: "{{.NODE}}"
     cmds:
-      - talosctl --nodes {{.NODE}} reset --graceful=false --reboot --system-labels-to-wipe=EPHEMERAL
+      - talosctl --nodes {{.NODE}} reset --graceful=false --reboot --user-disks-to-wipe=nvme0n1
 
   apply-node:
     desc: Apply Talos config to a node [NODE=required]

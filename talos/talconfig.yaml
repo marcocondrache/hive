@@ -1,10 +1,10 @@
 ---
 clusterName: &clusterName hive
 
-endpoint: https://192.168.0.51:6443
+endpoint: https://192.168.0.108:6443
 
-talosVersion: v1.10.0-beta.1
-kubernetesVersion: v1.33.0-rc.1
+talosVersion: v1.10.0
+kubernetesVersion: v1.33.0
 
 clusterPodNets:
   - "10.42.0.0/16"
@@ -14,7 +14,7 @@ clusterSvcNets:
 
 additionalApiServerCertSans: &sans
   - queen.local
-  - 192.168.0.51
+  - 192.168.0.108
   - 127.0.0.1
 
 additionalMachineCertSans: *sans
@@ -25,7 +25,7 @@ cniConfig:
 nodes:
   # TODO: Change hostname to queen.hive.internal
   - hostname: queen.local # queen leadership
-    ipAddress: 192.168.0.51
+    ipAddress: 192.168.0.108
     installDisk: /dev/mmcblk0 # eMMC
     controlPlane: true
 
@@ -37,13 +37,13 @@ nodes:
       bootMethod: disk-image
       imageSuffix: raw.xz
 
-    # Enable when talhelper is released
-    # userVolumes:
-    #   - name: DATA
-    #     provisioning:
-    #       diskSelector:
-    #         match: disk.transport == "nvme"
-    #       grow: true
+    userVolumes:
+      - name: data
+        provisioning:
+          diskSelector:
+            match: disk.transport == "nvme"
+          minSize: 100GiB
+          grow: true
 
     volumes:
       - name: EPHEMERAL
@@ -61,9 +61,16 @@ nodes:
         name: turingrk1
         image: siderolabs/sbc-rockchip
       customization:
+        extraKernelArgs:
+          - -selinux
+          - apparmor=0
+          - security=none
+          - mitigations=off
+          - talos.auditd.disabled=1
         systemExtensions:
           officialExtensions:
             - siderolabs/iscsi-tools
+            - siderolabs/util-linux-tools
 
   # missing hardware
   # - hostname: royal-jelly.hive.internal # sustenance
@@ -105,9 +112,16 @@ controlPlane:
     topology.kubernetes.io/zone: m
 
   patches:
+    - |-
+      - op: remove
+        path: /cluster/apiServer/admissionControl
+
+    - |-
+      cluster:
+        apiServer:
+          extraArgs:
+            runtime-config: admissionregistration.k8s.io/v1alpha1=true
+            feature-gates: MutatingAdmissionPolicy=true
+
     - "@./patches/controlplane/cluster.yaml"
     - "@./patches/controlplane/machine-features.yaml"
-
-  # TODO: Remove this once talhelper is released
-  extraManifests:
-    - /Users/marcocondrache/Personal/hive/talos/manifests/data-volume.yaml
