@@ -67,7 +67,6 @@ spec:
         enabled: true
         accessMode: ReadWriteOnce
         size: 5Gi
-        storageClass: longhorn-crypto
         advancedMounts:
           n8n:
             app:
