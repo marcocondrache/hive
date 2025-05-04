@@ -22,9 +22,10 @@ spec:
   wait: false
   components:
     - ../../../../components/volsync
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_PUID: "1000"
-      VOLSYNC_PGID: "1000"
       VOLSYNC_CAPACITY: 5Gi
