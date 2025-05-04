@@ -79,13 +79,14 @@ spec:
 
     persistence:
       config:
-        existingClaim: home-assistant-config
+        existingClaim: home-assistant
         advancedMounts:
           home-assistant:
             app:
               - path: /config
             code-server:
               - path: /config
+
       hass-cache:
         existingClaim: hass-cache
         advancedMounts:
