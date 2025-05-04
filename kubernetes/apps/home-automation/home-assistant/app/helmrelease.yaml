@@ -94,6 +94,7 @@ spec:
             app:
               - path: /venv
                 subPath: hass-venv
+
       tmpfs:
         type: emptyDir
         advancedMounts:
