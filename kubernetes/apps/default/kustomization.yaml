@@ -8,6 +8,6 @@ components:
 resources:
   - ./it-tools/ks.yaml
   - ./pdf/ks.yaml
-  # - ./n8n/ks.yaml
+  - ./n8n/ks.yaml
   - ./speedtest/ks.yaml
   - ./webcheck/ks.yaml
