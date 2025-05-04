@@ -49,7 +49,7 @@ envoy:
   rollOutEnvoyPods: true
 
 operator:
-  replicas: 2
+  replicas: 1
   rollOutPods: true
 
 bpfClockProbe: true
