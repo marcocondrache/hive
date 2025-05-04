@@ -64,9 +64,7 @@ spec:
 
     persistence:
       data:
-        enabled: true
-        accessMode: ReadWriteOnce
-        size: 4Gi
+        existingClaim: n8n
         advancedMounts:
           n8n:
             app:
