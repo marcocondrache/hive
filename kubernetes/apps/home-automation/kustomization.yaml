@@ -6,4 +6,4 @@ namespace: home-automation
 resources:
   - ./home-assistant/ks.yaml
 components:
-  - ../../components/namespace
+  - ../../components/common

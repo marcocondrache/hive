@@ -7,4 +7,4 @@ resources:
   - ./reloader/ks.yaml
   - ./volsync/ks.yaml
 components:
-  - ../../components/namespace
+  - ../../components/common
