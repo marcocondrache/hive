@@ -24,7 +24,7 @@ spec:
     - ../../../../components/volsync
   postBuild:
     substitute:
-      APP: *appname
+      APP: *app
       VOLSYNC_PUID: "1000"
       VOLSYNC_PGID: "1000"
       VOLSYNC_CAPACITY: 5Gi
