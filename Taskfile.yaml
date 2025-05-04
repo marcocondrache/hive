@@ -16,6 +16,7 @@ vars:
 includes:
   bootstrap: .taskfiles/bootstrap
   talos: .taskfiles/talos
+  volsync: .taskfiles/volsync
 
 tasks:
   default:
