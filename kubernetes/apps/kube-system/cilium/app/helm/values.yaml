@@ -29,8 +29,10 @@ cgroup:
 l2announcements:
   enabled: true
 
-# endpointRoutes:
-#   enabled: true
+endpointRoutes:
+  enabled: true
+
+MTU: 1500
 
 loadBalancer:
   mode: dsr
