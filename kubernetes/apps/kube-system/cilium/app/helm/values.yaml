@@ -18,6 +18,9 @@ installNoConntrackIptablesRules: true
 
 autoDirectNodeRoutes: true
 
+cni:
+  exclusive: false
+
 cgroup:
   autoMount:
     enabled: false
