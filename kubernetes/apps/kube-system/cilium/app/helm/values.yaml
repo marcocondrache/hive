@@ -29,8 +29,8 @@ cgroup:
 l2announcements:
   enabled: true
 
-endpointRoutes:
-  enabled: true
+# endpointRoutes:
+#   enabled: true
 
 loadBalancer:
   mode: dsr
