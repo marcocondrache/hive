@@ -32,8 +32,6 @@ l2announcements:
 endpointRoutes:
   enabled: true
 
-MTU: 1500
-
 loadBalancer:
   mode: dsr
   algorithm: maglev
