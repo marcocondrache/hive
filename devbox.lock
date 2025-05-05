@@ -49,6 +49,54 @@
         }
       }
     },
+    "arping@latest": {
+      "last_modified": "2025-03-11T17:52:14Z",
+      "resolved": "github:NixOS/nixpkgs/0d534853a55b5d02a4ababa1d71921ce8f0aee4c#arping",
+      "source": "devbox-search",
+      "version": "2.25",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/prcc9b5bbw92j0nb24xa012bgfhmb2w0-arping-2.25",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/prcc9b5bbw92j0nb24xa012bgfhmb2w0-arping-2.25"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n1i3z85jj3ljjs7gqr64mi9wm00fba2v-arping-2.25",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n1i3z85jj3ljjs7gqr64mi9wm00fba2v-arping-2.25"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/717n5754qgjpwkj9b73bxb78vbr5q4wd-arping-2.25",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/717n5754qgjpwkj9b73bxb78vbr5q4wd-arping-2.25"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/d06fap6g4mjq0ihvzgw0fhd90j3v5yxa-arping-2.25",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/d06fap6g4mjq0ihvzgw0fhd90j3v5yxa-arping-2.25"
+        }
+      }
+    },
     "cilium-cli@latest": {
       "last_modified": "2025-03-28T03:27:31Z",
       "resolved": "github:NixOS/nixpkgs/398f1f1892a56d1e058d21b0d279512fcc181d3e#cilium-cli",
