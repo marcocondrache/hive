@@ -1,0 +1,109 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
+  values:
+    controllers:
+      immich:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 3000
+            runAsGroup: 3000
+            fsGroup: 3000
+
+        containers:
+          server:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.132.3
+            env:
+              TZ: Europe/Rome
+              IMMICH_MEDIA_LOCATION: /data/nas
+
+              REDIS_URL: redis://immich-redis.default.svc.cluster.local:6379
+
+              DB_VECTOR_EXTENSION: pgvector
+              DB_HOST: immich-postgres.database.svc.cluster.local
+              DB_PORT: 5432
+            envFrom:
+              - secretRef:
+                  name: immich-postgres
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 100m
+                memory: 250Mi
+              limits:
+                memory: 3072Mi
+
+      redis:
+        containers:
+          redis:
+            image:
+              repository: ghcr.io/valkey-io/valkey
+              tag: 8.1.1
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+
+    service:
+      server:
+        controller: immich
+        ports:
+          http:
+            port: 2283
+
+      redis:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
+
+    persistence:
+      nas:
+        type: nfs
+        # TODO: Make this dynamic
+        server: 192.168.0.131
+        path: /mnt/tankpool/hive/immich
+        advancedMounts:
+          immich:
+            server:
+              - path: /data/nas
+
+    route:
+      app:
+        hostnames:
+          - immich.marcocondrache.com
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: immich
+                port: 2283

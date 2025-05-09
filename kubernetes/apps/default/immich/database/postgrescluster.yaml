@@ -1,0 +1,54 @@
+---
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: immich-database
+spec:
+  postgresVersion: 17
+
+  instances:
+    - name: pgha
+      dataVolumeClaimSpec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: longhorn-local
+
+  backups:
+    pgbackrest:
+      repos:
+        - name: nfs
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - "ReadWriteOnce"
+              resources:
+                requests:
+                  storage: 5Gi
+              storageClassName: longhorn
+
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        pg_hba:
+          - host all all 0.0.0.0/0 md5
+        parameters:
+          max_connections: "300"
+          shared_buffers: 256MB
+          max_parallel_workers: "8"
+          max_worker_processes: "8"
+
+  users:
+    - name: immich
+      databases:
+        - immich
+      password:
+        ref:
+          name: immich-database
+          key: DB_PASSWORD
+
+  databaseInitSQL:
+    key: init-database
+    name: immich-database
