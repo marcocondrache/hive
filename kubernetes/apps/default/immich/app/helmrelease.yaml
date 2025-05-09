@@ -48,7 +48,7 @@ spec:
                   secretKeyRef:
                     name: immich-pguser-immich
                     key: password
-              DB_HOST:
+              DB_HOSTNAME:
                 valueFrom:
                   secretKeyRef:
                     name: immich-pguser-immich
@@ -58,7 +58,7 @@ spec:
                   secretKeyRef:
                     name: immich-pguser-immich
                     key: port
-              DB_NAME:
+              DB_DATABASE_NAME:
                 valueFrom:
                   secretKeyRef:
                     name: immich-pguser-immich
