@@ -3,7 +3,7 @@ clusterName: &clusterName hive
 
 endpoint: https://192.168.0.108:6443
 
-talosVersion: v1.10.0
+talosVersion: v1.10.1
 kubernetesVersion: v1.33.0
 
 clusterPodNets:
@@ -71,6 +71,7 @@ nodes:
           - security=none
           - mitigations=off
           - talos.auditd.disabled=1
+          - rockchip_drm.dmc_enable=1
         systemExtensions:
           officialExtensions:
             - siderolabs/panfrost

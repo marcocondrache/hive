@@ -21,13 +21,13 @@
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
-    "KUBECONFIG":   "$PWD/kubeconfig",
-    "TALOSCONFIG":  "$PWD/talos/clusterconfig/talosconfig",
-    "ROOT_DIR":     "$PWD"
+    "KUBECONFIG": "$PWD/kubeconfig",
+    "TALOSCONFIG": "$PWD/talos/clusterconfig/talosconfig",
+    "ROOT_DIR": "$PWD"
   },
   "env_from": ".env",
   "shell": {
     "init_hook": [],
-    "scripts":   {}
+    "scripts": {}
   }
 }
