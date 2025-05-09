@@ -37,11 +37,6 @@ spec:
   dependsOn:
     - name: postgres
       namespace: database
-  healthCheckExprs:
-    - apiVersion: postgres-operator.crunchydata.com/v1beta1
-      kind: PostgresCluster
-      failed: status.conditions.filter(e, e.type == 'Available').all(e, e.status == 'False')
-      current: status.conditions.filter(e, e.type == 'Available').all(e, e.status == 'True')
   interval: 1h
   path: ./kubernetes/apps/default/immich/database
   prune: true
