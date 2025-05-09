@@ -117,8 +117,7 @@ spec:
     persistence:
       config:
         type: configMap
-        configMap:
-          name: immich-config
+        name: immich-config
         advancedMounts:
           immich:
             server:
