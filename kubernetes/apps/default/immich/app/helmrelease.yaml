@@ -33,6 +33,7 @@ spec:
               TZ: Europe/Rome
 
               # IMMICH_CONFIG_FILE: /config.json
+              IMMICH_LOG_LEVEL: verbose
               IMMICH_MEDIA_LOCATION: /data/nas
 
               REDIS_HOSTNAME: immich-redis.default.svc.cluster.local
