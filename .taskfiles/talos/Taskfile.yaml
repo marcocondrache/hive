@@ -44,12 +44,14 @@ tasks:
       - test -f "${TALOSCONFIG}"
     vars:
       NODE: "{{.NODE}}"
-      TALOS_IMAGE: "{{.TALOS_DIR}}/image.raw.xz"
+      TMP_DIR:
+        sh: mktemp -d
     cmds:
+      - defer: rm -rf {{.TMP_DIR}}
       - task: _download-image
         vars:
-          TALOS_IMAGE: "{{.TALOS_IMAGE}}"
-      - tpi flash -n {{.NODE}} -i {{.TALOS_DIR}}/image.raw
+          TALOS_IMAGE: "{{.TMP_DIR}}/image.raw.xz"
+      - tpi flash -n {{.NODE}} -i {{.TMP_DIR}}/image.raw
 
   reset-node:
     desc: Reset a Talos node
