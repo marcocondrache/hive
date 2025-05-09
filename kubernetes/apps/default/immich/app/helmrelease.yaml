@@ -38,9 +38,32 @@ spec:
               REDIS_URL: redis://immich-redis.default.svc.cluster.local:6379
 
               DB_VECTOR_EXTENSION: pgvector
-              DB_NAME: immich
-              DB_HOST: immich-primary.default.svc.cluster.local
-              DB_PORT: 5432
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-pguser-immich
+                    key: user
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-pguser-immich
+                    key: password
+              DB_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-pguser-immich
+                    key: host
+              DB_PORT:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-pguser-immich
+                    key: port
+              DB_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-pguser-immich
+                    key: dbname
+
             probes:
               liveness:
                 enabled: true
