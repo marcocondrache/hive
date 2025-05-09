@@ -35,7 +35,7 @@ spec:
               # IMMICH_CONFIG_FILE: /config.json
               IMMICH_MEDIA_LOCATION: /data/nas
 
-              REDIS_URL: redis://immich-redis.default.svc.cluster.local:6379
+              REDIS_HOSTNAME: immich-redis.default.svc.cluster.local
 
               DB_VECTOR_EXTENSION: pgvector
               DB_USERNAME:
