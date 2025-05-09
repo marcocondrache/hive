@@ -94,12 +94,12 @@ spec:
               limits:
                 memory: 128Mi
 
-    configMapsFromFolder:
-      enabled: true
-      basePath: "files/configMaps"
-      configMapOverrides:
-        config.json:
-          forceRename: immich-config
+    # configMapsFromFolder:
+    #   enabled: true
+    #   basePath: "files/configMaps"
+    #   configMapOverrides:
+    #     config.json:
+    #       forceRename: immich-config
 
     service:
       server:
