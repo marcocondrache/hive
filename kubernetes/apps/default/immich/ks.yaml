@@ -22,7 +22,7 @@ spec:
   wait: false
   dependsOn:
     - name: immich-database
-      namespace: database
+      namespace: *namespace
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -35,8 +35,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: postgres-operator
-      namespace: postgres-operator
+    - name: postgres
+      namespace: database
   healthCheckExprs:
     - apiVersion: postgres-operator.crunchydata.com/v1beta1
       kind: PostgresCluster

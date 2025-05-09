@@ -2,12 +2,12 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: immich-database
+  name: immich
 spec:
   postgresVersion: 17
 
   instances:
-    - name: immich-database
+    - name: immich
       dataVolumeClaimSpec:
         accessModes:
           - "ReadWriteOnce"
@@ -27,4 +27,4 @@ spec:
 
   databaseInitSQL:
     key: init-database
-    name: immich-database
+    name: immich-database-init
