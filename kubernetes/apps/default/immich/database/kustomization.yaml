@@ -4,10 +4,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./postgrescluster.yaml
-  - ./externalsecret.yaml
 configMapGenerator:
-  - name: immich-database
+  - name: immich-database-init
     files:
-      - init-database=./config/config.sql
+      - init.sql=./files/configMaps/init.sql
 configurations:
-  - ./config/kustomizeconfig.yaml
+  - ./kustomizeconfig.yaml

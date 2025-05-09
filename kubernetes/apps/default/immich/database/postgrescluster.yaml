@@ -16,15 +16,6 @@ spec:
             storage: 10Gi
         storageClassName: longhorn-local
 
-  users:
-    - name: immich
-      databases:
-        - immich
-      password:
-        ref:
-          name: immich-database
-          key: DB_PASSWORD
-
   databaseInitSQL:
     key: init-database
     name: immich-database-init

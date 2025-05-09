@@ -31,16 +31,16 @@ spec:
               tag: v1.132.3
             env:
               TZ: Europe/Rome
+
+              IMMICH_CONFIG_FILE: /config.json
               IMMICH_MEDIA_LOCATION: /data/nas
 
               REDIS_URL: redis://immich-redis.default.svc.cluster.local:6379
 
               DB_VECTOR_EXTENSION: pgvector
-              DB_HOST: immich-postgres.database.svc.cluster.local
+              DB_NAME: immich
+              DB_HOST: immich-primary.default.svc.cluster.local
               DB_PORT: 5432
-            envFrom:
-              - secretRef:
-                  name: immich-postgres
             probes:
               liveness:
                 enabled: true
@@ -71,6 +71,13 @@ spec:
               limits:
                 memory: 128Mi
 
+    configMapsFromFolder:
+      enabled: true
+      basePath: "files/configMaps"
+      configMapOverrides:
+        config.json:
+          forceRename: immich-config
+
     service:
       server:
         controller: immich
@@ -85,6 +92,15 @@ spec:
             port: 6379
 
     persistence:
+      config:
+        type: configMap
+        configMap:
+          name: immich-config
+        advancedMounts:
+          immich:
+            server:
+              - path: /config.json
+
       nas:
         type: nfs
         # TODO: Make this dynamic
