@@ -6,6 +6,7 @@ metadata:
   name: &app longhorn
   namespace: &namespace longhorn-system
 spec:
+  force: true
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
