@@ -16,6 +16,6 @@ spec:
             storage: 10Gi
         storageClassName: longhorn-local
 
-  databaseInitSQL:
-    key: init.sql
-    name: immich-database-init
+  # databaseInitSQL:
+  #   key: init.sql
+  #   name: immich-database-init
