@@ -58,7 +58,5 @@ spec:
     txtOwnerId: default
     txtPrefix: k8s.
     domainFilters: ["marcocondrache.com"]
-    serviceMonitor:
-      enabled: true
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
