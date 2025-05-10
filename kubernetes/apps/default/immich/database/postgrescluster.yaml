@@ -19,7 +19,7 @@ spec:
   backups:
     pgbackrest:
       repos:
-        - name: database
+        - name: repo1
           volume:
             volumeClaimSpec:
               accessModes:
