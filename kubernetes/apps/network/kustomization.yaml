@@ -8,4 +8,4 @@ components:
 resources:
   - ./multus/ks.yaml
   - ./tailscale/ks.yaml
-  # - ./cloudflare-dns/ks.yaml
+  - ./cloudflare-dns/ks.yaml
