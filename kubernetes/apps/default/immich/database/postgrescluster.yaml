@@ -6,6 +6,17 @@ metadata:
 spec:
   postgresVersion: 17
 
+  patroni:
+    dynamicConfiguration:
+      synchronous_mode: true
+      postgresql:
+        synchronous_commit: "on"
+        parameters:
+          search_path: '"$user", public, vector"'
+        pg_hba:
+          - hostnossl all all 10.42.0.0/16 md5
+          - hostssl all all all md5
+
   instances:
     - name: database
       dataVolumeClaimSpec:
@@ -15,6 +26,11 @@ spec:
           requests:
             storage: 10Gi
         storageClassName: longhorn-local
+
+  users:
+    - name: immich
+      databases:
+        - immich
 
   # backups:
   #   pgbackrest:
