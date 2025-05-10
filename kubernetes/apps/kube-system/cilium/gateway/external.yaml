@@ -7,7 +7,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname external.marcocondrache.com
 spec:
-  gatewayClassName: cilium
+  gatewayClassName: cilium-external
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
