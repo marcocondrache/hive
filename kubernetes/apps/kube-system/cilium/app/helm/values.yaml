@@ -35,6 +35,7 @@ endpointRoutes:
 loadBalancer:
   mode: dsr
   algorithm: maglev
+  # TODO: l2 doesn't work without best-effort
   acceleration: best-effort
 
 gatewayAPI:
