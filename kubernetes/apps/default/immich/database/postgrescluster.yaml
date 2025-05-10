@@ -16,17 +16,17 @@ spec:
             storage: 10Gi
         storageClassName: longhorn-local
 
-  backups:
-    pgbackrest:
-      repos:
-        - name: repo1
-          volume:
-            volumeClaimSpec:
-              accessModes:
-                - "ReadWriteOnce"
-              resources:
-                requests:
-                  storage: 10Gi
+  # backups:
+  #   pgbackrest:
+  #     repos:
+  #       - name: repo1
+  #         volume:
+  #           volumeClaimSpec:
+  #             accessModes:
+  #               - "ReadWriteOnce"
+  #             resources:
+  #               requests:
+  #                 storage: 10Gi
 
   databaseInitSQL:
     key: init.sql
