@@ -53,9 +53,8 @@ spec:
       defaultTags:
         - "tag:hive-operator"
 
-    # proxyConfig:
-    #   defaultTags: "tag:hive"
-    #   defaultProxyClass: "default"
+    proxyConfig:
+      defaultTags: "tag:hive"
 
     apiServerProxyConfig:
       mode: "true"
