@@ -29,6 +29,7 @@ spec:
 
   users:
     - name: immich
+      options: "SUPERUSER"
       databases:
         - immich
 
@@ -43,7 +44,3 @@ spec:
   #             resources:
   #               requests:
   #                 storage: 10Gi
-
-  databaseInitSQL:
-    key: init.sql
-    name: immich-database-init
