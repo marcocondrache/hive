@@ -41,6 +41,12 @@ spec:
   path: ./kubernetes/apps/default/immich/database
   prune: true
   retryInterval: 2m
+  components:
+    - ../../../../components/volsync
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_CAPACITY: 5Gi
   sourceRef:
     kind: GitRepository
     name: flux-system
