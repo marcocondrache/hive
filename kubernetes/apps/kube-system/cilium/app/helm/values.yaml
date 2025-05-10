@@ -35,6 +35,7 @@ endpointRoutes:
 loadBalancer:
   mode: dsr
   algorithm: maglev
+  acceleration: best-effort
 
 gatewayAPI:
   enabled: true
@@ -71,9 +72,6 @@ enableIPv6BIGTCP: true
 
 hubble:
   enabled: false
-
-socketLB:
-  hostNamespaceOnly: true
 
 securityContext:
   capabilities:
