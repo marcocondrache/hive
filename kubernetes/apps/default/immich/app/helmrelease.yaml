@@ -95,6 +95,7 @@ spec:
           immich:
             server:
               - path: /config.json
+                subPath: config.json
 
       nas:
         type: nfs
