@@ -72,6 +72,9 @@ enableIPv6BIGTCP: true
 hubble:
   enabled: false
 
+socketLB:
+  hostNamespaceOnly: true
+
 securityContext:
   capabilities:
     ciliumAgent:
