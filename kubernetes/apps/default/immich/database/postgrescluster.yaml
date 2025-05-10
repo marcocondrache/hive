@@ -17,5 +17,5 @@ spec:
         storageClassName: longhorn-local
 
   databaseInitSQL:
-    key: init-database
+    key: init.sql
     name: immich-database-init
