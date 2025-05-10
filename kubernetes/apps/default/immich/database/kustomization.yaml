@@ -8,5 +8,5 @@ configMapGenerator:
   - name: immich-database-init
     files:
       - init.sql=./files/configMaps/init.sql
-# configurations:
-#   - ./kustomizeconfig.yaml
+configurations:
+  - ./kustomizeconfig.yaml

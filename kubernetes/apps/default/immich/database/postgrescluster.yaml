@@ -16,6 +16,18 @@ spec:
             storage: 10Gi
         storageClassName: longhorn-local
 
-  # databaseInitSQL:
-  #   key: init.sql
-  #   name: immich-database-init
+  backups:
+    pgbackrest:
+      repos:
+        - name: database
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - "ReadWriteOnce"
+              resources:
+                requests:
+                  storage: 10Gi
+
+  databaseInitSQL:
+    key: init.sql
+    name: immich-database-init
