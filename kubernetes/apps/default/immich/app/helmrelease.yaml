@@ -38,7 +38,6 @@ spec:
 
               REDIS_HOSTNAME: immich-redis.default.svc.cluster.local
 
-              DB_VECTOR_EXTENSION: pgvector
               DB_URL:
                 valueFrom:
                   secretKeyRef:
