@@ -8,3 +8,4 @@ resources:
   - ./external.yaml
   - ./pushsecret.yaml
   - ./certificate.yaml
+  - ./redirect.yaml

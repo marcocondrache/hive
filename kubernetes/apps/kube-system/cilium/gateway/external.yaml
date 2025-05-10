@@ -8,22 +8,21 @@ metadata:
     external-dns.alpha.kubernetes.io/target: &hostname external.marcocondrache.com
 spec:
   gatewayClassName: cilium-external
+  addresses:
+    - type: IPAddress
+      value: 192.168.0.61
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
   listeners:
-    - name: default
-      protocol: HTTPS
-      port: 443
-      hostname: "marcocondrache.com"
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: "*.marcocondrache.com"
       allowedRoutes:
         namespaces:
-          from: All
-      tls:
-        certificateRefs:
-          - kind: Secret
-            name: hive-marcocondrache-com-tls
+          from: Same
 
     - name: https
       protocol: HTTPS
