@@ -52,10 +52,17 @@ bandwidthManager:
 envoy:
   enabled: true
   rollOutEnvoyPods: true
+  prometheus:
+    serviceMonitor:
+      enabled: true
 
 operator:
   replicas: 1
   rollOutPods: true
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 
 bpfClockProbe: true
 
@@ -70,6 +77,12 @@ encryption:
 
 enableIPv4BIGTCP: true
 enableIPv6BIGTCP: true
+
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    trustCRDsExist: true
 
 hubble:
   enabled: false
