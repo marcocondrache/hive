@@ -82,18 +82,3 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
-
-      webhooks:
-        hostnames:
-          - n8n-webhook.marcocondrache.com
-        parentRefs:
-          - name: external
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - matches:
-              - path:
-                  value: /webhook
-            backendRefs:
-              - name: n8n
-                port: *port
