@@ -47,13 +47,14 @@ spec:
             key: *name
     extraArgs:
       - --cloudflare-dns-records-per-page=1000
+      - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
-      - --gateway-name=internal
+      - --gateway-name=external
       - --zone-id-filter=$(CF_ZONE_ID)
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["gateway-httproute", "service"]
+    sources: ["crd", "gateway-httproute"]
     txtOwnerId: default
     txtPrefix: k8s.
     domainFilters: ["marcocondrache.com"]
