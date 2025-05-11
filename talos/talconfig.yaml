@@ -111,6 +111,7 @@ patches:
   - "@./patches/common/machine-kubelet.yaml"
   - "@./patches/common/machine-network.yaml"
   - "@./patches/common/machine-features.yaml"
+  - "@./patches/common/machine-sysctls.yaml"
 
 controlPlane:
   nodeLabels: &nodeLabels
