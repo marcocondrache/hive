@@ -77,7 +77,7 @@ spec:
             port: *port
 
     persistence:
-      config-file:
+      config:
         type: configMap
         name: cloudflared-configmap
         globalMounts:
