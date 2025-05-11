@@ -15,3 +15,11 @@ stringData:
   1password-credentials.json: |
     op://hive/1password/OP_CREDENTIALS_JSON
   token: op://hive/1password/OP_CONNECT_TOKEN
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflared-tid-secret
+  namespace: network
+stringData:
+  CLOUDFLARE_TUNNEL_ID: op://hive/cloudflare/CLOUDFLARE_TUNNEL_ID

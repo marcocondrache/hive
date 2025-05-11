@@ -14,7 +14,7 @@ spec:
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: cloudflared-secret
+        name: cloudflared-tid-secret
   prune: true
   retryInterval: 2m
   sourceRef:
