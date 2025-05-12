@@ -3,5 +3,8 @@
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
     "kubernetes": "./kubernetes/**/*.yaml"
-  }
+  },
+  "files.associations": {
+    "**/*.json5": "json5"
+  },
 }
