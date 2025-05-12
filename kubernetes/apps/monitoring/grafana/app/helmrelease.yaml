@@ -38,54 +38,7 @@ spec:
       configmap.reloader.stakater.com/reload: grafana
       secret.reloader.stakater.com/reload: grafana-admin-secret
 
-    deploymentStrategy:
-      type: Recreate
-
-    env:
-      GF_ANALYTICS_CHECK_FOR_UPDATES: false
-      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: false
-      GF_ANALYTICS_REPORTING_ENABLED: false
-      GF_AUTH_ANONYMOUS_ENABLED: false
-      GF_AUTH_BASIC_ENABLED: false
-      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
-      GF_EXPLORE_ENABLED: true
-      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
-      GF_LOG_MODE: console
-      GF_NEWS_NEWS_FEED_ENABLED: false
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
-      GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_ROOT_URL: https://grafana.marcocondrache.com
-
-    datasources:
-      datasources.yaml:
-        apiVersion: 1
-
-        deleteDatasources:
-          - { name: Alertmanager, orgId: 1 }
-          - { name: Loki, orgId: 1 }
-          - { name: Prometheus, orgId: 1 }
-
-        datasources:
-          - name: Prometheus
-            type: prometheus
-            uid: prometheus
-            access: proxy
-            url: http://prometheus-operated.monitoring.svc.cluster.local:9090
-            isDefault: true
-          - name: Loki
-            type: loki
-            uid: loki
-            access: proxy
-            url: http://loki-headless.monitoring.svc.cluster.local:3100
-            jsonData:
-              maxLines: 250
-          - name: Alertmanager
-            type: alertmanager
-            uid: alertmanager
-            access: proxy
-            url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
-            jsonData:
-              implementation: prometheus
+    replicas: 1
 
     dashboardProviders:
       dashboardproviders.yaml:
@@ -219,6 +172,93 @@ spec:
           revision: 14
           datasource: Prometheus
 
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - access: proxy
+            name: Prometheus
+            type: prometheus
+            url: http://prometheus-operated.monitoring.svc.cluster.local:9090
+            isDefault: true
+            jsonData:
+              prometheusType: Prometheus
+          - access: proxy
+            name: Loki
+            type: loki
+            url: http://loki-headless.monitoring.svc.cluster.local:3100
+          - name: Alertmanager
+            type: alertmanager
+            access: proxy
+            url: http://alertmanager.monitoring.svc.cluster.local:9093
+            jsonData:
+              implementation: prometheus
+
+        deleteDatasources:
+          - name: Alertmanager
+            orgId: 1
+          - name: Prometheus
+            orgId: 1
+          - name: Loki
+            orgId: 1
+
+    env:
+      GF_ANALYTICS_CHECK_FOR_UPDATES: false
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: false
+      GF_ANALYTICS_REPORTING_ENABLED: false
+      GF_AUTH_ANONYMOUS_ENABLED: false
+      GF_AUTH_BASIC_ENABLED: false
+      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /tmp/dashboards/home.json
+      GF_EXPLORE_ENABLED: true
+      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
+      GF_LOG_MODE: console
+      GF_NEWS_NEWS_FEED_ENABLED: false
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
+      GF_SECURITY_COOKIE_SAMESITE: grafana
+      GF_SERVER_ROOT_URL: https://grafana.marcocondrache.com
+
+    imageRenderer:
+      enabled: true
+
+    persistence:
+      enabled: false
+
+    plugins:
+      - grafana-clock-panel
+      - grafana-piechart-panel
+      - grafana-worldmap-panel
+      - natel-discrete-panel
+      - pr0ps-trackmap-panel
+      - vonage-status-panel
+
+    rbac:
+      pspEnabled: false
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - grafana.marcocondrache.com
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+
+    serviceAccount:
+      create: true
+      autoMount: true
+
+    serviceMonitor:
+      enabled: true
+
     sidecar:
       dashboards:
         enabled: true
@@ -232,29 +272,6 @@ spec:
         enabled: true
         searchNamespace: ALL
         labelValue: ""
-
-    plugins:
-      - grafana-clock-panel
-      - grafana-piechart-panel
-      - grafana-worldmap-panel
-      - natel-discrete-panel
-      - pr0ps-trackmap-panel
-      - vonage-status-panel
-
-    serviceMonitor:
-      enabled: true
-
-    route:
-      main:
-        enabled: true
-        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
-
-    persistence:
-      enabled: false
 
     testFramework:
       enabled: false
