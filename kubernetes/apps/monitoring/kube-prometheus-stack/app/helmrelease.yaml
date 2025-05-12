@@ -32,11 +32,9 @@ spec:
       retries: 3
   values:
     crds:
-      enabled: true
-      upgradeJob:
-        enabled: true
-        forceConflicts: true
+      enabled: false
     cleanPrometheusOperatorObjectNames: true
+
     alertmanager:
       route:
         main:
@@ -59,12 +57,15 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+
     kubeEtcd:
       service:
         selector:
           component: kube-apiserver # etcd runs on control plane nodes
+
     kubeProxy:
       enabled: false
+
     prometheus:
       route:
         main:
@@ -98,6 +99,7 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
+
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
@@ -109,6 +111,7 @@ spec:
               replacement: $1
               sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
+
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
       metricLabelsAllowlist:
