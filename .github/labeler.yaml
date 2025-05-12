@@ -1,7 +1,7 @@
 ---
 area/bootstrap:
   - changed-files:
-      - any-glob-to-any-file: "bootstrap/**/*"
+      - any-glob-to-any-file: "kubernetes/bootstrap/**/*"
 area/docs:
   - changed-files:
       - any-glob-to-any-file:
