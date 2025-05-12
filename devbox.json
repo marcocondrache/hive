@@ -16,7 +16,7 @@
     "kubefetch@latest",
     "ipmitool@latest",
     "talosctl@latest",
-    "yq-go@latest",
+    "yq-go@4.45.1",
     "arping@latest"
   ],
   "env": {
