@@ -11,17 +11,6 @@ tasks:
     cmds:
       - echo "{{.RESOURCES}}" | kubectl apply --server-side -f -
 
-  apply-cdrs:
-    silent: true
-    internal: true
-    vars:
-      CDRS:
-        - https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/tags/v0.16.1/docs/sources/crd/crd-manifest.yaml
-    cmds:
-      - for: { var: CDRS }
-        cmd: |
-          kubectl apply --server-side --filename {{.ITEM}}
-
   apply-helmfile:
     internal: true
     cmds:
