@@ -3,7 +3,7 @@
   "packages": [
     "k3d@latest",
     "go-task@latest",
-    "helmfile@latest",
+    "helmfile@0.171.0",
     "_1password-cli@latest",
     "kubectl@latest",
     "fluxcd@latest",
