@@ -10,7 +10,7 @@
     "kubernetes-helm@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "cilium-cli@latest",
-    "minijinja@latest",
+    "minijinja@2.9.0",
     "tpi@latest",
     "github:budimanjojo/talhelper",
     "kubefetch@latest",
