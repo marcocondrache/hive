@@ -15,7 +15,7 @@
     "github:budimanjojo/talhelper",
     "kubefetch@latest",
     "ipmitool@latest",
-    "talosctl@latest",
+    "talosctl@0.14.3",
     "yq-go@4.45.1",
     "arping@latest"
   ],
