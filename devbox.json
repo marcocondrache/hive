@@ -6,7 +6,7 @@
     "helmfile@latest",
     "_1password-cli@latest",
     "kubectl@latest",
-    "fluxcd@latest",
+    "fluxcd@2.5.1",
     "kubernetes-helm@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "cilium-cli@latest",
