@@ -9,7 +9,7 @@
     "fluxcd@2.5.1",
     "kubernetes-helm@3.17.3",
     "kubernetes-helmPlugins.helm-diff@3.11.0",
-    "cilium-cli@latest",
+    "cilium-cli@0.18.3",
     "minijinja@2.9.0",
     "tpi@1.0.7",
     "github:budimanjojo/talhelper",
