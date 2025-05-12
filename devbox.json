@@ -13,7 +13,7 @@
     "minijinja@latest",
     "tpi@latest",
     "github:budimanjojo/talhelper",
-    "kubefetch@latest",
+    "kubefetch@0.8.1",
     "ipmitool@latest",
     "talosctl@latest",
     "yq-go@latest",
