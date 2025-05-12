@@ -24,6 +24,7 @@ spec:
     kind: OCIRepository
     name: kube-prometheus-stack
   install:
+    crds: Skip
     remediation:
       retries: -1
   upgrade:
