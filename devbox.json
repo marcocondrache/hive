@@ -7,7 +7,7 @@
     "_1password-cli@latest",
     "kubectl@1.33.0",
     "fluxcd@2.5.1",
-    "kubernetes-helm@latest",
+    "kubernetes-helm@3.17.3",
     "kubernetes-helmPlugins.helm-diff@3.11.0",
     "cilium-cli@latest",
     "minijinja@2.9.0",
