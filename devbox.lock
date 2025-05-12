@@ -345,9 +345,9 @@
         }
       }
     },
-    "k3d@latest": {
-      "last_modified": "2025-04-17T05:47:26Z",
-      "resolved": "github:NixOS/nixpkgs/ebe4301cbd8f81c4f8d3244b3632338bbeb6d49c#k3d",
+    "k3d@5.8.3": {
+      "last_modified": "2025-05-06T08:06:31Z",
+      "resolved": "github:NixOS/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679#k3d",
       "source": "devbox-search",
       "version": "5.8.3",
       "systems": {
