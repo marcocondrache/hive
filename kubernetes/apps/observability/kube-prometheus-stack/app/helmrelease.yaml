@@ -37,6 +37,32 @@ spec:
       enabled: false
     cleanPrometheusOperatorObjectNames: true
 
+    kubelet:
+      enabled: true
+
+    kubeApiServer:
+      enabled: true
+
+    kubeControllerManager:
+      enabled: false
+
+    kubeEtcd:
+      enabled: false
+
+    kubeScheduler:
+      enabled: false
+
+    kubeProxy:
+      enabled: false
+
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          annotations:
+            grafana_folder: Kubernetes
+
     alertmanager:
       route:
         main:
@@ -60,14 +86,6 @@ spec:
                 requests:
                   storage: 1Gi
 
-    kubeEtcd:
-      service:
-        selector:
-          component: kube-apiserver # etcd runs on control plane nodes
-
-    kubeProxy:
-      enabled: false
-
     prometheus:
       route:
         main:
@@ -77,6 +95,7 @@ spec:
             - name: internal
               namespace: kube-system
               sectionName: https
+
       prometheusSpec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
@@ -86,7 +105,9 @@ spec:
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
+          - auto-gomaxprocs
           - memory-snapshot-on-shutdown
+          - new-service-discovery-manager
         retention: 14d
         retentionSize: 50GB
         resources:
@@ -130,14 +151,6 @@ spec:
               sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
 
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          annotations:
-            grafana_folder: Kubernetes
-
     additionalPrometheusRulesMap:
       dockerhub-rules:
         groups:
@@ -149,6 +162,7 @@ spec:
                 expr: count(time() - container_last_seen{image=~"(docker.io).*",container!=""} < 30) > 25
                 labels:
                   severity: critical
+
       oom-rules:
         groups:
           - name: oom
@@ -159,6 +173,7 @@ spec:
                 expr: (kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1
                 labels:
                   severity: critical
+
       zfs-rules:
         groups:
           - name: zfs
