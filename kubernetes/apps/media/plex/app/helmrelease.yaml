@@ -105,6 +105,10 @@ spec:
     persistence:
       config:
         existingClaim: plex
+        advancedMounts:
+          plex:
+            app:
+              - path: /config
 
       config-cache:
         existingClaim: plex-cache
