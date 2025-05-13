@@ -39,20 +39,10 @@ spec:
 
     # Components
 
-    kubelet:
-      enabled: true
-
-    kubeApiServer:
-      enabled: true
-
-    kubeControllerManager:
-      enabled: false
-
     kubeEtcd:
-      enabled: false
-
-    kubeScheduler:
-      enabled: false
+      service:
+        selector:
+          component: kube-apiserver # etcd runs on control plane nodes
 
     kubeProxy:
       enabled: false
