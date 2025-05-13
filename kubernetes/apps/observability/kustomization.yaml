@@ -5,9 +5,9 @@ kind: Kustomization
 namespace: observability
 components:
   - ../../components/common
-resources:
-  - prometheus-operator/ks.yaml
-  - kube-prometheus-stack/ks.yaml
-  - grafana/ks.yaml
-  - loki/ks.yaml
-  - promtail/ks.yaml
+# resources:
+#   - prometheus-operator/ks.yaml
+#   - kube-prometheus-stack/ks.yaml
+#   - grafana/ks.yaml
+#   - loki/ks.yaml
+#   - promtail/ks.yaml
