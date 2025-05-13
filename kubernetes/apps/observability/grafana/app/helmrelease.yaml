@@ -219,7 +219,7 @@ spec:
       GF_SERVER_ROOT_URL: https://grafana.marcocondrache.com
 
     imageRenderer:
-      enabled: true
+      enabled: false
 
     persistence:
       enabled: false
