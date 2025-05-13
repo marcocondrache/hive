@@ -12,3 +12,4 @@ resources:
   - ./speedtest/ks.yaml
   - ./webcheck/ks.yaml
   - ./immich/ks.yaml
+  - ./plex/ks.yaml
