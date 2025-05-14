@@ -1,51 +1,51 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "_1password-cli@2.30.3": {
-      "last_modified": "2025-05-06T08:06:31Z",
-      "resolved": "github:NixOS/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679#_1password-cli",
+    "_1password-cli@2.31.0": {
+      "last_modified": "2025-05-12T14:38:58Z",
+      "resolved": "github:NixOS/nixpkgs/eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1#_1password-cli",
       "source": "devbox-search",
-      "version": "2.30.3",
+      "version": "2.31.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/2sad605ilxn39a9bh12ikqzray1gq9g0-1password-cli-2.30.3",
+              "path": "/nix/store/swdvw6da1r8xr37w5h0vfy96xj6kb5zm-1password-cli-2.31.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/2sad605ilxn39a9bh12ikqzray1gq9g0-1password-cli-2.30.3"
+          "store_path": "/nix/store/swdvw6da1r8xr37w5h0vfy96xj6kb5zm-1password-cli-2.31.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/fffp55hmkvjza0wligs98f4yqw5z8nii-1password-cli-2.30.3",
+              "path": "/nix/store/15wvrc6jflxp8l89dg95a7fgvklgfm6y-1password-cli-2.31.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/fffp55hmkvjza0wligs98f4yqw5z8nii-1password-cli-2.30.3"
+          "store_path": "/nix/store/15wvrc6jflxp8l89dg95a7fgvklgfm6y-1password-cli-2.31.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ywnzwmngxrrymf2j2bn8blcywgxj2j5i-1password-cli-2.30.3",
+              "path": "/nix/store/xi1fps3wlkkqvj5blf0599nbw54qd7fp-1password-cli-2.31.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ywnzwmngxrrymf2j2bn8blcywgxj2j5i-1password-cli-2.30.3"
+          "store_path": "/nix/store/xi1fps3wlkkqvj5blf0599nbw54qd7fp-1password-cli-2.31.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vx8l9iy3nffpn7flazpsz1ik4hv49c3y-1password-cli-2.30.3",
+              "path": "/nix/store/fpqppdgfh4lii2ijvbrp0carhpdh8ypr-1password-cli-2.31.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/vx8l9iy3nffpn7flazpsz1ik4hv49c3y-1password-cli-2.30.3"
+          "store_path": "/nix/store/fpqppdgfh4lii2ijvbrp0carhpdh8ypr-1password-cli-2.31.0"
         }
       }
     },
