@@ -78,6 +78,7 @@ spec:
 
     serviceMonitor:
       app:
+        enabled: true
         serviceName: cloudflared
         endpoints:
           - port: http
