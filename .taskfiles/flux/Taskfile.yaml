@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  reconcile:
+    cmds:
+      - flux reconcile source git flux-system
+
+  force-hr:
+    desc: Force all HelmRelease to be reconciled
+    vars:
+      RELEASES:
+        sh: |
+          kubectl get helmrelease -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{"|"}{end}'
+    cmds:
+      - for:
+          var: RELEASES
+          split: "|"
+        cmd: |
+          flux reconcile helmrelease {{.ITEM | splitList "/" | last}} -n {{.ITEM | splitList "/" | first }} --force
