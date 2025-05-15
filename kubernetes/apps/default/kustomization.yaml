@@ -6,12 +6,12 @@ namespace: default
 components:
   - ../../components/common
 resources:
-  - ./it-tools/ks.yaml
   - ./pdf/ks.yaml
   - ./n8n/ks.yaml
-  - ./speedtest/ks.yaml
-  - ./webcheck/ks.yaml
-  - ./home-assistant/ks.yaml
-  - ./immich/ks.yaml
   - ./plex/ks.yaml
+  - ./immich/ks.yaml
   - ./fusion/ks.yaml
+  - ./webcheck/ks.yaml
+  - ./it-tools/ks.yaml
+  - ./speedtest/ks.yaml
+  - ./home-assistant/ks.yaml
