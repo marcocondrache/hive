@@ -176,13 +176,12 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-          - access: proxy
-            name: Prometheus
+          - name: Prometheus
             type: prometheus
+            uid: prometheus
+            access: proxy
             url: http://prometheus-operated.observability.svc.cluster.local:9090
             isDefault: true
-            jsonData:
-              prometheusType: Prometheus
           - access: proxy
             name: Loki
             type: loki
