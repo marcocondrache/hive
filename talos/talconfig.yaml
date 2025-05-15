@@ -43,6 +43,9 @@ nodes:
       bootMethod: disk-image
       imageSuffix: raw.xz
 
+    extraManifests:
+      - "@./manifests/watchdog.yaml"
+
     userVolumes:
       - name: data
         provisioning:
