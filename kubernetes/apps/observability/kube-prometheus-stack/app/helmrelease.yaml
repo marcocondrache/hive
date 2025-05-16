@@ -119,17 +119,20 @@ spec:
               sectionName: https
 
       prometheusSpec:
+        image:
+          registry: docker.io
+          repository: prompp/prompp
+          tag: 2.53.2-0.2.3
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 64535
+          runAsGroup: 64535
+          fsGroup: 64535
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         ruleSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        enableAdminAPI: true
-        walCompression: true
-        enableFeatures:
-          - auto-gomaxprocs
-          - memory-snapshot-on-shutdown
-          - new-service-discovery-manager
         retention: 14d
         retentionSize: 50GB
         resources:
@@ -155,7 +158,7 @@ spec:
               - alert: DockerhubRateLimitRisk
                 annotations:
                   summary: Kubernetes cluster Dockerhub rate limit risk
-                expr: count(time() - container_last_seen{image=~"(docker.io).*",container!=""} < 30) > 25
+                expr: count(time() - container_last_seen{image=~"(docker.io).*",container!=""} < 30) > 100
                 labels:
                   severity: critical
 
