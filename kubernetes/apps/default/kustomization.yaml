@@ -11,7 +11,6 @@ resources:
   - ./plex/ks.yaml
   - ./immich/ks.yaml
   - ./fusion/ks.yaml
-  - ./webcheck/ks.yaml
   - ./it-tools/ks.yaml
   - ./speedtest/ks.yaml
   - ./home-assistant/ks.yaml
