@@ -12,5 +12,4 @@ resources:
   - ./immich/ks.yaml
   - ./fusion/ks.yaml
   - ./it-tools/ks.yaml
-  - ./speedtest/ks.yaml
   - ./home-assistant/ks.yaml
