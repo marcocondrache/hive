@@ -9,7 +9,7 @@ vars:
   SCRIPTS_DIR: "{{.ROOT_DIR}}/scripts"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   BOOTSTRAP_DIR: "{{.ROOT_DIR}}/kubernetes/bootstrap"
-  TALOS_DIR: "{{.ROOT_DIR}}/talos"
+  TALOS_DIR: "{{.ROOT_DIR}}/kubernetes/talos"
 
   KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
 
