@@ -60,7 +60,7 @@ spec:
 
     service:
       app:
-        controller: *app
+        controller: pdf
         ports:
           http:
             port: &port 8080
@@ -75,7 +75,7 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: pdf
+              - identifier: app
                 port: *port
 
     persistence:

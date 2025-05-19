@@ -8,10 +8,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: app-template
-    namespace: flux-system
-  dependsOn:
-    - name: longhorn
-      namespace: longhorn-system
   values:
     controllers:
       immich:
@@ -117,5 +113,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: immich-server
+              - identifier: app
                 port: 2283

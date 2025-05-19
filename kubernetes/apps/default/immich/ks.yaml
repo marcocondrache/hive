@@ -37,6 +37,8 @@ spec:
   dependsOn:
     - name: postgres
       namespace: database
+    - name: longhorn
+      namespace: longhorn-system
   interval: 1h
   path: ./kubernetes/apps/default/immich/database
   prune: true

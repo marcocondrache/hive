@@ -9,8 +9,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: app-template
-    namespace: flux-system
-
   values:
     controllers:
       it-tools:
@@ -66,5 +64,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: it-tools
+              - identifier: app
                 port: *port
