@@ -78,7 +78,8 @@ spec:
                 cpu: 25m
                 memory: 2Gi
               limits:
-                memory: 6Gi
+                # TODO: increase limit
+                memory: 2Gi
 
       redis:
         containers:
