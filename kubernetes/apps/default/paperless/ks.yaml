@@ -29,5 +29,4 @@ spec:
       APP: *appname
       VOLSYNC_PUID: "1000"
       VOLSYNC_PGID: "65542"
-      VOLSYNC_CLAIM: paperless-data
       VOLSYNC_CAPACITY: 15Gi
