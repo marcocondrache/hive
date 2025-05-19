@@ -6,7 +6,6 @@ namespace: default
 components:
   - ../../components/common
 resources:
-  - ./pdf/ks.yaml
   - ./n8n/ks.yaml
   - ./plex/ks.yaml
   - ./immich/ks.yaml
