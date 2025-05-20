@@ -39,7 +39,7 @@ spec:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn-single
+        storageClassName: longhorn-local
         resources:
           requests:
             storage: 25Gi
