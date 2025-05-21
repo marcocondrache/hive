@@ -67,7 +67,8 @@
         "github-actions"
       ],
       matchPackageNames: [
-        "/^actions\//"
+        "/^actions\//",
+        "/^renovatebot\//",
       ],
       automerge: true,
       automergeType: "branch",
