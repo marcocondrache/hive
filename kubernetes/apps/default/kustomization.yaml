@@ -11,5 +11,6 @@ resources:
   - ./immich/ks.yaml
   - ./fusion/ks.yaml
   - ./it-tools/ks.yaml
+  - ./ocis/ks.yaml
   # - ./paperless/ks.yaml
   - ./home-assistant/ks.yaml
