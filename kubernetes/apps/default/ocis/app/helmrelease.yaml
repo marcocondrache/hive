@@ -104,7 +104,7 @@ spec:
         hostnames:
           - files.marcocondrache.com
         parentRefs:
-          - name: internal
+          - name: external
             namespace: kube-system
             sectionName: https
         rules:
