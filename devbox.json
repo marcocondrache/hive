@@ -4,7 +4,7 @@
     "go-task@3.43.3",
     "helmfile@1.1.0",
     "_1password-cli@2.31.0",
-    "kubectl@1.33.0",
+    "kubectl@1.33.1",
     "fluxcd@2.5.1",
     "kubernetes-helm@3.17.3",
     "kubernetes-helmPlugins.helm-diff@3.12.0",
