@@ -525,51 +525,51 @@
         }
       }
     },
-    "kubernetes-helmPlugins.helm-diff@3.12.0": {
-      "last_modified": "2025-05-21T01:27:34Z",
-      "resolved": "github:NixOS/nixpkgs/f0d925b947cca0bbe7f2d25115cbaf021844aba7#kubernetes-helmPlugins.helm-diff",
+    "kubernetes-helmPlugins.helm-diff@3.12.1": {
+      "last_modified": "2025-05-31T03:30:20Z",
+      "resolved": "github:NixOS/nixpkgs/59138c7667b7970d205d6a05a8bfa2d78caa3643#kubernetes-helmPlugins.helm-diff",
       "source": "devbox-search",
-      "version": "3.12.0",
+      "version": "3.12.1",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/d1nx30j2kgw42mzhnc4gp9i6jznxd5h7-helm-diff-3.12.0",
+              "path": "/nix/store/w6cfy9c2w5zr519k5mf0gmr17lld6b2n-helm-diff-3.12.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/d1nx30j2kgw42mzhnc4gp9i6jznxd5h7-helm-diff-3.12.0"
+          "store_path": "/nix/store/w6cfy9c2w5zr519k5mf0gmr17lld6b2n-helm-diff-3.12.1"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ig3n7f9pw0wqrl353f1nr48dpwpvqbhz-helm-diff-3.12.0",
+              "path": "/nix/store/wvjy8cw5h9ff73kch5b7jzrpf0qicfvk-helm-diff-3.12.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ig3n7f9pw0wqrl353f1nr48dpwpvqbhz-helm-diff-3.12.0"
+          "store_path": "/nix/store/wvjy8cw5h9ff73kch5b7jzrpf0qicfvk-helm-diff-3.12.1"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/llb08pmjldzmf5md5mi8y6rhcq700iz8-helm-diff-3.12.0",
+              "path": "/nix/store/55sjbsws6gn650dnr8ad58xijp1vzpmg-helm-diff-3.12.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/llb08pmjldzmf5md5mi8y6rhcq700iz8-helm-diff-3.12.0"
+          "store_path": "/nix/store/55sjbsws6gn650dnr8ad58xijp1vzpmg-helm-diff-3.12.1"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/zn76qahrmwrd33173v1pasxl8ljnqyv4-helm-diff-3.12.0",
+              "path": "/nix/store/dwx9fwf2vvr64vv0snmwxg5ay3ijjr3z-helm-diff-3.12.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/zn76qahrmwrd33173v1pasxl8ljnqyv4-helm-diff-3.12.0"
+          "store_path": "/nix/store/dwx9fwf2vvr64vv0snmwxg5ay3ijjr3z-helm-diff-3.12.1"
         }
       }
     },
