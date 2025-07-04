@@ -573,51 +573,51 @@
         }
       }
     },
-    "minijinja@2.10.2": {
-      "last_modified": "2025-05-12T14:38:58Z",
-      "resolved": "github:NixOS/nixpkgs/eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1#minijinja",
+    "minijinja@2.11.0": {
+      "last_modified": "2025-06-29T07:09:35Z",
+      "resolved": "github:NixOS/nixpkgs/a48741b083d4f36dd79abd9f760c84da6b4dc0e5#minijinja",
       "source": "devbox-search",
-      "version": "2.10.2",
+      "version": "2.11.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/zh58775nmk6070a9vjijkm5nhk9gmgwy-minijinja-2.10.2",
+              "path": "/nix/store/s6jfracwiw3z2g85ldxfj40qv6721nh3-minijinja-2.11.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/zh58775nmk6070a9vjijkm5nhk9gmgwy-minijinja-2.10.2"
+          "store_path": "/nix/store/s6jfracwiw3z2g85ldxfj40qv6721nh3-minijinja-2.11.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ama41gfs276l3x5a4vgnbzivn20kgyzd-minijinja-2.10.2",
+              "path": "/nix/store/a9rbp7gwnj4zmzyvd6i0s9k2qs08rkjk-minijinja-2.11.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ama41gfs276l3x5a4vgnbzivn20kgyzd-minijinja-2.10.2"
+          "store_path": "/nix/store/a9rbp7gwnj4zmzyvd6i0s9k2qs08rkjk-minijinja-2.11.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/h4b1hiwd5d0bwnnw7lbpain1zfxxpr8j-minijinja-2.10.2",
+              "path": "/nix/store/3jdlkq7z7124hks3yhcy581j3pkv9spd-minijinja-2.11.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/h4b1hiwd5d0bwnnw7lbpain1zfxxpr8j-minijinja-2.10.2"
+          "store_path": "/nix/store/3jdlkq7z7124hks3yhcy581j3pkv9spd-minijinja-2.11.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/mhfnvhqqv53fm330y9nd384vk6mac1r9-minijinja-2.10.2",
+              "path": "/nix/store/mvxzxkjv3i8hsxxx0nlhzny4sjxb37kp-minijinja-2.11.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/mhfnvhqqv53fm330y9nd384vk6mac1r9-minijinja-2.10.2"
+          "store_path": "/nix/store/mvxzxkjv3i8hsxxx0nlhzny4sjxb37kp-minijinja-2.11.0"
         }
       }
     },
