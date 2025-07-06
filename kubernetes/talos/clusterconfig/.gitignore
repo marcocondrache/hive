@@ -1,3 +1,3 @@
-hive-192.168.0.51.yaml
 talosconfig
-hive-queen.local.yaml
+hive-queen.hive.internal.yaml
+hive-forager.hive.internal.yaml

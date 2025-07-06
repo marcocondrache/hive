@@ -1,4 +1,7 @@
 cluster:
+  etcd:
+    advertisedSubnets:
+      - 10.0.30.0/24
   allowSchedulingOnControlPlanes: true
   coreDNS:
     disabled: true

@@ -27,7 +27,7 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 
 l2announcements:
-  enabled: true
+  enabled: false
 
 endpointRoutes:
   enabled: true

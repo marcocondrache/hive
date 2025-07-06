@@ -1,7 +1,7 @@
 ---
 clusterName: &clusterName hive
 
-endpoint: https://192.168.0.108:6443
+endpoint: https://k8s.hive.internal:6443
 
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.10.4
@@ -15,8 +15,8 @@ clusterSvcNets:
   - "10.43.0.0/16"
 
 additionalApiServerCertSans: &sans
-  - queen.local
-  - 192.168.0.108
+  - k8s.hive.internal
+  - &vip 10.0.30.20
   - 127.0.0.1
 
 additionalMachineCertSans: *sans
@@ -25,63 +25,20 @@ cniConfig:
   name: none
 
 nodes:
-  # TODO: Change hostname to queen.hive.internal
-  - hostname: queen.local # queen leadership
-    ipAddress: 192.168.0.108
+  - hostname: queen.hive.internal # queen leadership
+    ipAddress: 10.0.30.21
     installDisk: /dev/mmcblk0 # eMMC
     controlPlane: true
-
-    kernelModules:
-      - name: gpu-sched
-      - name: panfrost
-
-    machineSpec: &turingrk1-machineSpec
-      mode: metal
-      arch: arm64
-      secureboot: false
-      useUKI: false
-      bootMethod: disk-image
-      imageSuffix: raw.xz
-
-    extraManifests:
-      - "@./manifests/watchdog.yaml"
-
-    userVolumes:
-      - name: data
-        provisioning:
-          diskSelector:
-            match: disk.transport == "nvme"
-          minSize: 100GiB
-          grow: true
-
-    volumes:
-      - name: EPHEMERAL
-        provisioning:
-          diskSelector:
-            match: disk.transport == "nvme"
-          maxSize: 100GiB
 
     networkInterfaces:
       - interface: end0
         dhcp: true
-
-    schematic: &turingrk1-schematic
-      overlay:
-        name: turingrk1
-        image: siderolabs/sbc-rockchip
-      customization:
-        extraKernelArgs:
-          - -selinux
-          - apparmor=0
-          - security=none
-          - mitigations=off
-          - talos.auditd.disabled=1
-          - rockchip_drm.dmc_enable=1
-        systemExtensions:
-          officialExtensions:
-            - siderolabs/panfrost
-            - siderolabs/iscsi-tools
-            - siderolabs/util-linux-tools
+        vip:
+          ip: *vip
+        vlans:
+          - &lab
+            vlanId: 30
+            dhcp: false
 
   # missing hardware
   # - hostname: royal-jelly.hive.internal # sustenance
@@ -103,13 +60,14 @@ nodes:
   #       vip:
   #         ip: *vip
 
-  # missing hardware
-  # - hostname: forager.hive.internal
-  #   ipAddress: 192.168.0.59
-  #   installDisk: /dev/mmcblk0 # eMMC
-  #   networkInterfaces:
-  #     - interface: end0
-  #       dhcp: true
+  - hostname: forager.hive.internal
+    ipAddress: 10.0.30.29
+    installDisk: /dev/mmcblk0 # eMMC
+    networkInterfaces:
+      - interface: end0
+        dhcp: true
+        vlans:
+          - *lab
 
 patches:
   - "@./patches/common/machine-files.yaml"
@@ -122,6 +80,54 @@ controlPlane:
   nodeLabels: &nodeLabels
     topology.kubernetes.io/region: *clusterName
     topology.kubernetes.io/zone: m
+
+  extraManifests:
+    - "@./manifests/watchdog.yaml"
+
+  kernelModules: &turingrk1-kernelModules
+    - name: gpu-sched
+    - name: panfrost
+
+  machineSpec: &turingrk1-machineSpec
+    mode: metal
+    arch: arm64
+    secureboot: false
+    useUKI: false
+    bootMethod: disk-image
+    imageSuffix: raw.xz
+
+  schematic: &turingrk1-schematic
+    overlay:
+      name: turingrk1
+      image: siderolabs/sbc-rockchip
+    customization:
+      extraKernelArgs:
+        - -selinux
+        - apparmor=0
+        - security=none
+        - mitigations=off
+        - talos.auditd.disabled=1
+        - rockchip_drm.dmc_enable=1
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/panfrost
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
+
+  volumes: &turingrk1-volumes
+    - name: EPHEMERAL
+      provisioning:
+        diskSelector:
+          match: disk.transport == "nvme"
+        maxSize: 100GiB
+
+  userVolumes: &turingrk1-userVolumes
+    - name: data
+      provisioning:
+        diskSelector:
+          match: disk.transport == "nvme"
+        minSize: 100GiB
+        grow: true
 
   patches:
     - |-
@@ -137,3 +143,17 @@ controlPlane:
 
     - "@./patches/controlplane/cluster.yaml"
     - "@./patches/controlplane/machine-features.yaml"
+
+worker:
+  nodeLabels: *nodeLabels
+
+  extraManifests:
+    - "@./manifests/watchdog.yaml"
+
+  kernelModules: *turingrk1-kernelModules
+
+  machineSpec: *turingrk1-machineSpec
+  schematic: *turingrk1-schematic
+
+  volumes: *turingrk1-volumes
+  userVolumes: *turingrk1-userVolumes

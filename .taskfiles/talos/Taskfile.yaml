@@ -37,6 +37,7 @@ tasks:
           FILENAME: '{{.TALOS_DIR}}/clusterconfig/hive-{{splitList "," .ITEM | first}}.yaml'
           INSECURE: "{{ .INSECURE }}"
 
+  # TODO: FIX
   flash-node:
     desc: Flash a Talos node
     preconditions:
