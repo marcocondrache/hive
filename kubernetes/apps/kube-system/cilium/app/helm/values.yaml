@@ -35,8 +35,6 @@ endpointRoutes:
 loadBalancer:
   mode: dsr
   algorithm: maglev
-  # TODO: l2 doesn't work without best-effort
-  acceleration: best-effort
 
 gatewayAPI:
   enabled: true
@@ -56,9 +54,13 @@ envoy:
     serviceMonitor:
       enabled: true
 
+localRedirectPolicy: true
+
 operator:
   replicas: 1
   rollOutPods: true
+  dashboards:
+    enabled: true
   prometheus:
     enabled: true
     serviceMonitor:
