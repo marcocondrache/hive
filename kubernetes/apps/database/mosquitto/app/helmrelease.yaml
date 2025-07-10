@@ -47,7 +47,7 @@ spec:
         controller: mosquitto
         type: LoadBalancer
         annotations:
-          lbipam.cilium.io/ips: 192.168.0.63
+          lbipam.cilium.io/ips: 10.0.90.3
         ports:
           http:
             port: 1883
