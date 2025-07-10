@@ -25,6 +25,7 @@ spec:
   values:
     persistence:
       defaultClass: false
+      defaultClassReplicaCount: 2
 
     defaultSettings:
       defaultDataPath: /var/mnt/data
