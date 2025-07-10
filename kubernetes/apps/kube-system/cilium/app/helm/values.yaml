@@ -66,6 +66,9 @@ operator:
 
 bpfClockProbe: true
 
+bgpControlPlane:
+  enabled: true
+
 bpf:
   masquerade: true
   datapathMode: netkit
