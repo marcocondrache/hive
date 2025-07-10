@@ -37,7 +37,7 @@ nodes:
           ip: *vip
         vlans:
           - &lab
-            vlanId: 30
+            vlanId: 3
             dhcp: false
 
   # missing hardware
