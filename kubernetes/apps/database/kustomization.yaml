@@ -5,6 +5,5 @@ kind: Kustomization
 namespace: database
 resources:
   - ./mosquitto/ks.yaml
-  - ./postgres/ks.yaml
 components:
   - ../../components/common
