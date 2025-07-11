@@ -92,6 +92,8 @@ prometheus:
 hubble:
   enabled: false
 
+MTU: 1500
+
 securityContext:
   capabilities:
     ciliumAgent:
