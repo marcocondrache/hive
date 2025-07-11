@@ -32,7 +32,7 @@ nodes:
 
     networkInterfaces:
       - interface: end0
-        mtu: 9000
+        mtu: 1500
         dhcp: true
         vip:
           ip: *vip
@@ -66,7 +66,7 @@ nodes:
     installDisk: /dev/mmcblk0 # eMMC
     networkInterfaces:
       - interface: end0
-        mtu: 9000
+        mtu: 1500
         dhcp: true
         vlans:
           - *lab
