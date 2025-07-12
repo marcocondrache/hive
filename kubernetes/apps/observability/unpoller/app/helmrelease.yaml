@@ -27,7 +27,7 @@ spec:
             env:
               TZ: America/New_York
               UP_UNIFI_DEFAULT_ROLE: home-ops
-              UP_UNIFI_DEFAULT_URL: https://unifi.management.internal
+              UP_UNIFI_DEFAULT_URL: https://unifi.network.internal
               UP_PROMETHEUS_HTTP_LISTEN: 0.0.0.0:80
               UP_INFLUXDB_DISABLE: true
             envFrom:
