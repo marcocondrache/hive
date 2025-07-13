@@ -49,19 +49,6 @@ spec:
               - -c
             args:
               - exec mosquitto -c "/config/$(hostname).conf"
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - /bin/sh
-                      - -c
-                      - >-
-                        /usr/bin/mosquitto_pub -h localhost -p 1883 -t mosquitto/healthcheck/$(hostname)/liveness -m "ok $(date)" -r -q 0
-              readiness:
-                enabled: true
             resources:
               limits:
                 memory: 256Mi
