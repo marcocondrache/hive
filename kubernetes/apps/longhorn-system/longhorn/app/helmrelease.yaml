@@ -26,6 +26,20 @@ spec:
     persistence:
       defaultClass: false
       defaultClassReplicaCount: 2
+      defaultDataLocality: best-effort
+
+    csi:
+      attacherReplicaCount: 2
+      provisionerReplicaCount: 2
+      resizerReplicaCount: 2
+      snapshotterReplicaCount: 2
+
+    longhornUI:
+      replicaCount: 1
+
+    metrics:
+      serviceMonitor:
+        enabled: true
 
     defaultSettings:
       defaultDataPath: /var/mnt/data
@@ -33,3 +47,5 @@ spec:
       storageMinimalAvailablePercentage: 10
       storageReservedPercentageForDefaultDisk: 0
       allowCollectingLonghornUsageMetrics: false
+
+      # storageNetwork:
