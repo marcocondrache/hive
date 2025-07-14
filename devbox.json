@@ -7,7 +7,7 @@
     "kubectl@1.33.2",
     "fluxcd@2.6.3",
     "kubernetes-helm@3.18.4",
-    "kubernetes-helmPlugins.helm-diff@3.12.2",
+    "kubernetes-helmPlugins.helm-diff@3.12.3",
     "cilium-cli@0.18.5",
     "minijinja@2.11.0",
     "tpi@1.0.7",
