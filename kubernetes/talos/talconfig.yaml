@@ -40,6 +40,9 @@ nodes:
           - &lab
             vlanId: 3
             dhcp: false
+          - &iot
+            vlanId: 4
+            dhcp: false
 
   # missing hardware
   # - hostname: royal-jelly.hive.internal # sustenance
@@ -70,6 +73,7 @@ nodes:
         dhcp: true
         vlans:
           - *lab
+          - *iot
 
 patches:
   - "@./patches/common/machine-files.yaml"
