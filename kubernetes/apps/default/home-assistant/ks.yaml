@@ -20,6 +20,8 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
+    - name: mosquitto
+      namespace: default
     - name: longhorn
       namespace: longhorn-system
   components:
