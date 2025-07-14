@@ -25,6 +25,7 @@ spec:
     - name: longhorn
       namespace: longhorn-system
   components:
+    - ../../../../components/gatus/guarded
     - ../../../../components/volsync
   postBuild:
     substitute:
