@@ -99,7 +99,7 @@ spec:
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
                   server: "nas.hive.internal",
-                  path: "/mnt/tank/volsync"
+                  path: "/mnt/tank/hive/volsync"
                 }
               }
             }
