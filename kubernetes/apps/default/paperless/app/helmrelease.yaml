@@ -117,8 +117,8 @@ spec:
               - path: /data/local
       nas:
         type: nfs
-        server: 192.168.0.131
-        path: /mnt/tankpool/hive/paperless
+        server: nas.hive.internal
+        path: /mnt/tank/hive/paperless
         advancedMounts:
           paperless:
             app:
