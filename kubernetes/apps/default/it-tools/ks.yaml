@@ -10,6 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
+  components:
+    - ../../../../components/gatus/guarded
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/default/it-tools/app"
