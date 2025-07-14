@@ -37,10 +37,7 @@ nodes:
         vip:
           ip: *vip
         vlans:
-          - &lab
-            vlanId: 3
-            dhcp: false
-          - &iot
+          - &iot-vlan
             vlanId: 4
             dhcp: false
 
@@ -72,8 +69,7 @@ nodes:
         mtu: 1500
         dhcp: true
         vlans:
-          - *lab
-          - *iot
+          - *iot-vlan
 
 patches:
   - "@./patches/common/machine-files.yaml"
