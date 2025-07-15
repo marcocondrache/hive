@@ -345,7 +345,7 @@
         }
       }
     },
-    "kubectl-node-shell@latest": {
+    "kubectl-node-shell@1.11.0": {
       "last_modified": "2025-06-20T02:24:11Z",
       "resolved": "github:NixOS/nixpkgs/076e8c6678d8c54204abcb4b1b14c366835a58bb#kubectl-node-shell",
       "source": "devbox-search",
