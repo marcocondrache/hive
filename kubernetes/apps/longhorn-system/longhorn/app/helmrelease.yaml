@@ -43,7 +43,7 @@ spec:
 
     defaultSettings:
       defaultDataPath: /var/mnt/data
-      defaultReplicaCount: 1
+      defaultReplicaCount: 2
       storageMinimalAvailablePercentage: 10
       storageReservedPercentageForDefaultDisk: 0
       allowCollectingLonghornUsageMetrics: false
