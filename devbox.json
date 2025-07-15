@@ -16,17 +16,18 @@
     "ipmitool@1.8.19",
     "talosctl@1.10.4",
     "yq-go@4.45.4",
-    "arping@latest"
+    "arping@latest",
+    "kubectl-node-shell@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default",
-    "KUBECONFIG": "$PWD/kubeconfig",
-    "TALOSCONFIG": "$PWD/kubernetes/talos/clusterconfig/talosconfig",
-    "ROOT_DIR": "$PWD"
+    "KUBECONFIG":   "$PWD/kubeconfig",
+    "TALOSCONFIG":  "$PWD/kubernetes/talos/clusterconfig/talosconfig",
+    "ROOT_DIR":     "$PWD"
   },
   "env_from": ".env",
   "shell": {
     "init_hook": [],
-    "scripts": {}
+    "scripts":   {}
   }
 }

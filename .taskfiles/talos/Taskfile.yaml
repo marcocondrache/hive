@@ -16,7 +16,6 @@ tasks:
         --secret-file {{.TALOS_DIR}}/talsecret.yaml
         --config-file {{.TALOS_DIR}}/talconfig.yaml
         --out-dir {{.TALOS_DIR}}/clusterconfig
-        --debug
 
   apply-clusterconfig:
     desc: Apply clusterconfig for a Talos cluster
