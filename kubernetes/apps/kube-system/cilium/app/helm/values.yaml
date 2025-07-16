@@ -92,7 +92,7 @@ prometheus:
 hubble:
   enabled: false
 
-MTU: 1500
+devices: bond+
 
 securityContext:
   capabilities:

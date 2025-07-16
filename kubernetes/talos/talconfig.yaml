@@ -25,118 +25,110 @@ cniConfig:
   name: none
 
 nodes:
+  # missing: royal-jelly
+  # missing: royal-guard
   - hostname: queen.hive.internal # queen leadership
     ipAddress: 10.0.30.21
-    installDisk: /dev/mmcblk0 # eMMC
     controlPlane: true
-
+    installDiskSelector:
+      type: nvme
     networkInterfaces:
-      - interface: end0
-        mtu: 1500
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: 48:21:0b:55:c4:8a
         dhcp: true
+        mtu: 9000
         vip:
           ip: *vip
         vlans:
           - &iot-vlan
             vlanId: 4
+            mtu: 1500
             dhcp: false
-
-  # missing hardware
-  # - hostname: royal-jelly.hive.internal # sustenance
-  #   ipAddress: 192.168.0.52
-  #   controlPlane: true
-  #   installDisk: /dev/mmcblk0 # eMMC
-  #   networkInterfaces:
-  #     - interface: end0
-  #       dhcp: true
-
-  # missing hardware
-  # - hostname: royal-guard.hive.internal # protection
-  #   ipAddress: 192.168.0.53
-  #   controlPlane: true
-  #   installDisk: /dev/mmcblk0 # eMMC
-  #   networkInterfaces:
-  #     - interface: end0
-  #       dhcp: true
-  #       vip:
-  #         ip: *vip
-
-  - hostname: forager.hive.internal
-    ipAddress: 10.0.30.29
-    installDisk: /dev/mmcblk0 # eMMC
-    networkInterfaces:
-      - interface: end0
-        mtu: 1500
-        dhcp: true
-        vlans:
-          - *iot-vlan
-
-patches:
-  - "@./patches/common/machine-files.yaml"
-  - "@./patches/common/machine-kubelet.yaml"
-  - "@./patches/common/machine-network.yaml"
-  - "@./patches/common/machine-features.yaml"
-  - "@./patches/common/machine-mounts.yaml"
-  - "@./patches/common/machine-sysctls.yaml"
+            dhcpOptions:
+              routeMetric: 4096
 
 controlPlane:
   nodeLabels: &nodeLabels
     topology.kubernetes.io/region: *clusterName
     topology.kubernetes.io/zone: m
 
-  extraManifests:
-    - "@./manifests/watchdog.yaml"
+  kernelModules:
+    - name: nbd
+    - name: thunderbolt
 
-  kernelModules: &turingrk1-kernelModules
-    - name: gpu-sched
-    - name: panfrost
-
-  machineSpec: &turingrk1-machineSpec
-    mode: metal
-    arch: arm64
-    secureboot: false
-    useUKI: false
-    bootMethod: disk-image
-    imageSuffix: raw.xz
-
-  schematic: &turingrk1-schematic
-    overlay:
-      name: turingrk1
-      image: siderolabs/sbc-rockchip
+  schematic:
     customization:
       extraKernelArgs:
-        - -selinux
-        - apparmor=0
-        - security=none
-        - mitigations=off
-        - talos.auditd.disabled=1
-        - rockchip_drm.dmc_enable=1
+        - -init_on_alloc # Less security, faster puter
+        - -init_on_free # Less security, faster puter
+        - -selinux # Less security, faster puter
+        - apparmor=0 # Less security, faster puter
+        - init_on_alloc=0 # Less security, faster puter
+        - init_on_free=0 # Less security, faster puter
+        - iommu=pt # PCI Passthrough
+        - amd_pstate=active # AMD P-State
+        - mitigations=off # Less security, faster puter
+        - security=none # Less security, faster puter
+        - talos.auditd.disabled=1 # Less security, faster puter
       systemExtensions:
         officialExtensions:
-          - siderolabs/panfrost
-          - siderolabs/iscsi-tools
-          - siderolabs/util-linux-tools
-
-  volumes: &turingrk1-volumes
-    - name: EPHEMERAL
-      provisioning:
-        diskSelector:
-          match: disk.transport == "nvme"
-        maxSize: 100GiB
-
-  userVolumes: &turingrk1-userVolumes
-    - name: data
-      provisioning:
-        diskSelector:
-          match: disk.transport == "nvme"
-        minSize: 100GiB
-        grow: true
+          - siderolabs/amd-ucode
+          - siderolabs/amdgpu
+          - siderolabs/thunderbolt
 
   patches:
+    # Configure containerd for spegel
     - |-
-      - op: remove
-        path: /cluster/apiServer/admissionControl
+      machine:
+        files:
+          - op: create
+            path: /etc/cri/conf.d/20-customization.part
+            content: |
+              [plugins."io.containerd.cri.v1.images"]
+                discard_unpacked_layers = false
 
+    # Disable search domain everywhere
+    - |-
+      machine: 
+        network:
+          disableSearchDomain: true
+
+    # Enable host dns
+    - |-
+      machine:
+        features:
+          hostDNS:
+            enabled: true
+            resolveMemberNames: true
+            forwardKubeDNSToHost: false
+
+    # Mount openebs-hostpath in kubelet
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/mnt/extra
+              type: bind
+              source: /var/mnt/extra
+              options:
+                - rbind
+                - rshared
+                - rw
+
+    # Configure kubelet
+    - |-
+      machine:
+        kubelet:
+          extraConfig:
+            maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.0.30.0/24
+
+    # Enable MutatingAdmissionPolicy
     - |-
       cluster:
         apiServer:
@@ -144,19 +136,89 @@ controlPlane:
             runtime-config: admissionregistration.k8s.io/v1alpha1=true
             feature-gates: MutatingAdmissionPolicy=true
 
-    - "@./patches/controlplane/cluster.yaml"
-    - "@./patches/controlplane/machine-features.yaml"
+    # Configure cluster
+    - |-
+      cluster:
+        allowSchedulingOnControlPlanes: true
+        coreDNS:
+            disabled: true
+        proxy:
+          disabled: true
+        scheduler:
+          config:
+            apiVersion: kubescheduler.config.k8s.io/v1
+            kind: KubeSchedulerConfiguration
+            profiles:
+              - schedulerName: default-scheduler
+                pluginConfig:
+                  - name: PodTopologySpread
+                    args:
+                      defaultingType: List
+                      defaultConstraints:
+                        - maxSkew: 1
+                          topologyKey: kubernetes.io/hostname
+                          whenUnsatisfiable: ScheduleAnyway
 
-worker:
-  nodeLabels: *nodeLabels
+    # Configure etcd
+    - |-
+      cluster:
+        etcd:
+          advertisedSubnets:
+            - 10.0.30.0/24
 
-  extraManifests:
-    - "@./manifests/watchdog.yaml"
+    # Configure NFS mount options
+    - |
+      machine:
+        files:
+          - op: overwrite
+            path: /etc/nfsmount.conf
+            permissions: 0o644
+            content: |
+              [ NFSMount_Global_Options ]
+              nfsvers=4.2
+              hard=True
+              noatime=True
+              nconnect=16
 
-  kernelModules: *turingrk1-kernelModules
+    # Configure static host entries
+    - |-
+      machine:
+        network:
+          extraHostEntries:
+            - ip: 10.0.30.20
+              aliases:
+                - k8s.hive.internal
 
-  machineSpec: *turingrk1-machineSpec
-  schematic: *turingrk1-schematic
+    # Configure custom sysctls
+    - |-
+      machine:
+        sysctls:
+          fs.inotify.max_user_watches: 1048576   # Watchdog
+          fs.inotify.max_user_instances: 8192    # Watchdog
+          net.core.rmem_max: 67108864            # Cloudflared / QUIC
+          net.core.wmem_max: 67108864            # Cloudflared / QUIC
+          net.ipv4.tcp_congestion_control: bbr   # BBR congestion control
+          net.ipv4.tcp_fastopen: 3               # Send and accept data in the opening SYN packet
+          net.ipv4.tcp_mtu_probing: 1            # Jumbo frames
+          net.ipv4.tcp_rmem: 4096 87380 33554432
+          net.ipv4.tcp_wmem: 4096 65536 33554432
+          net.ipv4.tcp_window_scaling: 1
+          sunrpc.tcp_slot_table_entries: 128     # NFS
+          user.max_user_namespaces: 11255        # User Namespaces
 
-  volumes: *turingrk1-volumes
-  userVolumes: *turingrk1-userVolumes
+    # Disable default API server admission plugins.
+    - |-
+      - op: remove
+        path: /cluster/apiServer/admissionControl
+
+    # Enable K8s Talos API Access
+    - |-
+      machine:
+        features:
+          kubernetesTalosAPIAccess:
+            enabled: true
+            allowedRoles:
+              - os:admin
+            allowedKubernetesNamespaces:
+              - actions-runner-system
+              - system-upgrade
