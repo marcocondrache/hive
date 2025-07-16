@@ -15,7 +15,7 @@
     "kubefetch@0.8.1",
     "ipmitool@1.8.19",
     "talosctl@1.10.4",
-    "yq-go@4.45.4",
+    "yq-go@4.46.1",
     "arping@latest",
     "kubectl-node-shell@1.11.0"
   ],
