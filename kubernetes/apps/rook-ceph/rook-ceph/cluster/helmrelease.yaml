@@ -48,7 +48,6 @@ spec:
         wipeDevicesFromOtherClusters: true
       crashCollector:
         disable: false
-      # TODO: REMOVE
       mon:
         count: 1
         allowMultiplePerNode: true
