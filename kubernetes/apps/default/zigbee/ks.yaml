@@ -15,8 +15,8 @@ spec:
   dependsOn:
     - name: mosquitto
       namespace: database
-    - name: longhorn
-      namespace: longhorn-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   interval: 1h
   path: ./kubernetes/apps/default/zigbee/app
   postBuild:

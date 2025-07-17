@@ -22,8 +22,8 @@ spec:
   dependsOn:
     - name: mosquitto
       namespace: database
-    - name: longhorn
-      namespace: longhorn-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   components:
     - ../../../../components/gatus/guarded
     - ../../../../components/volsync

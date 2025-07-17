@@ -22,8 +22,8 @@ spec:
   dependsOn:
     - name: keda
       namespace: observability
-    - name: longhorn
-      namespace: longhorn-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   components:
     - ../../../../components/keda/nfs-scaler
     - ../../../../components/volsync
