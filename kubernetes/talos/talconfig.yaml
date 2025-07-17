@@ -31,24 +31,20 @@ nodes:
     ipAddress: 10.0.30.21
     controlPlane: true
     installDiskSelector:
-      type: nvme
+      serial: S7HDNF0Y611403F
     networkInterfaces:
-      - interface: bond0
-        bond:
-          mode: active-backup
-          deviceSelectors:
-            - hardwareAddr: 48:21:0b:55:c4:8a
+      - mtu: 9000
         dhcp: true
-        mtu: 9000
+        deviceSelector:
+          hardwareAddr: 58:47:ca:7f:c1:0d
         vip:
           ip: *vip
-        vlans:
-          - &iot-vlan
-            vlanId: 4
-            mtu: 1500
-            dhcp: false
-            dhcpOptions:
-              routeMetric: 4096
+
+      # - deviceSelector: { busPath: 0-1.0 }
+      #   dhcp: false
+      #   mtu: 65520
+      #   addresses: [169.254.255.12/32]
+      #   routes: [{ network: 169.254.255.10/32, metric: 2048 }]
 
 controlPlane:
   nodeLabels: &nodeLabels
@@ -79,6 +75,7 @@ controlPlane:
           - siderolabs/amd-ucode
           - siderolabs/amdgpu
           - siderolabs/thunderbolt
+          - siderolabs/realtek-firmware
 
   patches:
     # Configure containerd for spegel
