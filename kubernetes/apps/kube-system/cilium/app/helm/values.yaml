@@ -92,8 +92,6 @@ prometheus:
 hubble:
   enabled: false
 
-devices: bond+
-
 securityContext:
   capabilities:
     ciliumAgent:
