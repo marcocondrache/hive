@@ -76,6 +76,7 @@ spec:
         devicePathFilter: /dev/disk/by-id/nvme-Samsung_SSD_990_PRO_1TB_S7HDNF0Y611456Y.*
         config:
           osdsPerDevice: "1"
+
     cephBlockPools:
       - name: ceph-blockpool
         spec:
