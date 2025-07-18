@@ -13,7 +13,6 @@ spec:
     controllers:
       ai:
         replicas: 1
-        strategy: RollingUpdate
 
         annotations:
           reloader.stakater.com/auto: "true"
@@ -48,7 +47,7 @@ spec:
                 memory: 1Gi
             env:
               - name: OLLAMA_BASE_URL
-                value: "https://ai.marcocondrache.com"
+                value: "http://ai.default.svc.cluster.local:11434"
 
     service:
       app:
