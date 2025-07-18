@@ -47,7 +47,7 @@ nodes:
       #   routes: [{ network: 169.254.255.10/32, metric: 2048 }]
 
 controlPlane:
-  nodeLabels: &nodeLabels
+  nodeLabels:
     topology.kubernetes.io/region: *clusterName
     topology.kubernetes.io/zone: m
 

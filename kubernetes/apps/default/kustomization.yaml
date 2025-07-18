@@ -12,3 +12,4 @@ resources:
   - ./paperless/ks.yaml
   - ./home-assistant/ks.yaml
   - ./zigbee/ks.yaml
+  - ./local-ai/ks.yaml

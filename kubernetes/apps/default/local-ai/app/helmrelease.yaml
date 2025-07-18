@@ -1,0 +1,81 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: local-ai
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  values:
+    controllers:
+      local-ai:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: quay.io/go-skynet/local-ai
+              tag: v3.1.1
+            resources:
+              requests:
+                cpu: 200m
+                memory: 1Gi
+                amd.com/gpu: 1
+              limits:
+                memory: 24Gi
+                amd.com/gpu: 1
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: true
+
+    service:
+      app:
+        controller: local-ai
+        ports:
+          http:
+            port: &port 8080
+
+    persistence:
+      models:
+        type: persistentVolumeClaim
+        storageClass: "openebs-hostpath"
+        accessMode: ReadWriteOnce
+        size: 100Gi
+        globalMounts:
+          - path: /models
+
+      tmpfs:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+            subPath: tmp
+
+    route:
+      app:
+        hostnames:
+          - ai.marcocondrache.com
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
