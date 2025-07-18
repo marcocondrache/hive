@@ -31,6 +31,9 @@ spec:
               limits:
                 memory: 4Gi
                 amd.com/gpu: 1
+            env:
+              - name: HSA_OVERRIDE_GFX_VERSION
+                value: 11.0.0
 
           openwebui:
             image:
