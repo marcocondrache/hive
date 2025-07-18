@@ -6,7 +6,7 @@ namespace: network
 components:
   - ../../components/common
 resources:
-  - ./multus/ks.yaml
+  # - ./multus/ks.yaml
   - ./cloudflare-dns/ks.yaml
   - ./cloudflared/ks.yaml
   - ./unifi-dns/ks.yaml
