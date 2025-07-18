@@ -28,7 +28,7 @@ spec:
                 memory: 1Gi
                 amd.com/gpu: 1
               limits:
-                memory: 4Gi
+                memory: 8Gi
                 amd.com/gpu: 1
             env:
               - name: HSA_OVERRIDE_GFX_VERSION
