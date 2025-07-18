@@ -72,7 +72,7 @@ spec:
               - path: /root/.ollama
 
     route:
-      ai:
+      app:
         hostnames:
           - ai.marcocondrache.com
         parentRefs:
@@ -81,5 +81,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: openwebui
+              - identifier: app
                 port: *port
