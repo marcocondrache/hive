@@ -12,6 +12,9 @@ spec:
 
   metricsExporter:
     enable: true
+    prometheus:
+      serviceMonitor:
+        enable: true
 
   testRunner:
     enable: true
