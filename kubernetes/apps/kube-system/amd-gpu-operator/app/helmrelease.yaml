@@ -4,6 +4,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: amd-gpu-operator
+  namespace: kube-system
 spec:
   interval: 30m
   url: https://rocm.github.io/gpu-operator
@@ -18,7 +19,6 @@ spec:
   chart:
     spec:
       chart: amd-gpu-operator
-      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: amd-gpu-operator
