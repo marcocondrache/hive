@@ -8,7 +8,7 @@ components:
 resources:
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  - ./amd-gpu-operator/ks.yaml
+  - ./amd-device/ks.yaml
   - ./descheduler/ks.yaml
   - ./reloader/ks.yaml
   - ./metrics-server/ks.yaml
