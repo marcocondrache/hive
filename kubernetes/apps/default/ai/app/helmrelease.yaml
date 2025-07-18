@@ -72,7 +72,7 @@ spec:
               - path: /root/.ollama
 
     route:
-      app:
+      ai:
         hostnames:
           - ai.marcocondrache.com
         parentRefs:
