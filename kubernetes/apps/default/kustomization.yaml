@@ -12,6 +12,7 @@ resources:
   - ./paperless/ks.yaml
   - ./home-assistant/ks.yaml
   - ./zigbee/ks.yaml
+  - ./atuin/ks.yaml
   # TODO: Increase UMA for gpu
   # https://github.com/ollama/ollama/pull/5426
   # - ./ai/ks.yaml
