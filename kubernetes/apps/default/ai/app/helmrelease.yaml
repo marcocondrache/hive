@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: local-ai
+  name: ai
 spec:
   interval: 30m
   chartRef:
@@ -11,61 +11,65 @@ spec:
     name: app-template
   values:
     controllers:
-      local-ai:
+      ai:
         replicas: 1
         strategy: RollingUpdate
 
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
-
         containers:
-          app:
+          ollama:
             image:
-              repository: quay.io/go-skynet/local-ai
-              tag: v3.1.1
+              repository: ollama/ollama
+              tag: v0.9.6
             resources:
               requests:
                 cpu: 200m
                 memory: 1Gi
                 amd.com/gpu: 1
               limits:
-                memory: 24Gi
+                memory: 4Gi
                 amd.com/gpu: 1
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
-              readOnlyRootFilesystem: true
+
+          openwebui:
+            image:
+              repository: ghcr.io/open-webui/open-webui
+              tag: v0.6.16
+            resources:
+              requests:
+                cpu: 500m
+                memory: 500Mi
+              limits:
+                cpu: 1000m
+                memory: 1Gi
+            env:
+              - name: OLLAMA_BASE_URL
+                value: "https://ai.marcocondrache.com"
 
     service:
       app:
-        controller: local-ai
+        controller: ai
         ports:
-          http:
+          ollama:
+            port: 11434
+          openwebui:
             port: &port 8080
 
     persistence:
-      models:
-        type: persistentVolumeClaim
-        storageClass: "openebs-hostpath"
-        accessMode: ReadWriteOnce
-        size: 100Gi
-        globalMounts:
-          - path: /models
+      openwebui:
+        existingClaim: ai
+        advancedMounts:
+          ai:
+            openwebui:
+              - path: /app/backend/data
 
-      tmpfs:
-        type: emptyDir
-        globalMounts:
-          - path: /tmp
-            subPath: tmp
+      models:
+        existingClaim: ollama
+        advancedMounts:
+          ai:
+            ollama:
+              - path: /root/.ollama
 
     route:
       app:
@@ -77,5 +81,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: openwebui
                 port: *port
