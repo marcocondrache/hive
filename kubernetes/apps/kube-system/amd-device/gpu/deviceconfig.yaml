@@ -8,5 +8,10 @@ spec:
     enable: false
 
   devicePlugin:
-    devicePluginImage: rocm/k8s-device-plugin:latest
-    nodeLabellerImage: rocm/k8s-device-plugin:labeller-latest
+    enableNodeLabeller: true
+
+  metricsExporter:
+    enable: true
+
+  testRunner:
+    enable: true
