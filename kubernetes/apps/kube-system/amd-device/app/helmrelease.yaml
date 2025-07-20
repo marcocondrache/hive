@@ -33,6 +33,9 @@ spec:
     remediation:
       retries: 3
   values:
+    kmm:
+      enabled: false
+
     crds:
       defaultCR:
         install: false
