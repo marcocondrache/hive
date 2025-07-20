@@ -48,7 +48,14 @@ spec:
             env:
               PORT: 8080
               DATA_DIR: /data
-              OLLAMA_BASE_URL: "http://ai.default.svc.cluster.local:11434"
+              OLLAMA_BASE_URL: http://ai.default.svc.cluster.local:11434
+
+              WEBUI_URL: https://ai.marcocondrache.com
+              WEBUI_SECRET_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: ai-secret
+                    key: WEBUI_SECRET_KEY
 
     service:
       app:
