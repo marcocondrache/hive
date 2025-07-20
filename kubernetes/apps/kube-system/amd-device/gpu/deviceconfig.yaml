@@ -15,6 +15,3 @@ spec:
     prometheus:
       serviceMonitor:
         enable: true
-
-  testRunner:
-    enable: true
