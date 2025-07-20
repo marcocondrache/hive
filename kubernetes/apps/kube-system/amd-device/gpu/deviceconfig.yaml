@@ -1,0 +1,17 @@
+apiVersion: amd.com/v1alpha1
+kind: DeviceConfig
+metadata:
+  name: amd-gpu-deviceconfig
+  namespace: kube-system
+spec:
+  driver:
+    enable: false
+
+  devicePlugin:
+    enableNodeLabeller: true
+
+  metricsExporter:
+    enable: true
+    prometheus:
+      serviceMonitor:
+        enable: true
