@@ -77,6 +77,13 @@ controlPlane:
           - siderolabs/thunderbolt
           - siderolabs/realtek-firmware
 
+  userVolumes:
+    - name: extra
+      provisioning:
+        diskSelector:
+          match: disk.transport == "nvme" && system_disk
+        maxSize: 300Gib
+
   extraManifests:
     - manifests/watchdog.yaml
 
@@ -105,19 +112,6 @@ controlPlane:
             enabled: true
             resolveMemberNames: true
             forwardKubeDNSToHost: false
-
-    # Mount openebs-hostpath in kubelet
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/mnt/extra
-              type: bind
-              source: /var/mnt/extra
-              options:
-                - rbind
-                - rshared
-                - rw
 
     # Configure kubelet
     - |-
