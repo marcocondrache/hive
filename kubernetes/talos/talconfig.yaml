@@ -82,8 +82,9 @@ controlPlane:
       provisioning:
         diskSelector:
           match: disk.transport == "nvme" && system_disk
-        minSize: 600GiB
-        maxSize: 600GiB
+        minSize: 500GiB
+        maxSize: 500GiB
+        grow: false
 
   userVolumes:
     - name: extra

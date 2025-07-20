@@ -62,7 +62,7 @@ tasks:
     vars:
       NODE: "{{.NODE}}"
     cmds:
-      - talosctl --nodes {{.NODE}} reset --graceful=false --user-disks-to-wipe=/dev/nvme0n1
+      - talosctl --nodes {{.NODE}} reset --graceful=false --wipe-mode=all
 
   apply-node:
     desc: Apply Talos config to a node [NODE=required]
