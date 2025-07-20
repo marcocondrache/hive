@@ -77,13 +77,21 @@ controlPlane:
           - siderolabs/thunderbolt
           - siderolabs/realtek-firmware
 
+  volumes:
+    - name: EPHEMERAL
+      provisioning:
+        diskSelector:
+          match: disk.transport == "nvme" && system_disk
+        minSize: 600GiB
+        maxSize: 600GiB
+
   userVolumes:
     - name: extra
       provisioning:
         diskSelector:
           match: disk.transport == "nvme" && system_disk
         minSize: 300GiB
-        maxSize: 300GiB
+        grow: true # fill up the disk
 
   extraManifests:
     - manifests/watchdog.yaml
