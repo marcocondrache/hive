@@ -89,6 +89,8 @@ prometheus:
     enabled: true
     trustCRDsExist: true
 
+devices: bond+
+
 hubble:
   enabled: false
 
