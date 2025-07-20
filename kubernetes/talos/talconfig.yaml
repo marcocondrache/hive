@@ -82,7 +82,8 @@ controlPlane:
       provisioning:
         diskSelector:
           match: disk.transport == "nvme" && system_disk
-        maxSize: 300Gib
+        minSize: 300GiB
+        maxSize: 300GiB
 
   extraManifests:
     - manifests/watchdog.yaml
