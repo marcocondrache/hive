@@ -48,7 +48,6 @@ spec:
             env:
               PORT: 8080
               DATA_DIR: /data
-              OPENAI_API_BASE_URL: "https://ai.marcocondrache.com/v1"
               OLLAMA_BASE_URL: "http://ai.default.svc.cluster.local:11434"
 
     service:
