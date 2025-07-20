@@ -41,13 +41,15 @@ spec:
             resources:
               requests:
                 cpu: 500m
-                memory: 500Mi
+                memory: 1Gi
               limits:
                 cpu: 1000m
-                memory: 1Gi
+                memory: 4Gi
             env:
-              - name: OLLAMA_BASE_URL
-                value: "http://ai.default.svc.cluster.local:11434"
+              PORT: 8080
+              DATA_DIR: /data
+              OPENAI_API_BASE_URL: "https://ai.marcocondrache.com/v1"
+              OLLAMA_BASE_URL: "http://ai.default.svc.cluster.local:11434"
 
     service:
       app:
@@ -64,7 +66,7 @@ spec:
         advancedMounts:
           ai:
             openwebui:
-              - path: /app/backend/data
+              - path: /data
 
       models:
         existingClaim: ollama
