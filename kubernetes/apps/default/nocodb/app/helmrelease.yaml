@@ -71,6 +71,12 @@ spec:
           http:
             port: *port
 
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
+
     route:
       app:
         hostnames:
