@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: default
+  name: postgres-default
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:${POSTGRESQL_VERSION}
