@@ -97,3 +97,10 @@ spec:
           nocodb:
             app:
               - path: /usr/app/data
+
+      redis:
+        existingClaim: nocodb-redis-data
+        advancedMounts:
+          redis:
+            app:
+              - path: /data
