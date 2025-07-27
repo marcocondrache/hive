@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: papra
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  values:
+    controllers:
+      papra:
+        forceRename: papra
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/papra-hq/papra
+              tag: 0.7.0-rootless
+            env:
+              PORT: &port 8000
+              APP_BASE_URL: https://papra.marcocondrache.com
+              DOCUMENTS_OCR_LANGUAGES: eng,ita,ron
+              INGESTION_FOLDER_IS_ENABLED: true
+              AUTH_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: papra-secret
+                    key: PAPRA_SECRET
+
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 25m
+                memory: 2Gi
+              limits:
+                memory: 4Gi
+
+    service:
+      app:
+        forceRename: papra
+        controller: papra
+        primary: true
+        ports:
+          http:
+            port: *port
+
+    persistence:
+      data:
+        existingClaim: papra
+        advancedMounts:
+          papra:
+            app:
+              - path: /app/app-data
+      # nas:
+      #   type: nfs
+      #   server: nas.hive.internal
+      #   path: /mnt/tank/hive/papra
+      #   advancedMounts:
+      #     papra:
+      #       app:
+      #         - path: /data/nas
+
+    route:
+      app:
+        hostnames:
+          - papra.marcocondrache.com
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
