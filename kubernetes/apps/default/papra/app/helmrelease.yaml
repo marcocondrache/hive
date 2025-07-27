@@ -76,14 +76,15 @@ spec:
           papra:
             app:
               - path: /app/app-data
-      # nas:
-      #   type: nfs
-      #   server: nas.hive.internal
-      #   path: /mnt/tank/hive/papra
-      #   advancedMounts:
-      #     papra:
-      #       app:
-      #         - path: /data/nas
+
+      nas:
+        type: nfs
+        server: nas.hive.internal
+        path: /mnt/tank/hive/papra
+        advancedMounts:
+          papra:
+            app:
+              - path: /app/ingestion
 
     route:
       app:
