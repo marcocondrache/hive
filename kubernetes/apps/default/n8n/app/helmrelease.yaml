@@ -39,6 +39,7 @@ spec:
               N8N_HOST: &hostName n8n.marcocondrache.com
               N8N_LOG_LEVEL: info
               N8N_LOG_OUTPUT: console
+              N8N_RUNNERS_ENABLED: true
               N8N_ENCRYPTION_KEY:
                 valueFrom:
                   secretKeyRef:
