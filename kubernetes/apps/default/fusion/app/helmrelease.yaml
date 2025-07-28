@@ -49,6 +49,7 @@ spec:
                 cpu: 100m
               limits:
                 memory: 512Mi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -56,12 +57,15 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [3000]
+
     service:
       app:
         controller: fusion
         ports:
           http:
             port: *port
+
     route:
       app:
         hostnames:
@@ -75,6 +79,7 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+
     persistence:
       config:
         existingClaim: fusion

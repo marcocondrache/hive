@@ -62,7 +62,7 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [65568]
+        supplementalGroups: [3000]
 
     service:
       app:

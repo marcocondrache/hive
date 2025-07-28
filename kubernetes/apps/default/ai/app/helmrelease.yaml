@@ -57,6 +57,10 @@ spec:
                     name: ai-secret
                     key: WEBUI_SECRET_KEY
 
+    defaultPodOptions:
+      securityContext:
+        supplementalGroups: [3000]
+
     service:
       app:
         controller: ai
