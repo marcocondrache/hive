@@ -38,6 +38,8 @@ spec:
               APP_BASE_URL: https://papra.marcocondrache.com
               DOCUMENTS_OCR_LANGUAGES: eng,ita,ron
               INGESTION_FOLDER_IS_ENABLED: true
+              INGESTION_FOLDER_POST_PROCESSING_STRATEGY: delete
+              INGESTION_FOLDER_PROCESSING_CONCURRENCY: 4
               AUTH_SECRET:
                 valueFrom:
                   secretKeyRef:
