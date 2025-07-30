@@ -126,7 +126,7 @@ spec:
         image:
           registry: docker.io
           repository: prompp/prompp
-          tag: 2.53.2-0.3.3
+          tag: 2.53.2-0.3.4
         securityContext:
           runAsNonRoot: true
           runAsUser: 64535
@@ -143,7 +143,7 @@ spec:
           requests:
             cpu: 100m
           limits:
-            memory: 2000Mi
+            memory: 3000Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
