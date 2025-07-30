@@ -2,6 +2,7 @@
 /.task/
 *.crt
 *.key
+*.iso
 .decrypted~*
 .DS_Store
 Brewfile.lock.json
