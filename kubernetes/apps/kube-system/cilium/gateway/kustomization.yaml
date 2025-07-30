@@ -4,8 +4,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./gatewayclass.yaml
-  - ./internal.yaml
-  - ./external.yaml
+  - ./gateway.yaml
   - ./pushsecret.yaml
   - ./certificate.yaml
   - ./redirect.yaml
