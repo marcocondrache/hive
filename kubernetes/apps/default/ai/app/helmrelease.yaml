@@ -21,7 +21,7 @@ spec:
           ollama:
             image:
               repository: ollama/ollama
-              tag: 0.10.0-rocm
+              tag: 0.10.1-rocm
             resources:
               requests:
                 cpu: 200m
