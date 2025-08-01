@@ -43,7 +43,7 @@ spec:
               N8N_ENCRYPTION_KEY:
                 valueFrom:
                   secretKeyRef:
-                    name: n8n-secret
+                    name: "{{ .Release.Name }}-secret"
                     key: N8N_ENCRYPTION_KEY
             resources:
               requests:
@@ -68,7 +68,7 @@ spec:
 
     persistence:
       data:
-        existingClaim: n8n
+        existingClaim: "{{ .Release.Name }}"
         advancedMounts:
           n8n:
             app:
