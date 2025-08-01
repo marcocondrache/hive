@@ -52,7 +52,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ember
             envFrom:
               - secretRef:
-                  name: zigbee-secret
+                  name: "{{ .Release.Name }}-secret"
             probes:
               liveness:
                 enabled: true
@@ -94,4 +94,4 @@ spec:
             sectionName: https
     persistence:
       config:
-        existingClaim: zigbee
+        existingClaim: "{{ .Release.Name }}"

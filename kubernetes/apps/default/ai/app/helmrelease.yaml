@@ -72,14 +72,14 @@ spec:
 
     persistence:
       openwebui:
-        existingClaim: ai
+        existingClaim: "{{ .Release.Name }}"
         advancedMounts:
           ai:
             openwebui:
               - path: /data
 
       models:
-        existingClaim: ollama
+        existingClaim: "{{ .Release.Name }}-models"
         advancedMounts:
           ai:
             ollama:

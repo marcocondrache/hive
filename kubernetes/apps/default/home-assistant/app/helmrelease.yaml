@@ -5,11 +5,10 @@ kind: HelmRelease
 metadata:
   name: home-assistant
 spec:
-  interval: 30m
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: app-template
-    namespace: flux-system
   values:
     controllers:
       home-assistant:
@@ -80,7 +79,7 @@ spec:
 
     persistence:
       config:
-        existingClaim: home-assistant
+        existingClaim: "{{ .Release.Name }}"
         advancedMounts:
           home-assistant:
             app:
@@ -88,8 +87,8 @@ spec:
             code-server:
               - path: /config
 
-      hass-cache:
-        existingClaim: hass-cache
+      config-cache:
+        existingClaim: "{{ .Release.Name }}-cache"
         advancedMounts:
           home-assistant:
             app:

@@ -77,6 +77,7 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
+
     persistence:
       config:
-        existingClaim: atuin
+        existingClaim: "{{ .Release.Name }}"
