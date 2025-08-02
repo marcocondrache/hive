@@ -110,6 +110,8 @@ controlPlane:
             content: |
               [plugins."io.containerd.cri.v1.images"]
                 discard_unpacked_layers = false
+              [plugins."io.containerd.cri.v1.runtime"]
+                device_ownership_from_security_context = true
 
     # Disable search domain everywhere
     - |-
@@ -201,6 +203,15 @@ controlPlane:
               aliases:
                 - k8s.hive.internal
 
+    # Configure mirror of docker images
+    - |-
+      machine:
+        registries:
+          mirrors:
+            docker.io:
+              endpoints:
+                - https://mirror.gcr.io
+
     # Configure custom sysctls
     - |-
       machine:
@@ -220,14 +231,6 @@ controlPlane:
           sunrpc.tcp_max_slot_table_entries: 128 # 10Gb/s | NFS
           user.max_user_namespaces: 11255        # User Namespaces
           vm.nr_hugepages: 1024                  # PostgreSQL
-
-    # Configure udev rules
-    - |-
-      machine:
-        udev:
-          rules:
-            # AMD GPU
-            - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660"
 
     # Disable default API server admission plugins.
     - |-
