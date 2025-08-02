@@ -203,15 +203,6 @@ controlPlane:
               aliases:
                 - k8s.hive.internal
 
-    # Configure mirror of docker images
-    - |-
-      machine:
-        registries:
-          mirrors:
-            docker.io:
-              endpoints:
-                - https://mirror.gcr.io
-
     # Configure custom sysctls
     - |-
       machine:
