@@ -4,7 +4,7 @@ clusterName: &clusterName hive
 endpoint: https://k8s.hive.internal:6443
 
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.10.6
+talosVersion: v1.11.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.33.3
 
@@ -79,6 +79,7 @@ controlPlane:
           - siderolabs/amdgpu
           - siderolabs/thunderbolt
           - siderolabs/realtek-firmware
+          - siderolabs/nfsrahead
 
   volumes:
     - name: EPHEMERAL
@@ -99,6 +100,7 @@ controlPlane:
 
   extraManifests:
     - manifests/watchdog.yaml
+    - manifests/extensionserviceconfig.yaml
 
   patches:
     # Configure containerd for spegel
@@ -132,8 +134,11 @@ controlPlane:
     - |-
       machine:
         kubelet:
+          extraArgs:
+            feature-gates: ImageVolume=true
           extraConfig:
-            maxPods: 150
+            maxPods: 512
+            serializeImagePulls: false
           nodeIP:
             validSubnets:
                 - 10.0.30.0/24
@@ -144,7 +149,7 @@ controlPlane:
         apiServer:
           extraArgs:
             runtime-config: admissionregistration.k8s.io/v1alpha1=true
-            feature-gates: MutatingAdmissionPolicy=true
+            feature-gates: MutatingAdmissionPolicy=true,ImageVolume=true
 
     # Configure cluster
     - |-
