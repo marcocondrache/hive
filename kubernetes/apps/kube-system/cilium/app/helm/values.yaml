@@ -5,12 +5,11 @@ ipam:
 
 k8s:
   requireIPv4PodCIDR: true
+  apiServerURLs:
+    - https://10.0.30.21:6443
 
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
-
-k8sServiceHost: 127.0.0.1
-k8sServicePort: 7445
 
 routingMode: native
 ipv4NativeRoutingCIDR: 10.42.0.0/16
