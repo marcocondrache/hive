@@ -1,0 +1,10 @@
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: nfsrahead
+configFiles:
+  - content: |
+      [nfsrahead]
+      nfs4=15360
+      default=128
+    mountPath: /usr/local/etc/nfsrahead/nfs.conf
