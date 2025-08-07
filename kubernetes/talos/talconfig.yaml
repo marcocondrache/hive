@@ -52,7 +52,6 @@ nodes:
 controlPlane:
   nodeLabels:
     topology.kubernetes.io/region: *clusterName
-    topology.kubernetes.io/zone: m
 
   kernelModules:
     - name: nbd
