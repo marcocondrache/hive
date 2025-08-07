@@ -23,12 +23,12 @@ spec:
           app:
             image:
               repository: docker.io/excalidraw/excalidraw
-              tag: v0.18.0@sha256:525d72908ffed09807bad50321b94698d725ddc5945118dc3e0b4a494f9772a8
+              tag: v0.18.0
             resources:
               requests:
-                cpu: 100m
+                cpu: 10m
               limits:
-                memory: 512Mi
+                memory: 48Mi
 
     service:
       app:
