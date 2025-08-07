@@ -97,51 +97,51 @@
         }
       }
     },
-    "cilium-cli@0.18.5": {
-      "last_modified": "2025-07-06T07:15:37Z",
-      "resolved": "github:NixOS/nixpkgs/ceb24d94c6feaa4e8737a8e2bd3cf71c3a7eaaa0#cilium-cli",
+    "cilium-cli@0.18.6": {
+      "last_modified": "2025-08-05T11:35:34Z",
+      "resolved": "github:NixOS/nixpkgs/a683adc19ff5228af548c6539dbc3440509bfed3#cilium-cli",
       "source": "devbox-search",
-      "version": "0.18.5",
+      "version": "0.18.6",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ixgqvzrr7jzfbyxi1s1xpqkw2h1lhprv-cilium-cli-0.18.5",
+              "path": "/nix/store/ycj2v9f0cl5xszzhyixd3acwmlh4yapy-cilium-cli-0.18.6",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ixgqvzrr7jzfbyxi1s1xpqkw2h1lhprv-cilium-cli-0.18.5"
+          "store_path": "/nix/store/ycj2v9f0cl5xszzhyixd3acwmlh4yapy-cilium-cli-0.18.6"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/3wl91fxm4fg6l4a59cdwh00bx9m11jn7-cilium-cli-0.18.5",
+              "path": "/nix/store/3zaddxxb2qvs9jynp3vcfxq06jl2miv5-cilium-cli-0.18.6",
               "default": true
             }
           ],
-          "store_path": "/nix/store/3wl91fxm4fg6l4a59cdwh00bx9m11jn7-cilium-cli-0.18.5"
+          "store_path": "/nix/store/3zaddxxb2qvs9jynp3vcfxq06jl2miv5-cilium-cli-0.18.6"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ypm3fb5g862nq8951x2k0726qv62ll4b-cilium-cli-0.18.5",
+              "path": "/nix/store/xcaa6n1w491iz7lvvm9yqshfgxcnf7yr-cilium-cli-0.18.6",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ypm3fb5g862nq8951x2k0726qv62ll4b-cilium-cli-0.18.5"
+          "store_path": "/nix/store/xcaa6n1w491iz7lvvm9yqshfgxcnf7yr-cilium-cli-0.18.6"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/4cl778izvd5rh0gciyjfaxn7vwsmb85n-cilium-cli-0.18.5",
+              "path": "/nix/store/b2nzz1lrwfd8yqx0xwkwwbdvbifdkz58-cilium-cli-0.18.6",
               "default": true
             }
           ],
-          "store_path": "/nix/store/4cl778izvd5rh0gciyjfaxn7vwsmb85n-cilium-cli-0.18.5"
+          "store_path": "/nix/store/b2nzz1lrwfd8yqx0xwkwwbdvbifdkz58-cilium-cli-0.18.6"
         }
       }
     },
