@@ -35,7 +35,7 @@ spec:
         controller: excalidraw
         ports:
           http:
-            port: *port
+            port: &port 80
 
     route:
       app:
