@@ -120,13 +120,6 @@ controlPlane:
         network:
           disableSearchDomain: true
 
-    # Disable kubePrism
-    - |-
-      machine:
-        features:
-          kubePrism:
-            enabled: false
-
     # Enable host dns
     - |-
       machine:
@@ -165,8 +158,6 @@ controlPlane:
             disabled: true
         proxy:
           disabled: true
-        discovery:
-          enabled: false
         scheduler:
           config:
             apiVersion: kubescheduler.config.k8s.io/v1
