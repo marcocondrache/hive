@@ -141,11 +141,12 @@ controlPlane:
             validSubnets:
                 - 10.0.30.0/24
 
-    # Enable MutatingAdmissionPolicy
+    # Configure API server
     - |-
       cluster:
         apiServer:
           extraArgs:
+            enable-aggregator-routing: "true"
             runtime-config: admissionregistration.k8s.io/v1alpha1=true
             feature-gates: MutatingAdmissionPolicy=true,ImageVolume=true
 
