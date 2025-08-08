@@ -28,5 +28,6 @@ resources:
   - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
   - ./sabnzbd/ks.yaml
-  - ./slskd/ks.yaml
+  # Do we need this?
+  # - ./slskd/ks.yaml
   - ./sonarr/ks.yaml
