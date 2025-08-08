@@ -146,7 +146,7 @@ spec:
 
     persistence:
       data:
-        existingClaim: karakeep-data
+        existingClaim: "{{ .Release.Name }}"
         advancedMounts:
           karakeep:
             app:
