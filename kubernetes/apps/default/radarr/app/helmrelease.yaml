@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: fusion
+  name: radarr
 spec:
   interval: 1h
   chartRef:
@@ -18,22 +18,34 @@ spec:
       retries: 3
   values:
     controllers:
-      fusion:
+      radarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/0x2e/fusion
-              tag: 0.9.8@sha256:2d98a5bf0cabd6998d07fa26c63f1b742a1c33a4c926f2da1dfd7ee49e88e3e0
+              repository: ghcr.io/home-operations/radarr
+              tag: 5.27.3.10153@sha256:1bf822eaf3d944dc994656c3a712a89df0d88f5f46731af4fccc90c5e0333167
             env:
-              PORT: &port 80
+              RADARR__APP__INSTANCENAME: Radarr
+              RADARR__APP__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__LOG__LEVEL: info
+              RADARR__SERVER__PORT: &port 80
+              RADARR__UPDATE__BRANCH: develop
               TZ: Europe/Rome
+            envFrom:
+              - secretRef:
+                  name: "{{ .Release.Name }}-secret"
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /ping
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -48,8 +60,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 512Mi
-
+                memory: 4Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -57,31 +68,30 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [3000]
-
     service:
       app:
-        controller: fusion
         ports:
           http:
             port: *port
-
     route:
       app:
-        hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
-          - feeds.marcocondrache.com
+        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
-
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
+      config-cache:
+        existingClaim: "{{ .Release.Name }}-cache"
         globalMounts:
-          - path: /data
+          - path: /config/MediaCover
+      media:
+        type: nfs
+        server: nas.hive.internal
+        path: /mnt/tank/hive/media
+        globalMounts:
+          - path: /media
+      tmp:
+        type: emptyDir

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: fusion
+  name: &app slskd
 spec:
   interval: 1h
   chartRef:
@@ -18,22 +18,32 @@ spec:
       retries: 3
   values:
     controllers:
-      fusion:
+      slskd:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/0x2e/fusion
-              tag: 0.9.8@sha256:2d98a5bf0cabd6998d07fa26c63f1b742a1c33a4c926f2da1dfd7ee49e88e3e0
+              repository: ghcr.io/slskd/slskd
+              tag: 0.23.1@sha256:57f87d80b882b882f72cecc0b3aa0f0adb4c7887ed278906c237ff30003ae639
             env:
-              PORT: &port 80
+              DOTNET_BUNDLE_EXTRACT_BASE_DIR: /tmp/.net
               TZ: Europe/Rome
+              SLSKD_APP_DIR: /config
+              SLSKD_HTTP_PORT: &port 80
+              SLSKD_NO_AUTH: true
+              SLSKD_NO_HTTPS: true
+              SLSKD_SLSK_LISTEN_PORT: &soulseekPort 50300
+            envFrom:
+              - secretRef:
+                  name: "{{ .Release.Name }}-secret"
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /health
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -46,10 +56,10 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 512Mi
-
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -57,20 +67,24 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [3000]
-
     service:
       app:
-        controller: fusion
+        forceRename: "{{ .Release.Name }}"
+        primary: true
         ports:
           http:
             port: *port
-
+      soulseek:
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 192.168.42.127
+        ports:
+          soulseek-tcp:
+            port: *soulseekPort
+            protocol: TCP
     route:
       app:
-        hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
-          - feeds.marcocondrache.com
+        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
@@ -79,9 +93,23 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
-
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
+      config-file:
+        type: configMap
+        name: "{{ .Release.Name }}-configmap"
+        defaultMode: 0775
         globalMounts:
-          - path: /data
+          - path: /config/slskd.yml
+            subPath: slskd.yml
+            readOnly: true
+      media:
+        type: nfs
+        server: nas.hive.internal
+        path: /mnt/tank/hive/media
+        globalMounts:
+          - path: /media/Downloads/soulseek
+            subPath: Downloads/soulseek
+      tmp:
+        type: emptyDir
