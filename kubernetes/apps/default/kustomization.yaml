@@ -20,3 +20,14 @@ resources:
   # TODO: Increase UMA for gpu
   # https://github.com/ollama/ollama/pull/5426
   - ./ai/ks.yaml
+
+  - ./autobrr/ks.yaml
+  - ./bazarr/ks.yaml
+  - ./jellyfin/ks.yaml
+  - ./jellyseerr/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./qbittorrent/ks.yaml
+  - ./radarr/ks.yaml
+  - ./sabnzbd/ks.yaml
+  - ./slskd/ks.yaml
+  - ./sonarr/ks.yaml
