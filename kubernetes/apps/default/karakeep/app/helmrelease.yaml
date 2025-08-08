@@ -132,7 +132,7 @@ spec:
         controller: karakeep
         ports:
           http:
-            port: &httpPort 3000
+            port: &port 3000
       chrome:
         controller: chrome
         ports:
@@ -164,3 +164,7 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
