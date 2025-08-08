@@ -159,8 +159,7 @@ spec:
 
     route:
       app:
-        hostnames:
-          - karakeep.marcocondrache.com
+        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
         parentRefs:
           - name: internal
             namespace: kube-system
