@@ -24,7 +24,7 @@ resources:
   # - ./autobrr/ks.yaml
   # - ./bazarr/ks.yaml
   # - ./jellyfin/ks.yaml
-  # - ./plex/ks.yaml
+  - ./plex/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./recyclarr/ks.yaml
