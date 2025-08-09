@@ -3,34 +3,73 @@
 version: "3"
 
 tasks:
-  apply-resources:
-    silent: true
-    vars:
-      RESOURCES:
-        sh: minijinja-cli {{.BOOTSTRAP_DIR}}/templates/resources.yaml.j2 | op inject
+  default:
+    desc: Bootstrap Talos and Kubernetes cluster
     cmds:
-      - echo "{{.RESOURCES}}" | kubectl apply --server-side -f -
+      - task: talos
+      - task: wait
+      - task: crds
+      - task: resources
+      - task: apps
 
-  apply-cdrs:
+  wait:
+    desc: Wait for all nodes to be 'Ready=False'
+    cmd: |
+      echo "Waiting for nodes to be available..."
+      until kubectl wait nodes --for=condition=Ready=False --all --timeout=10s &>/dev/null; do
+          echo "Nodes are not available, waiting for nodes to be available. Retrying in 10 seconds..."
+          sleep 10
+      done
+    status:
+      - kubectl wait nodes --for=condition=Ready=True --all --timeout=10s
+    preconditions:
+      - talosctl config info
+      - which kubectl
     silent: true
-    internal: true
-    vars:
-      CDRS:
-        # renovate: datasource=github-releases depName=kubernetes-sigs/external-dns
-        - https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/tags/v0.18.0/config/crd/standard/dnsendpoints.externaldns.k8s.io.yaml
-        # renovate: datasource=github-releases depName=kubernetes-sigs/gateway-api
-        - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/experimental-install.yaml
-        # renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
-        - https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.84.1/stripped-down-crds.yaml
+
+  resources:
+    desc: Bootstrap Resources
+    cmd: |
+      echo "Bootstrapping Resources..."
+      op inject --in-file {{.BOOTSTRAP_DIR}}/templates/resources.yaml | kubectl apply --server-side --filename -
+      echo "Resources bootstrapped [{{.ITEM}}]"
+    status:
+      - op inject --in-file {{.BOOTSTRAP_DIR}}/templates/resources.yaml | kubectl diff --filename -
+    preconditions:
+      - op whoami
+      - test -f {{.BOOTSTRAP_DIR}}/templates/resources.yaml
+      - which kubectl op
+    silent: true
+
+  crds:
+    desc: Bootstrap CRDs
     cmds:
-      - for: { var: CDRS }
+      - echo "Bootstrapping CRDs..."
+      - for:
+          - # renovate: datasource=github-releases depName=kubernetes-sigs/external-dns
+            https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/tags/v0.18.0/config/crd/standard/dnsendpoints.externaldns.k8s.io.yaml
+          - # renovate: datasource=github-releases depName=kubernetes-sigs/gateway-api
+            https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/experimental-install.yaml
+          - # renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
+            https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.84.1/stripped-down-crds.yaml
         cmd: |
-          kubectl apply --server-side --filename {{.ITEM}}
+          if ! kubectl diff --filename "{{.ITEM}}" &>/dev/null; then
+              echo "Applying CRD from {{.ITEM}}..."
+              kubectl apply --server-side --filename "{{.ITEM}}"
+          fi
+    preconditions:
+      - which kubectl
+    silent: true
 
-  apply-helmfile:
-    internal: true
-    cmds:
-      - helmfile apply -f {{.BOOTSTRAP_DIR}}/helmfile.yaml --skip-diff-on-install --suppress-diff --debug
+  apps:
+    desc: Bootstrap Apps
+    cmd: |
+      echo "Bootstrapping Apps..."
+      helmfile --file {{.BOOTSTRAP_DIR}}/helmfile.yaml sync --hide-notes
+      echo "Apps bootstrapped [{{.ITEM}}]"
+    preconditions:
+      - test -f {{.BOOTSTRAP_DIR}}/helmfile.yaml
+      - which helm helmfile
     silent: true
 
   talos:
@@ -48,10 +87,3 @@ tasks:
           INSECURE: "true"
       - until talosctl --nodes {{.TALOS_CONTROLLER}} bootstrap; do sleep 5; done
       - talosctl kubeconfig --nodes {{.TALOS_CONTROLLER}} --force --force-context-name "hive" "${KUBECONFIG}"
-
-  cluster:
-    cmds:
-      - task: apply-cdrs
-      - task: apply-resources
-      - task: apply-helmfile
-    silent: true
