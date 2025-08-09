@@ -58,6 +58,7 @@ spec:
               limits:
                 amd.com/gpu: 1
                 memory: 8Gi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -65,6 +66,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+
     service:
       app:
         type: LoadBalancer
@@ -73,6 +75,7 @@ spec:
         ports:
           http:
             port: *port
+
     route:
       app:
         hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
@@ -80,24 +83,14 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
-            filters:
-              - type: RequestHeaderModifier
-                requestHeaderModifier:
-                  remove: ["Range"]
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /library/streams
-          - backendRefs:
-              - identifier: app
-                port: *port
+
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
+        advancedMounts:
+          plex:
+            app:
+              - path: /config
       config-cache:
         existingClaim: "{{ .Release.Name }}-cache"
         globalMounts:
