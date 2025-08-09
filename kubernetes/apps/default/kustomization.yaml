@@ -21,9 +21,7 @@ resources:
   # https://github.com/ollama/ollama/pull/5426
   # - ./ai/ks.yaml
 
-  # - ./autobrr/ks.yaml
   # - ./bazarr/ks.yaml
-  # - ./jellyfin/ks.yaml
   - ./plex/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./prowlarr/ks.yaml
