@@ -20,7 +20,7 @@ resources:
   # https://github.com/ollama/ollama/pull/5426
   # - ./ai/ks.yaml
 
-  # - ./plex/ks.yaml
+  - ./plex/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./recyclarr/ks.yaml
