@@ -249,51 +249,51 @@
         }
       }
     },
-    "helmfile@1.1.3": {
-      "last_modified": "2025-07-24T15:00:16Z",
-      "resolved": "github:NixOS/nixpkgs/b74a30dbc0a72e20df07d43109339f780b439291#helmfile",
+    "helmfile@1.1.4": {
+      "last_modified": "2025-08-11T07:05:29Z",
+      "resolved": "github:NixOS/nixpkgs/9585e9192aadc13ec3e49f33f8333bd3cda524df#helmfile",
       "source": "devbox-search",
-      "version": "1.1.3",
+      "version": "1.1.4",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/kmf3ry1icw9lh07bmbv403s7vcsaqkxr-helmfile-1.1.3",
+              "path": "/nix/store/8cakfdffaghplgs39yc477vjj0gmqcnp-helmfile-1.1.4",
               "default": true
             }
           ],
-          "store_path": "/nix/store/kmf3ry1icw9lh07bmbv403s7vcsaqkxr-helmfile-1.1.3"
+          "store_path": "/nix/store/8cakfdffaghplgs39yc477vjj0gmqcnp-helmfile-1.1.4"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/g8n6gdfxxdl22cgammbwrckp6j9n0kqm-helmfile-1.1.3",
+              "path": "/nix/store/vazn0wja5anw5hyz4phjx1yrh529ch8r-helmfile-1.1.4",
               "default": true
             }
           ],
-          "store_path": "/nix/store/g8n6gdfxxdl22cgammbwrckp6j9n0kqm-helmfile-1.1.3"
+          "store_path": "/nix/store/vazn0wja5anw5hyz4phjx1yrh529ch8r-helmfile-1.1.4"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/rbsia8n89j8drz1k8ar5fc60hmnpcxbh-helmfile-1.1.3",
+              "path": "/nix/store/mmrv6dk3h7dqjfz8wpbgvnql9623bfc7-helmfile-1.1.4",
               "default": true
             }
           ],
-          "store_path": "/nix/store/rbsia8n89j8drz1k8ar5fc60hmnpcxbh-helmfile-1.1.3"
+          "store_path": "/nix/store/mmrv6dk3h7dqjfz8wpbgvnql9623bfc7-helmfile-1.1.4"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/shn32c35l4hg268bail8apxz7gn610lm-helmfile-1.1.3",
+              "path": "/nix/store/5fj24c4887l1dpwf094zwl3rxjpz1pvk-helmfile-1.1.4",
               "default": true
             }
           ],
-          "store_path": "/nix/store/shn32c35l4hg268bail8apxz7gn610lm-helmfile-1.1.3"
+          "store_path": "/nix/store/5fj24c4887l1dpwf094zwl3rxjpz1pvk-helmfile-1.1.4"
         }
       }
     },
