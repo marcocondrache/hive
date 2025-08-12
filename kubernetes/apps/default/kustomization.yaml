@@ -13,7 +13,7 @@ resources:
   - ./excalidraw/ks.yaml
   - ./karakeep/ks.yaml
   # - ./nocodb/ks.yaml
-  # - ./zigbee/ks.yaml
+  - ./zigbee/ks.yaml
   - ./atuin/ks.yaml
   - ./pdf/ks.yaml
   # TODO: Increase UMA for gpu
