@@ -23,8 +23,8 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 1Gi
-  prune: true
   retryInterval: 2m
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
