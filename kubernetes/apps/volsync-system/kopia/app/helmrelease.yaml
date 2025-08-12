@@ -94,6 +94,6 @@ spec:
       repository:
         type: nfs
         server: nas.hive.internal
-        path: /mnt/tank/volsync-kopia
+        path: /mnt/tank/hive/volsync-kopia
         globalMounts:
           - path: /repository
