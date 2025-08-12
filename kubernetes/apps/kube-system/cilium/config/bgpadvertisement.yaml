@@ -27,6 +27,11 @@ spec:
       advertisements:
         matchLabels:
           advertise: bgp
+    - afi: ipv6
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: bgp
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgpclusterconfig_v2.json
 apiVersion: cilium.io/v2
