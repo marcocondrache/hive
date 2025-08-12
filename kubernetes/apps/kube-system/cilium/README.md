@@ -15,11 +15,13 @@ router bgp 64513
   neighbor 2a0d:3344:245b:2702:5a47:caff:fe7f:c10d peer-group k8s
 
   address-family ipv4 unicast
+    neighbor k8s activate
     neighbor k8s next-hop-self
     neighbor k8s soft-reconfiguration inbound
   exit-address-family
 
   address-family ipv6 unicast
+    neighbor k8s activate
     neighbor k8s next-hop-self
     neighbor k8s soft-reconfiguration inbound
   exit-address-family
