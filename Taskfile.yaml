@@ -18,7 +18,6 @@ includes:
   bootstrap: .taskfiles/bootstrap
   talos: .taskfiles/talos
   volsync: .taskfiles/volsync
-  flux: .taskfiles/flux
 
 tasks:
   default:
