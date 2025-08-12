@@ -80,9 +80,24 @@ spec:
       app:
         hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
         parentRefs:
-          - name: internal
+          - name: external
             namespace: kube-system
             sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+            filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  remove: ["Range"]
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /library/streams
+          - backendRefs:
+              - identifier: app
+                port: *port
 
     persistence:
       config:
