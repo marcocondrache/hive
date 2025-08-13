@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./bgpadvertisement.yaml
   - ./loadbalancerippool.yaml
+  - ./l2announcements.yaml
