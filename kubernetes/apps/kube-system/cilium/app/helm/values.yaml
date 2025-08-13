@@ -18,9 +18,6 @@ installNoConntrackIptablesRules: true
 
 autoDirectNodeRoutes: true
 
-ipv6:
-  enabled: true
-
 cni:
   exclusive: false
 
