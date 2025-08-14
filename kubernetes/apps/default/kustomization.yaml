@@ -21,6 +21,7 @@ resources:
   # - ./ai/ks.yaml
 
   - ./plex/ks.yaml
+  - ./tautulli/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./recyclarr/ks.yaml
