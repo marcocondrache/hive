@@ -76,7 +76,7 @@ controlPlane:
         officialExtensions:
           - siderolabs/amd-ucode
           - siderolabs/amdgpu
-          - siderolabs/nfsrahead
+          # - siderolabs/nfsrahead
           - siderolabs/thunderbolt
           - siderolabs/realtek-firmware
 
