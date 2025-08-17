@@ -13,13 +13,8 @@ kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 
 routingMode: native
-installNoConntrackIptablesRules: true
-
 ipv4NativeRoutingCIDR: 10.42.0.0/16
-ipv6NativeRoutingCIDR: fd23:9ab4:4c9e:42::/108
-
-ipv6:
-  enabled: true
+installNoConntrackIptablesRules: true
 
 autoDirectNodeRoutes: true
 
