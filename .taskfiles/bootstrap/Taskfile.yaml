@@ -45,9 +45,9 @@ tasks:
     desc: Bootstrap CRDs
     cmds:
       - echo "Bootstrapping CRDs..."
-      - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml template | kubectl apply --server-side --filename -
+      - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml template | yq ea --exit-status 'select(.kind == "CustomResourceDefinition")' - | kubectl apply --server-side --filename -
     status:
-      - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml template | kubectl diff --filename -
+      - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml template | yq ea --exit-status 'select(.kind == "CustomResourceDefinition")' - | kubectl diff --filename -
     preconditions:
       - test -f {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml
       - which kubectl helm helmfile yq
