@@ -12,7 +12,7 @@ spec:
     - type: IPAddress
       value: 10.0.90.3
     - type: IPAddress
-      value: 2a0d:3344:245b:2703::101
+      value: fd23:9ab4:4c9e:9::1002
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
@@ -50,7 +50,7 @@ spec:
     - type: IPAddress
       value: 10.0.90.2
     - type: IPAddress
-      value: 2a0d:3344:245b:2703::100
+      value: fd23:9ab4:4c9e:9::1001
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
