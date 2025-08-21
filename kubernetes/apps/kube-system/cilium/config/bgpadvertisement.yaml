@@ -55,6 +55,6 @@ spec:
             name: l3-bgp-peer-config
         - name: unifi-ipv6
           peerASN: 64513
-          peerAddress: fe80::6e63:f8ff:fe18:c6e2
+          peerAddress: 2a0d:3344:245b:2702::1
           peerConfigRef:
             name: l3-bgp-peer-config
