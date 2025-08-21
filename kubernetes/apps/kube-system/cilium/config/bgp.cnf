@@ -4,24 +4,18 @@ router bgp 64513
 
   no bgp ebgp-requires-policy
 
-  neighbor k8s-v4 peer-group
-  neighbor k8s-v4 remote-as 64514
+  neighbor k8s peer-group
+  neighbor k8s remote-as 64514
 
-  neighbor k8s-v6 peer-group
-  neighbor k8s-v6 remote-as 64514
-
-  neighbor k8s-v4 soft-reconfiguration inbound
-  neighbor k8s-v6 soft-reconfiguration inbound
-
-  neighbor 10.0.30.21 peer-group k8s-v4
-  
-  neighbor fe80::5a47:caff:fe7f:c10d peer-group k8s-v6
+  neighbor 10.0.30.21 peer-group k8s
 
   address-family ipv4 unicast
-    neighbor k8s-v4 next-hop-self
+    neighbor k8s next-hop-self
+    neighbor k8s soft-reconfiguration inbound
   exit-address-family
 
   address-family ipv6 unicast
-    neighbor k8s-v6 next-hop-self
+    neighbor k8s next-hop-self
+    neighbor k8s soft-reconfiguration inbound
   exit-address-family
 exit
