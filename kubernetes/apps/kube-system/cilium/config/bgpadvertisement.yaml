@@ -47,10 +47,15 @@ spec:
       kubernetes.io/os: linux
   bgpInstances:
     - name: cilium
-      localASN: 64514
       peers:
-        - name: unifi
-          peerASN: 64513
+        - name: unifi-v4
+          peerASN: 64514
           peerAddress: 10.0.30.1
+          peerConfigRef:
+            name: l3-bgp-peer-config
+
+        - name: unifi-v6
+          peerASN: 64515
+          peerAddress: fe80::6e63:f8ff:fe18:c6e2
           peerConfigRef:
             name: l3-bgp-peer-config
