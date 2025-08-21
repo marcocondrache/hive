@@ -237,6 +237,7 @@ controlPlane:
           net.ipv4.tcp_window_scaling: 1         # 10Gb/s
           net.ipv6.conf.all.accept_ra: 2         # IPv6 Router Advertisement
           net.ipv6.conf.all.forwarding: 1        # IPv6 Forwarding
+          net.ipv6.conf.bond0.accept_ra: 2       # IPv6 Router Advertisement on bond0
           sunrpc.tcp_slot_table_entries: 128     # 10Gb/s | NFS
           sunrpc.tcp_max_slot_table_entries: 128 # 10Gb/s | NFS
           user.max_user_namespaces: 11255        # User Namespaces

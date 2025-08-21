@@ -73,6 +73,7 @@ tasks:
       - test -f "${TALOSCONFIG}"
       - talosctl config info
     cmds:
+      - task: :talos:generate-clusterconfig
       - task: :talos:apply-clusterconfig
         vars:
           INSECURE: "true"
