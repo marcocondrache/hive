@@ -21,8 +21,6 @@ kind: CiliumBGPPeerConfig
 metadata:
   name: l3-bgp-peer-config
 spec:
-  ebgpMultihop: 4
-
   families:
     - afi: ipv4
       safi: unicast
@@ -51,9 +49,12 @@ spec:
       peers:
         - name: unifi-v4
           peerASN: 64514
-          autoDiscovery:
-            mode: "DefaultGateway"
-            defaultGateway:
-              addressFamily: ipv6
+          peerAddress: 10.0.30.1
+          peerConfigRef:
+            name: l3-bgp-peer-config
+
+        - name: unifi-v6
+          peerASN: 64514
+          peerAddress: fe80::6e63:f8ff:fe18:c6e2
           peerConfigRef:
             name: l3-bgp-peer-config
