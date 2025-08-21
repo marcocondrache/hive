@@ -5,6 +5,7 @@ ipam:
 
 k8s:
   requireIPv4PodCIDR: true
+  requireIPv6PodCIDR: true
 
 k8sServiceHost: 127.0.0.1
 k8sServicePort: 7445
@@ -16,7 +17,6 @@ ipv4NativeRoutingCIDR: 10.42.0.0/16
 ipv6NativeRoutingCIDR: fdf3:0f3a:242e:42::/108
 
 routingMode: native
-installNoConntrackIptablesRules: true
 
 autoDirectNodeRoutes: true
 
