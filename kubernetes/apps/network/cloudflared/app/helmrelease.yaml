@@ -33,6 +33,7 @@ spec:
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_POST_QUANTUM: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
+              TUNNEL_EDGE_IP_VERSION: 6
 
             envFrom:
               - secretRef:
