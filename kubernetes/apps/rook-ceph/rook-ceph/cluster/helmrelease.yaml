@@ -61,9 +61,6 @@ spec:
       mon:
         count: 1
         allowMultiplePerNode: true
-      csi:
-        readAffinity:
-          enabled: true
       dashboard:
         enabled: true
         urlPrefix: /
