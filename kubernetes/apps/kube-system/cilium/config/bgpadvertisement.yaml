@@ -19,16 +19,22 @@ spec:
 apiVersion: cilium.io/v2
 kind: CiliumBGPPeerConfig
 metadata:
-  name: l3-bgp-peer-config
+  name: l3-bgp-peer-config-ipv4
 spec:
-  ebgpMultihop: 4
   families:
     - afi: ipv4
       safi: unicast
       advertisements:
         matchLabels:
           advertise: bgp
-
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgppeerconfig_v2.json
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: l3-bgp-peer-config-ipv6
+spec:
+  families:
     - afi: ipv6
       safi: unicast
       advertisements:
@@ -52,9 +58,9 @@ spec:
           peerASN: 64513
           peerAddress: 10.0.30.1
           peerConfigRef:
-            name: l3-bgp-peer-config
+            name: l3-bgp-peer-config-ipv4
         - name: unifi-ipv6
           peerASN: 64513
           peerAddress: 2a0d:3344:245b:2702::1
           peerConfigRef:
-            name: l3-bgp-peer-config
+            name: l3-bgp-peer-config-ipv6
