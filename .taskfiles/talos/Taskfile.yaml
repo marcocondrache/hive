@@ -13,6 +13,7 @@ tasks:
       - op user get --me
     cmds:
       - op run --env-file {{.TALOS_DIR}}/talhelper-secrets.env --no-masking -- talhelper genconfig
+        --env-file {{.TALOS_DIR}}/talenv.yaml
         --secret-file {{.TALOS_DIR}}/talsecret.yaml
         --config-file {{.TALOS_DIR}}/talconfig.yaml
         --out-dir {{.TALOS_DIR}}/clusterconfig

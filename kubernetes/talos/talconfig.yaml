@@ -3,20 +3,20 @@ clusterName: &clusterName hive
 
 endpoint: https://k8s.hive.internal:6443
 
-# renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.11.0-rc.0
-# renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.33.4
+talosVersion: "${talosVersion}"
+kubernetesVersion: "${kubernetesVersion}"
 
 clusterPodNets:
   - "10.42.0.0/16"
+  - "fdf3:0f3a:242e:42::/108"
 
 clusterSvcNets:
   - "10.43.0.0/16"
+  - "fdf3:0f3a:242e:42::/108"
 
 additionalApiServerCertSans: &sans
   - k8s.hive.internal
-  - &vip 10.0.30.20
+  - ${vip}
   - 127.0.0.1
 
 additionalMachineCertSans: *sans
@@ -38,10 +38,12 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: 58:47:ca:7f:c1:0d
+
         dhcp: true
+
         mtu: 9000
         vip:
-          ip: *vip
+          ip: ${vip}
 
       # - deviceSelector: { busPath: 0-1.0 }
       #   dhcp: false
@@ -140,7 +142,8 @@ controlPlane:
             serializeImagePulls: false
           nodeIP:
             validSubnets:
-                - 10.0.30.0/24
+                - ${nodeSubnetV4}
+                - ${nodeSubnetV6}
 
     # Configure API server
     - |-
@@ -150,6 +153,14 @@ controlPlane:
             enable-aggregator-routing: "true"
             runtime-config: admissionregistration.k8s.io/v1alpha1=true
             feature-gates: MutatingAdmissionPolicy=true,ImageVolume=true
+
+    # Configure controller manager
+    - |-
+      cluster:
+        controllerManager:
+          extraArgs:
+            bind-address: 0.0.0.0
+            node-cidr-mask-size-ipv6: "112"
 
     # Configure cluster
     - |-
@@ -183,7 +194,8 @@ controlPlane:
       cluster:
         etcd:
           advertisedSubnets:
-            - 10.0.30.0/24
+            - ${nodeSubnetV4}
+            - ${nodeSubnetV6}
 
     # Configure NFS mount options
     - |
@@ -204,7 +216,7 @@ controlPlane:
       machine:
         network:
           extraHostEntries:
-            - ip: 10.0.30.20
+            - ip: ${vip}
               aliases:
                 - k8s.hive.internal
 
