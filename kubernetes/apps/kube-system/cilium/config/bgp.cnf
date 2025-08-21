@@ -15,7 +15,7 @@ router bgp 64513
 
   neighbor 10.0.30.21 peer-group k8s-v4
   
-  neighbor ~:5a47:caff:fe7f:c10d peer-group k8s-v6
+  neighbor fe80::5a47:caff:fe7f:c10d peer-group k8s-v6
 
   address-family ipv4 unicast
     neighbor k8s-v4 next-hop-self

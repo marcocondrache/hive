@@ -49,13 +49,13 @@ spec:
     - name: cilium
       localASN: 64514
       peers:
-        - name: unifi
+        - name: unifi-v4
           peerASN: 64513
           peerAddress: 10.0.30.1
           peerConfigRef:
             name: l3-bgp-peer-config
 
-        - name: unifi
+        - name: unifi-v6
           peerASN: 64513
           peerAddress: fe80::6e63:f8ff:fe18:c6e2
           peerConfigRef:
