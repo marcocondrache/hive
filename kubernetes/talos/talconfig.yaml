@@ -12,7 +12,7 @@ clusterPodNets:
 
 clusterSvcNets:
   - "10.43.0.0/16"
-  - "fdf3:0f3a:242e:42::/108"
+  - "fdf3:0f3a:242e:43::/108"
 
 additionalApiServerCertSans: &sans
   - k8s.hive.internal
