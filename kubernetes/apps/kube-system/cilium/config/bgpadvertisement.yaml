@@ -50,9 +50,6 @@ spec:
       peers:
         - name: unifi
           peerASN: 64514
-          autoDiscovery:
-            mode: "DefaultGateway"
-            defaultGateway:
-              addressFamily: ipv4
+          peerAddress: 10.0.30.1
           peerConfigRef:
             name: l3-bgp-peer-config
