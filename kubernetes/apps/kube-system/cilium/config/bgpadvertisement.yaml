@@ -61,6 +61,7 @@ spec:
             name: l3-bgp-peer-config-ipv4
         - name: unifi-ipv6
           peerASN: 64513
+          # TODO: understand how to use link local address
           peerAddress: 2a0d:3344:245b:2702::1
           peerConfigRef:
             name: l3-bgp-peer-config-ipv6
