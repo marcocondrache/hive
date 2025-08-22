@@ -5,6 +5,11 @@ metadata:
   name: cilium-internal
 spec:
   controllerName: io.cilium/gateway-controller
+  parametersRef:
+    group: cilium.io
+    kind: CiliumGatewayClassConfig
+    name: cilium
+    namespace: kube-system
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
@@ -12,3 +17,8 @@ metadata:
   name: cilium-external
 spec:
   controllerName: io.cilium/gateway-controller
+  parametersRef:
+    group: cilium.io
+    kind: CiliumGatewayClassConfig
+    name: cilium
+    namespace: kube-system
