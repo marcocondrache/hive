@@ -15,4 +15,6 @@ resources:
   - ./gateway-api-crds/ks.yaml
   - ./metrics-server/ks.yaml
   - ./snapshot-controller/ks.yaml
-  - ./spegel/ks.yaml
+  # TODO: wait for ipv6 support
+  # https://github.com/spegel-org/spegel/pull/968
+  # - ./spegel/ks.yaml
