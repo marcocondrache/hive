@@ -4,6 +4,7 @@ version: "3"
 
 tasks:
   generate-clusterconfig:
+    silent: true
     desc: Generate clusterconfig for Talos
     preconditions:
       - which op test talhelper
