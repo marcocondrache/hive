@@ -22,4 +22,5 @@ kind: ServiceAccount
 metadata:
   name: hive-runner
 spec:
-  roles: ["os:admin"]
+  roles:
+    - "os:admin"

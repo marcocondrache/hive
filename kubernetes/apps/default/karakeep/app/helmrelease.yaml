@@ -159,7 +159,8 @@ spec:
 
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
+        hostnames:
+          - "{{ .Release.Name }}.marcocondrache.com"
         parentRefs:
           - name: internal
             namespace: kube-system

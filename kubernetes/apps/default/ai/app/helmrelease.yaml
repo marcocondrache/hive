@@ -59,7 +59,8 @@ spec:
 
     defaultPodOptions:
       securityContext:
-        supplementalGroups: [3000]
+        supplementalGroups:
+          - 3000
 
     service:
       app:

@@ -20,9 +20,17 @@ in
     "ROOT_DIR" = "${pwd}";
   };
 
+  git-hooks.hooks = {
+    yamlfmt = {
+      enable = true;
+      settings.configPath = "${pwd}/.yamlfmt.yaml";
+    };
+  };
+
   packages = [
     pkgs.go-task
     pkgs.helmfile
+    pkgs.yamlfmt
     pkgs._1password-cli
     pkgs.kubectl
     pkgs.fluxcd

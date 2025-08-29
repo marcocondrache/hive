@@ -16,4 +16,6 @@ spec:
               name: cloudflare-issuer-secret
               key: CLOUDFLARE_DNS_TOKEN
         selector:
-          dnsZones: ["marcocondrache.com", "*.marcocondrache.com"]
+          dnsZones:
+            - "marcocondrache.com"
+            - "*.marcocondrache.com"

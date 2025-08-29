@@ -51,7 +51,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 100m
@@ -78,7 +78,8 @@ spec:
 
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.marcocondrache.com"]
+        hostnames:
+          - "{{ .Release.Name }}.marcocondrache.com"
         parentRefs:
           - name: external
             namespace: kube-system
@@ -90,7 +91,8 @@ spec:
             filters:
               - type: RequestHeaderModifier
                 requestHeaderModifier:
-                  remove: ["Range"]
+                  remove:
+                    - "Range"
             matches:
               - path:
                   type: PathPrefix

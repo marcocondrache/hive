@@ -21,7 +21,8 @@ spec:
             runAsGroup: 65533
             fsGroup: 65533
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [3000]
+            supplementalGroups:
+              - 3000
 
         containers:
           app:

@@ -60,10 +60,13 @@ spec:
           timeoutSeconds: 5
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["gateway-httproute", "service"]
+    sources:
+      - "gateway-httproute"
+      - "service"
     txtOwnerId: main
     txtPrefix: k8s.main.
-    domainFilters: ["marcocondrache.com"]
+    domainFilters:
+      - "marcocondrache.com"
     serviceMonitor:
       enabled: true
     podAnnotations:

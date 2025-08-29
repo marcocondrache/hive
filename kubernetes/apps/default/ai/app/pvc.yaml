@@ -4,7 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: ai-models
 spec:
-  accessModes: ["ReadWriteOnce"]
+  accessModes:
+    - "ReadWriteOnce"
   resources:
     requests:
       storage: 30Gi

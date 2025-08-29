@@ -58,7 +58,8 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: "OnRootMismatch"
-        supplementalGroups: [3000]
+        supplementalGroups:
+          - 3000
 
     service:
       app:
@@ -94,4 +95,5 @@ spec:
           - matches:
               - path:
                   value: /webhook
-            backendRefs: [{}]
+            backendRefs:
+              - {}
