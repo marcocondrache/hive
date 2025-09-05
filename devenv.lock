@@ -3,10 +3,10 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1756101922,
+        "lastModified": 1756819550,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "372c975fd0d5b7fc1ffbb15c75a21d7f9ea97603",
+        "rev": "f0a22d26a3c5f6f66249739a0e59ab828271ce72",
         "type": "github"
       },
       "original": {
@@ -36,10 +36,10 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1754487366,
+        "lastModified": 1756770412,
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
+        "rev": "4524271976b625a4a605beefd893f270620fd751",
         "type": "github"
       },
       "original": {
@@ -120,10 +120,10 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1756125398,
+        "lastModified": 1756542300,
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3b9f00d7a7bf68acd4c4abb9d43695afb04e03a5",
+        "rev": "d7600c775f877cd87b4f5a831c28aa94137377aa",
         "type": "github"
       },
       "original": {
@@ -150,10 +150,10 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1756096595,
+        "lastModified": 1756795087,
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "ad8284457c68a681b407f057ed54f8c387e6a6ad",
+        "rev": "ae5da7b7de57baab2dd79eaa36e491c259637087",
         "type": "github"
       },
       "original": {
