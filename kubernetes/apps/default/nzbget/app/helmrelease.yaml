@@ -42,10 +42,7 @@ spec:
               tag: 25.3.0@sha256:6ce885f0648894047483d64c4f32785af819b1def597c476e5ba2b7e564cfe68
             env:
               NZBGET__PORT: &port 80
-              TZ: America/New_York
-            envFrom:
-              - secretRef:
-                  name: "{{ .Release.Name }}-secret"
+              TZ: Europe/Rome
             probes:
               liveness: &probes
                 enabled: true
