@@ -19,8 +19,6 @@ spec:
   values:
     controllers:
       nzbget:
-        annotations:
-          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
@@ -35,7 +33,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /jsonrpc/status
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
