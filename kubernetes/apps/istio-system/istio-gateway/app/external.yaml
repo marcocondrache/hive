@@ -9,10 +9,10 @@ metadata:
 spec:
   gatewayClassName: istio
   addresses:
+    # - type: IPAddress
+    #   value: 10.0.90.3
     - type: IPAddress
-      value: 10.0.90.3
-      # - type: IPAddress
-      #   value: fd23:9ab4:4c9e:9::1002
+      value: fd23:9ab4:4c9e:9::1002
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
