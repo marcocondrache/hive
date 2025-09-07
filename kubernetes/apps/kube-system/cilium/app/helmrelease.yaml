@@ -56,11 +56,6 @@ spec:
       mode: dsr
       algorithm: maglev
 
-    gatewayAPI:
-      enabled: true
-      enableAlpn: true
-      xffNumTrustedHops: 1
-
     rollOutCiliumPods: true
 
     bandwidthManager:
@@ -68,11 +63,7 @@ spec:
       bbr: true
 
     envoy:
-      enabled: true
-      rollOutEnvoyPods: true
-      prometheus:
-        serviceMonitor:
-          enabled: true
+      enabled: false
 
     localRedirectPolicy: true
 
