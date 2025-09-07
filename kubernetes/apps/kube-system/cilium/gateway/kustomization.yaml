@@ -6,4 +6,4 @@ resources:
   - ./gatewayclassconfig.yaml
   - ./gatewayclass.yaml
   - ./gateway.yaml
-  - ./redirect.yaml
+  - ./httproute.yaml

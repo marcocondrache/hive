@@ -20,7 +20,6 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
-      hostname: "*.marcocondrache.com"
       allowedRoutes:
         namespaces:
           from: Same
@@ -28,7 +27,6 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.marcocondrache.com"
       allowedRoutes:
         namespaces:
           from: All
@@ -58,7 +56,6 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
-      hostname: "*.marcocondrache.com"
       allowedRoutes:
         namespaces:
           from: Same
@@ -66,7 +63,6 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.marcocondrache.com"
       allowedRoutes:
         namespaces:
           from: All
