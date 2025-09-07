@@ -24,4 +24,5 @@ spec:
     gatewayClasses:
       istio:
         service:
-          ipFamilyPolicy: PreferDualStack
+          spec:
+            ipFamilyPolicy: PreferDualStack
