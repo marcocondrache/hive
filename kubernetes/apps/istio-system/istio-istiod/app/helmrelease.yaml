@@ -21,6 +21,10 @@ spec:
       hub: gcr.io/istio-release
       variant: distroless
 
+    pilot:
+      env:
+        PILOT_ENABLE_QUIC_LISTENERS: true
+
     gatewayClasses:
       istio:
         service:
