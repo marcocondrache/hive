@@ -21,8 +21,15 @@ spec:
       hub: gcr.io/istio-release
       variant: distroless
 
-    env:
-      PILOT_ENABLE_QUIC_LISTENERS: true
+    meshConfig:
+      defaultConfig:
+        proxyMetadata:
+          ISTIO_DUAL_STACK: "true"
+
+    pilot:
+      env:
+        ISTIO_DUAL_STACK: "true"
+        PILOT_ENABLE_QUIC_LISTENERS: true
 
     gatewayClasses:
       istio:
