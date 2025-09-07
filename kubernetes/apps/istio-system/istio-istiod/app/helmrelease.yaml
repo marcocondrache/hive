@@ -21,15 +21,6 @@ spec:
       hub: gcr.io/istio-release
       variant: distroless
 
-    meshConfig:
-      defaultConfig:
-        proxyMetadata:
-          ISTIO_DUAL_STACK: "true"
-
-    pilot:
-      env:
-        ISTIO_DUAL_STACK: "true"
-
     gatewayClasses:
       istio:
         service:
