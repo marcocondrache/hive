@@ -86,6 +86,7 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: envoy-internal
+  http3: {}
   clientIPDetection:
     xForwardedFor:
       numTrustedHops: 1
