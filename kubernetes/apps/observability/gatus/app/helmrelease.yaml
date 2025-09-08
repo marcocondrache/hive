@@ -97,8 +97,8 @@ spec:
           - "{{ .Release.Name }}.marcocondrache.com"
           - status.marcocondrache.com
         parentRefs:
-          - name: external
-            namespace: istio-system
+          - name: envoy-external
+            namespace: network
             sectionName: https
 
     rbac:

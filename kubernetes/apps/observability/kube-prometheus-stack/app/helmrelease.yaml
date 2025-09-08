@@ -50,8 +50,8 @@ spec:
           hostnames:
             - "alertmanager.marcocondrache.com"
           parentRefs:
-            - name: internal
-              namespace: istio-system
+            - name: envoy-internal
+              namespace: network
               sectionName: https
       alertmanagerSpec:
         alertmanagerConfiguration:
@@ -106,8 +106,8 @@ spec:
           hostnames:
             - "prometheus.marcocondrache.com"
           parentRefs:
-            - name: internal
-              namespace: istio-system
+            - name: envoy-internal
+              namespace: network
               sectionName: https
 
       prometheusSpec:

@@ -8,8 +8,8 @@ spec:
   hostnames:
     - "flux.marcocondrache.com"
   parentRefs:
-    - name: external
-      namespace: istio-system
+    - name: envoy-external
+      namespace: network
       sectionName: https
   rules:
     - backendRefs:
