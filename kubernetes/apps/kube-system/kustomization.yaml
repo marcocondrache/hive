@@ -11,7 +11,6 @@ resources:
   - ./amd-device-plugin/ks.yaml
   - ./descheduler/ks.yaml
   - ./reloader/ks.yaml
-  - ./gateway-api-crds/ks.yaml
   - ./metrics-server/ks.yaml
   - ./snapshot-controller/ks.yaml
   # TODO: wait for ipv6 support
