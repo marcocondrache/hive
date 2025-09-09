@@ -3,7 +3,7 @@
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyProxy
 metadata:
-  name: envoy-external
+  name: envoy
 spec:
   logging:
     level:
@@ -21,9 +21,6 @@ spec:
               cpu: 100m
             limits:
               memory: 1Gi
-      envoyService:
-        name: envoy-external
-        externalTrafficPolicy: Cluster
   shutdown:
     drainTimeout: 180s
   telemetry:
@@ -36,13 +33,13 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
-  name: envoy-external
+  name: envoy
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
   parametersRef:
     group: gateway.envoyproxy.io
     kind: EnvoyProxy
-    name: envoy-external
+    name: envoy
     namespace: network
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/gateway_v1.json
@@ -53,7 +50,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname external.marcocondrache.com
 spec:
-  gatewayClassName: envoy-external
+  gatewayClassName: envoy
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
@@ -76,16 +73,59 @@ spec:
           - kind: Secret
             name: marcocondrache-com-tls
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/gateway_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-internal
+  annotations:
+    external-dns.alpha.kubernetes.io/target: &hostname internal.marcocondrache.com
+spec:
+  gatewayClassName: envoy-internal
+  infrastructure:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: *hostname
+      lbipam.cilium.io/ips: 10.0.90.2,fd23:9ab4:4c9e:9::1001
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: marcocondrache-com-tls
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/envoyproxy/gateway/refs/heads/main/charts/gateway-helm/crds/generated/gateway.envoyproxy.io_clienttrafficpolicies.yaml
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: envoy
+spec:
+  targetSelectors:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+  compression:
+    - type: Brotli
+    - type: Gzip
+---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/envoyproxy/gateway/refs/heads/main/charts/gateway-helm/crds/generated/gateway.envoyproxy.io_clienttrafficpolicies.yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: ClientTrafficPolicy
 metadata:
-  name: envoy-external
+  name: envoy
 spec:
-  targetRefs:
+  targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: envoy-external
   http3: {}
   clientIPDetection:
     xForwardedFor:
@@ -96,30 +136,19 @@ spec:
       - h2
       - http/1.1
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/envoyproxy/gateway/refs/heads/main/charts/gateway-helm/crds/generated/gateway.envoyproxy.io_clienttrafficpolicies.yaml
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: BackendTrafficPolicy
-metadata:
-  name: envoy-external
-spec:
-  targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: envoy-external
-  compression:
-    - type: Brotli
-    - type: Gzip
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/httproute_v1.json
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: envoy-external
+  name: https-redirect
   annotations:
     external-dns.alpha.kubernetes.io/controller: none
 spec:
   parentRefs:
     - name: envoy-external
+      namespace: network
+      sectionName: http
+    - name: envoy-internal
       namespace: network
       sectionName: http
   rules:
