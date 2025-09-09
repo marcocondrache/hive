@@ -8,7 +8,7 @@ spec:
   logging:
     level:
       default: info
-  # ipFamily: DualStack
+  ipFamily: DualStack
   provider:
     type: Kubernetes
     kubernetes:
@@ -54,8 +54,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-      lbipam.cilium.io/ips: 10.0.90.3
-      # lbipam.cilium.io/ips: 10.0.90.3,fd23:9ab4:4c9e:9::1002
+      lbipam.cilium.io/ips: 10.0.90.3,fd23:9ab4:4c9e:9::1002
   listeners:
     - name: http
       protocol: HTTP
@@ -86,8 +85,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-      lbipam.cilium.io/ips: 10.0.90.2
-      # lbipam.cilium.io/ips: 10.0.90.2,fd23:9ab4:4c9e:9::1001
+      lbipam.cilium.io/ips: 10.0.90.2,fd23:9ab4:4c9e:9::1001
   listeners:
     - name: http
       protocol: HTTP
