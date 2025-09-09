@@ -129,9 +129,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
   # http3: {}
-  clientIPDetection:
-    xForwardedFor:
-      numTrustedHops: 1
+  # clientIPDetection:
+  #   xForwardedFor:
+  #     numTrustedHops: 1
   tls:
     minVersion: "1.2"
     alpnProtocols:
