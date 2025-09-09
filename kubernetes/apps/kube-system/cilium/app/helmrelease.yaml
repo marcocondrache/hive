@@ -79,6 +79,9 @@ spec:
 
     bpfClockProbe: true
 
+    pmtuDiscovery:
+      enabled: true
+
     bgpControlPlane:
       enabled: true
 
