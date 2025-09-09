@@ -126,7 +126,7 @@ spec:
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
-  # http3: {}
+  http3: {}
   clientIPDetection:
     xForwardedFor:
       numTrustedHops: 1
