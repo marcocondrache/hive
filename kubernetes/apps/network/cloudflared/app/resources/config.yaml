@@ -4,7 +4,7 @@ originRequest:
 
 ingress:
   - hostname: marcocondrache.com
-    service: &svc https://envoy-external.network.svc.cluster.local
+    service: &service https://envoy-external.network.svc.cluster.local
   - hostname: "*.marcocondrache.com"
-    service: *svc
+    service: *service
   - service: http_status:404
