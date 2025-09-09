@@ -81,7 +81,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname internal.marcocondrache.com
 spec:
-  gatewayClassName: envoy-internal
+  gatewayClassName: envoy
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
