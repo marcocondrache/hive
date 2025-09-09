@@ -83,6 +83,9 @@ spec:
       enabled: true
 
     bpf:
+      mapDynamicSizeRatio: 0.005
+      distributedLRU:
+        enabled: true
       masquerade: true
       datapathMode: netkit
       preallocateMaps: true
