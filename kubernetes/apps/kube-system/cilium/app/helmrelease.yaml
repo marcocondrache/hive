@@ -86,13 +86,13 @@ spec:
       enabled: true
 
     bpf:
-      mapDynamicSizeRatio: 0.005
-      distributedLRU:
-        enabled: true
+      tproxy: true
       masquerade: true
       datapathMode: netkit
       preallocateMaps: true
-      tproxy: true
+      mapDynamicSizeRatio: 0.005
+      distributedLRU:
+        enabled: true
 
     encryption:
       enabled: true
