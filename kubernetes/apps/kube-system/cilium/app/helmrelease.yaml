@@ -86,6 +86,7 @@ spec:
       masquerade: true
       datapathMode: netkit
       preallocateMaps: true
+      tproxy: true
 
     encryption:
       enabled: true
