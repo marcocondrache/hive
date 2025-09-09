@@ -42,6 +42,7 @@ in
     pkgs.kubefetch
     pkgs.talosctl
     pkgs.yq-go
+    pkgs.hey
     pkgs.kubectl-node-shell
 
     inputs.talhelper.packages.${pkgs.system}.default

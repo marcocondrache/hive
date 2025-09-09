@@ -124,8 +124,8 @@ spec:
         advancedMounts:
           plex:
             app:
-              - path: /home/ubuntu/.cache
-                subPath: shader
+              # - path: /home/ubuntu/.cache
+              #   subPath: shader
               - path: /config/Library/Application Support/Plex Media Server/Logs
                 subPath: logs
               - path: /transcode
