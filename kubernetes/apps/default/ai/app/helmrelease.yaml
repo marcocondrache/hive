@@ -37,7 +37,7 @@ spec:
           openwebui:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.6.27
+              tag: 0.6.28
             resources:
               requests:
                 cpu: 500m
