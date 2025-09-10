@@ -1,10 +1,7 @@
 ---
-originRequest:
-  originServerName: external.marcocondrache.com
-
 ingress:
-  - hostname: marcocondrache.com
-    service: &service https://envoy-external.network.svc.cluster.local
   - hostname: "*.marcocondrache.com"
-    service: *service
+    originRequest:
+      originServerName: external.marcocondrache.com
+    service: https://envoy-external.network.svc.cluster.local
   - service: http_status:404
