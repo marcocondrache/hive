@@ -79,6 +79,8 @@ spec:
 
     bpfClockProbe: true
 
+    MTU: 9000
+
     pmtuDiscovery:
       enabled: true
 
