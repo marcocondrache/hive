@@ -115,7 +115,7 @@ spec:
         enabled: true
         trustCRDsExist: true
 
-    # devices: bond+
+    devices: bond+
 
     hubble:
       enabled: false
