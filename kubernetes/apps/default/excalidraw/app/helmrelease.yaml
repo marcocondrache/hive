@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: docker.io/excalidraw/excalidraw
-              tag: latest@sha256:b10bda4b579cca5b762fa13a6704c74c347e336686547588dc9a140a5eff5e0e
+              tag: latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
             resources:
               requests:
                 cpu: 10m
