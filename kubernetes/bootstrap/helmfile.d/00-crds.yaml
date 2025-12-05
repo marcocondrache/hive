@@ -18,7 +18,7 @@ releases: # Prevent helmfile apply or sync
   - name: external-secrets
     namespace: external-secrets
     chart: oci://ghcr.io/external-secrets/charts/external-secrets
-    version: 0.19.2
+    version: 1.1.1
 
   - name: envoy-gateway
     namespace: network
