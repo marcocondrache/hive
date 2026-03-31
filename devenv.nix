@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   inputs,
   ...
@@ -18,13 +17,6 @@ in
     "KUBECONFIG" = "${pwd}/kubeconfig";
     "TALOSCONFIG" = "${pwd}/kubernetes/talos/clusterconfig/talosconfig";
     "ROOT_DIR" = "${pwd}";
-  };
-
-  git-hooks.hooks = {
-    yamlfmt = {
-      enable = true;
-      settings.configPath = "${pwd}/.yamlfmt.yaml";
-    };
   };
 
   packages = [
