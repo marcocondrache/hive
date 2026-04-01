@@ -5,11 +5,17 @@ kind: Certificate
 metadata:
   name: marcocondrache-com
 spec:
-  secretName: marcocondrache-com-tls
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  commonName: marcocondrache.com
   dnsNames:
-    - "marcocondrache.com"
+    - marcocondrache.com
     - "*.marcocondrache.com"
+  duration: 160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-production
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+    rotationPolicy: Always
+  secretName: marcocondrache-com-tls
+  usages:
+    - digital signature

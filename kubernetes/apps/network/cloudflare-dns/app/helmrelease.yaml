@@ -5,17 +5,10 @@ kind: HelmRelease
 metadata:
   name: &app cloudflare-dns
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
     name: cloudflare-dns
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  interval: 1h
   values:
     fullnameOverride: *app
     provider:
@@ -41,12 +34,12 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     sources:
-      - "crd"
-      - "gateway-httproute"
+      - crd
+      - gateway-httproute
     txtOwnerId: default
     txtPrefix: k8s.
     domainFilters:
-      - "marcocondrache.com"
+      - marcocondrache.com
     serviceMonitor:
       enabled: true
     podAnnotations:

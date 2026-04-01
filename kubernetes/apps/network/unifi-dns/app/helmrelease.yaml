@@ -5,17 +5,10 @@ kind: HelmRelease
 metadata:
   name: &app unifi-dns
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
     name: unifi-dns
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  interval: 1h
   values:
     fullnameOverride: *app
     provider:
@@ -47,12 +40,12 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     sources:
-      - "gateway-httproute"
-      - "service"
+      - gateway-httproute
+      - service
     txtOwnerId: main
     txtPrefix: k8s.main.
     domainFilters:
-      - "marcocondrache.com"
+      - marcocondrache.com
     serviceMonitor:
       enabled: true
     podAnnotations:
