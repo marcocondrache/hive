@@ -3,29 +3,32 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: default
-components:
-  - ../../components/common
-resources:
-  - ./it-tools/ks.yaml
-  - ./papra/ks.yaml
-  # - ./n8n/ks.yaml
-  - ./home-assistant/ks.yaml
-  - ./excalidraw/ks.yaml
-  - ./karakeep/ks.yaml
-  # - ./nocodb/ks.yaml
-  - ./zigbee/ks.yaml
-  - ./atuin/ks.yaml
-  # - ./pdf/ks.yaml
-  # TODO: Increase UMA for gpu
-  # https://github.com/ollama/ollama/pull/5426
-  # - ./ai/ks.yaml
 
-  - ./plex/ks.yaml
-  - ./tautulli/ks.yaml
-  - ./jellyseerr/ks.yaml
-  - ./prowlarr/ks.yaml
-  - ./recyclarr/ks.yaml
-  - ./radarr/ks.yaml
-  - ./nzbget/ks.yaml
-  # - ./sabnzbd/ks.yaml
-  - ./sonarr/ks.yaml
+components:
+  - ../../components/alerts
+
+resources:
+  - ./atuin/ks.yaml
+  # - ./it-tools/ks.yaml
+  # - ./papra/ks.yaml
+  # # - ./n8n/ks.yaml
+  # - ./home-assistant/ks.yaml
+  # - ./excalidraw/ks.yaml
+  # - ./karakeep/ks.yaml
+  # # - ./nocodb/ks.yaml
+  # - ./zigbee/ks.yaml
+  # - ./atuin/ks.yaml
+  # # - ./pdf/ks.yaml
+  # # TODO: Increase UMA for gpu
+  # # https://github.com/ollama/ollama/pull/5426
+  # # - ./ai/ks.yaml
+
+  # - ./plex/ks.yaml
+  # - ./tautulli/ks.yaml
+  # - ./jellyseerr/ks.yaml
+  # - ./prowlarr/ks.yaml
+  # - ./recyclarr/ks.yaml
+  # - ./radarr/ks.yaml
+  # - ./nzbget/ks.yaml
+  # # - ./sabnzbd/ks.yaml
+  # - ./sonarr/ks.yaml
