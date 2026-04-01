@@ -43,6 +43,10 @@ spec:
                     secretKeyRef:
                       name: grafana-admin-password-secret
                       key: GF_SECURITY_ADMIN_PASSWORD
+                - name: GF_INSTALL_PLUGINS
+                  value: "https://github.com/GreptimeTeam/greptimedb-grafana-datasource/releases/latest/download/info8fcc-greptimedb-datasource.zip;info8fcc-greptimedb-datasource"
+                - name: GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS
+                  value: "info8fcc-greptimedb-datasource"
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
