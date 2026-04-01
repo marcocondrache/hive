@@ -9,14 +9,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cilium
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
   values:
     ipam:
       mode: kubernetes
@@ -42,7 +34,7 @@ spec:
       exclusive: false
 
     cgroup:
-      autoMount:
+      automount:
         enabled: false
       hostRoot: /sys/fs/cgroup
 
@@ -65,7 +57,8 @@ spec:
     envoy:
       enabled: false
 
-    localRedirectPolicy: true
+    localRedirectPolicies:
+      enabled: true
 
     operator:
       replicas: 1
@@ -79,9 +72,6 @@ spec:
 
     bpfClockProbe: true
 
-    # Breaks rook-ceph
-    # MTU: 9000
-
     pmtuDiscovery:
       enabled: true
 
@@ -89,13 +79,9 @@ spec:
       enabled: true
 
     bpf:
-      tproxy: true
       masquerade: true
       datapathMode: netkit
       preallocateMaps: true
-      mapDynamicSizeRatio: 0.005
-      distributedLRU:
-        enabled: true
 
     encryption:
       enabled: true
@@ -115,10 +101,12 @@ spec:
         enabled: true
         trustCRDsExist: true
 
-    devices: net+
-
     hubble:
       enabled: false
+
+    socketLB:
+      enabled: true
+      hostNamespaceOnly: true
 
     securityContext:
       capabilities:

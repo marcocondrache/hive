@@ -39,6 +39,7 @@ in
     pkgs.hey
     pkgs.just
     pkgs.gum
+    pkgs.kustomize
     pkgs.kubectl-node-shell
 
     inputs.talhelper.packages.${pkgs.system}.default

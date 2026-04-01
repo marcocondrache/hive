@@ -49,7 +49,7 @@ machine:
   install:
     diskSelector:
       serial: S7HDNF0Y611403F
-    image: factory.talos.dev/metal-installer/c57d7db6d46b10329ac04a0d74a7a80eb7361faf2e7f4b0ea6008e2ae5067781:v1.12.6
+    image: factory.talos.dev/metal-installer/1222c6939c1206d6cb6bdc188d87b17934c0d7b6ad37ddcd710efd1472cefed3:v1.12.6
     wipe: false
   kernel:
     modules:
@@ -201,11 +201,6 @@ up: true
 ---
 apiVersion: v1alpha1
 kind: DHCPv4Config
-name: net0
-clientIdentifier: mac
----
-apiVersion: v1alpha1
-kind: DHCPv6Config
 name: net0
 clientIdentifier: mac
 ---
