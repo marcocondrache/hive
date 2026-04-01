@@ -12,5 +12,5 @@ spec:
       namespace: network
   rules:
     - backendRefs:
-        - name: greptimedb-standalone
+        - name: greptimedb-instance-standalone
           port: 4000
