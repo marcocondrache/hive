@@ -19,14 +19,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: greptimedb-logs
+  name: greptimedb-instance
 spec:
   dependsOn:
     - name: greptimedb
     - name: rook-ceph-cluster
       namespace: rook-ceph
   interval: 1h
-  path: ./kubernetes/apps/observability/greptimedb/logs
+  path: ./kubernetes/apps/observability/greptimedb/instance
   prune: true
   sourceRef:
     kind: GitRepository

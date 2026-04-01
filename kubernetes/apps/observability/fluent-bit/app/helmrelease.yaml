@@ -77,7 +77,7 @@ spec:
         [OUTPUT]
           name http
           match kubernetes.*
-          host greptimedb-logs-standalone.observability.svc.cluster.local
+          host greptimedb-instance-standalone.observability.svc.cluster.local
           port 4000
           uri /v1/ingest?db=public&table=kubernetes_logs&pipeline_name=greptime_identity
           format json

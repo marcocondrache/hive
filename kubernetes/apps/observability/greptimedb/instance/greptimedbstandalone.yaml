@@ -2,7 +2,7 @@
 apiVersion: greptime.io/v1alpha1
 kind: GreptimeDBStandalone
 metadata:
-  name: greptimedb-logs
+  name: greptimedb-instance
 spec:
   base:
     main:
