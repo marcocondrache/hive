@@ -24,9 +24,13 @@ spec:
         ssl: false
         prometheusEndpoint: http://prometheus-operated.observability.svc.cluster.local:9090
       mgr:
+        allowMultiplePerNode: true
         modules:
           - name: pg_autoscaler
             enabled: true
+      mon:
+        allowMultiplePerNode: true
+        count: 1
       network:
         connections:
           requireMsgr2: true
@@ -57,9 +61,9 @@ spec:
     cephBlockPools:
       - name: ceph-blockpool
         spec:
-          failureDomain: host
+          failureDomain: osd
           replicated:
-            size: 3
+            size: 1
         storageClass:
           enabled: true
           name: ceph-block
@@ -92,24 +96,15 @@ spec:
         spec:
           metadataPool:
             replicated:
-              size: 3
+              size: 1
           dataPools:
             - name: data0
-              failureDomain: host
+              failureDomain: osd
               replicated:
-                size: 3
+                size: 1
           metadataServer:
             activeCount: 1
             activeStandby: true
-            placement:
-              topologySpreadConstraints:
-                - maxSkew: 1
-                  topologyKey: kubernetes.io/hostname
-                  whenUnsatisfiable: DoNotSchedule
-                  labelSelector:
-                    matchLabels:
-                      app.kubernetes.io/name: ceph-mds
-                      app.kubernetes.io/part-of: ceph-filesystem
             priorityClassName: system-cluster-critical
             resources:
               requests:
