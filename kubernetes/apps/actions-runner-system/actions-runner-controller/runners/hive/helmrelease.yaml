@@ -5,17 +5,10 @@ kind: HelmRelease
 metadata:
   name: &name hive-runner
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
     name: gha-runner-scale-set
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  interval: 1h
   values:
     githubConfigUrl: https://github.com/marcocondrache/hive
     githubConfigSecret: hive-runner-secret
@@ -25,25 +18,21 @@ spec:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
         accessModes:
-          - "ReadWriteOnce"
+          - ReadWriteOnce
         storageClassName: openebs-hostpath
         resources:
           requests:
             storage: 25Gi
-
     controllerServiceAccount:
       name: actions-runner-controller
       namespace: actions-runner-system
-
     template:
       spec:
-        securityContext:
-          fsGroup: 1001
         containers:
           - name: runner
             image: ghcr.io/home-operations/actions-runner:2.333.1@sha256:1a7726bcaeba4e46fe07fe98e1805b4df78618a71e67758f932862b929f852d4
             command:
-              - "/home/runner/run.sh"
+              - /home/runner/run.sh
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
