@@ -31,21 +31,3 @@ spec:
     jsonData:
       implementation: prometheus
     url: http://alertmanager-operated.observability.svc.cluster.local:9093
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/grafana.integreatly.org/grafanadatasource_v1beta1.json
-apiVersion: grafana.integreatly.org/v1beta1
-kind: GrafanaDatasource
-metadata:
-  name: greptimedb-logs
-spec:
-  instanceSelector:
-    matchLabels:
-      dashboards: grafana
-  datasource:
-    type: info8fcc-greptimedb-datasource
-    name: greptimedb-logs
-    access: proxy
-    url: http://greptimedb-logs-standalone.observability.svc.cluster.local:4000
-    jsonData:
-      host: http://greptimedb-logs-standalone.observability.svc.cluster.local:4000
-      database: public
