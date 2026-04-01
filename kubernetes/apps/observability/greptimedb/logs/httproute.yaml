@@ -6,7 +6,7 @@ metadata:
   name: greptimedb-logs
 spec:
   hostnames:
-    - greptimedb-logs.marcocondrache.com
+    - logs.marcocondrache.com
   parentRefs:
     - name: envoy-internal
       namespace: network
