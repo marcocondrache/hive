@@ -9,12 +9,12 @@ spec:
     receiver: pushover
     repeatInterval: 12h
     routes:
-      - receiver: blackhole
+      - receiver: "null"
         matchers:
           - name: alertname
             value: InfoInhibitor
             matchType: =
-      - receiver: buddy-heartbeat
+      - receiver: heartbeat
         groupInterval: 2m
         groupWait: 0s
         repeatInterval: 2m30s
