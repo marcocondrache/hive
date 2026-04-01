@@ -11,6 +11,8 @@ resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
   - ./zigbee/ks.yaml
+  - ./mosquitto/ks.yaml
+
   # - ./it-tools/ks.yaml
   # - ./papra/ks.yaml
   # # - ./n8n/ks.yaml
