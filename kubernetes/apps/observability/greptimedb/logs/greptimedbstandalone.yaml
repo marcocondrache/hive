@@ -1,0 +1,23 @@
+---
+apiVersion: greptime.io/v1alpha1
+kind: GreptimeDBStandalone
+metadata:
+  name: greptimedb-logs
+spec:
+  base:
+    main:
+      image: docker.io/greptime/greptimedb:v1.0.0-rc.2
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          memory: 2Gi
+  datanodeStorage:
+    dataHome: /data/greptimedb
+    fs:
+      storageClassName: ceph-block
+      storageSize: 20Gi
+  prometheusMonitor:
+    enabled: true
+    interval: 30s
