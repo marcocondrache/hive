@@ -5,17 +5,17 @@ kind: HelmRelease
 metadata:
   name: reloader
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
     name: reloader
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
+  interval: 1h
   values:
     fullnameOverride: reloader
+    reloader:
+      enableHA: true
+      deployment:
+        replicas: 1
+      readOnlyRootFileSystem: true
+      podMonitor:
+        enabled: true
+        namespace: "{{ .Release.Namespace }}"

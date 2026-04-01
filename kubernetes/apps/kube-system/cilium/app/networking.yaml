@@ -1,4 +1,15 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumloadbalancerippool_v2.json
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: pool
+spec:
+  allowFirstLastIPs: "No"
+  blocks:
+    - cidr: 10.0.90.0/24
+    - cidr: fd23:9ab4:4c9e:9::1000/120
+---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgpadvertisement_v2.json
 apiVersion: cilium.io/v2
 kind: CiliumBGPAdvertisement
@@ -14,7 +25,7 @@ spec:
           - "LoadBalancerIP"
       selector:
         matchExpressions:
-          - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+          - { key: somekey, operator: NotIn, values: ["never-used-value"] }
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgppeerconfig_v2.json
 apiVersion: cilium.io/v2
@@ -62,7 +73,23 @@ spec:
             name: l3-bgp-peer-config-ipv4
         - name: unifi-ipv6
           peerASN: 64513
-          # TODO: understand how to use link local address
+          # TODO: understand how to use link local address
           peerAddress: 2a0d:3344:245b:2702::1
           peerConfigRef:
             name: l3-bgp-peer-config-ipv6
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-api
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: k8s.marcocondrache.com
+    lbipam.cilium.io/ips: 10.0.30.20
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    k8s-app: kube-apiserver
+    tier: control-plane
+  ports:
+    - port: 6443
