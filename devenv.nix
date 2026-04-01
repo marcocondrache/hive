@@ -14,8 +14,10 @@ in
 
   env = {
     "HELM_PLUGINS" = config.env.DEVENV_PROFILE;
+    "MINIJINJA_CONFIG_FILE" = "${pwd}/.minijinja.toml";
     "KUBECONFIG" = "${pwd}/kubeconfig";
-    "TALOSCONFIG" = "${pwd}/kubernetes/talos/clusterconfig/talosconfig";
+    "TALOSCONFIG" = "${pwd}/talosconfig";
+    "JUST_UNSTABLE" = "1";
     "ROOT_DIR" = "${pwd}";
   };
 
@@ -35,6 +37,8 @@ in
     pkgs.talosctl
     pkgs.yq-go
     pkgs.hey
+    pkgs.just
+    pkgs.gum
     pkgs.kubectl-node-shell
 
     inputs.talhelper.packages.${pkgs.system}.default
