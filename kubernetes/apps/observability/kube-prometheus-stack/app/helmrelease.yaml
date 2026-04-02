@@ -59,23 +59,20 @@ spec:
         ruleSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        retention: 2d
-        retentionSize: 5GB
+        retention: 14d
+        retentionSize: 50GB
         resources:
           requests:
             cpu: 100m
           limits:
-            memory: 1500Mi
+            memory: 2000Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 10Gi
-        remoteWrite:
-          - url: http://greptimedb-instance-standalone.observability.svc.cluster.local:4000/v1/prometheus/write?db=public&physical_table=greptime_physical_table
-            name: greptimedb
+                  storage: 50Gi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
     kube-state-metrics:
