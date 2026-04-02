@@ -57,7 +57,7 @@ spec:
           - "{{ .Release.Name }}.marcocondrache.com"
           - hass.marcocondrache.com
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: network
     persistence:
       config:
