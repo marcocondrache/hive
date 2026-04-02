@@ -3,29 +3,23 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname papra
-  namespace: &namespace default
+  name: papra
 spec:
-  targetNamespace: *namespace
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *appname
-  interval: 30m
-  timeout: 5m
-  path: "./kubernetes/apps/default/papra/app"
+  components:
+    - ../../../../components/volsync
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  interval: 1h
+  path: ./kubernetes/apps/default/papra/app
+  postBuild:
+    substitute:
+      APP: papra
+      VOLSYNC_CAPACITY: 20Gi
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+  targetNamespace: default
   wait: false
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-  components:
-    - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
-  postBuild:
-    substitute:
-      APP: *appname
-      VOLSYNC_CAPACITY: 20Gi
