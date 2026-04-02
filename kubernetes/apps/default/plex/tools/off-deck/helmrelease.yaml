@@ -5,17 +5,10 @@ kind: HelmRelease
 metadata:
   name: plex-off-deck
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
-    name: app-template
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+    name: plex-off-deck
+  interval: 1h
   values:
     controllers:
       plex-off-deck:
@@ -35,10 +28,10 @@ spec:
             env:
               JBOPS__SCRIPT_PATH: utility/off_deck.py
             args:
-              - "--markWatched"
-              - "--playlists"
-              - "Toons"
-              - "SleepMix"
+              - --markWatched
+              - --playlists
+              - Toons
+              - SleepMix
         pod:
           restartPolicy: Never
     persistence:
@@ -48,4 +41,3 @@ spec:
         globalMounts:
           - path: /config/config.ini
             subPath: config.ini
-            readOnly: true
