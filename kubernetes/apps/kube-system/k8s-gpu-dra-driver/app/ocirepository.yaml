@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: amd-gpu-resource-driver
+  name: k8s-gpu-dra-driver
 spec:
   interval: 15m
   layerSelector:
