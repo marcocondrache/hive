@@ -24,6 +24,7 @@ spec:
         ssl: false
         prometheusEndpoint: http://prometheus-operated.observability.svc.cluster.local:9090
       mgr:
+        count: 1
         allowMultiplePerNode: true
         modules:
           - name: pg_autoscaler
@@ -36,8 +37,23 @@ spec:
           requireMsgr2: true
       resources:
         osd:
+          requests:
+            cpu: 500m
+            memory: 2Gi
           limits:
-            memory: 8Gi # Required for bootstrap
+            memory: 2Gi
+        mon:
+          requests:
+            cpu: 250m
+            memory: 1Gi
+          limits:
+            memory: 1Gi
+        mgr:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            memory: 1Gi
       storage:
         devicePathFilter: /dev/disk/by-id/nvme-Samsung_SSD_990_PRO_1TB_S7HDNF0Y611456Y.*
         config:
@@ -104,14 +120,14 @@ spec:
                 size: 1
           metadataServer:
             activeCount: 1
-            activeStandby: true
+            activeStandby: false
             priorityClassName: system-cluster-critical
             resources:
               requests:
                 cpu: 100m
-                memory: 1Gi
+                memory: 512Mi
               limits:
-                memory: 4Gi
+                memory: 1Gi
         storageClass:
           enabled: true
           name: ceph-filesystem
