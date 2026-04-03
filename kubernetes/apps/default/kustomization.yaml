@@ -15,6 +15,9 @@ resources:
   - ./home-assistant/ks.yaml
   - ./papra/ks.yaml
   - ./plex/ks.yaml
+  - ./radarr/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./sonarr/ks.yaml
 
   # - ./it-tools/ks.yaml
   # # - ./n8n/ks.yaml
@@ -32,9 +35,6 @@ resources:
   # - ./plex/ks.yaml
   # - ./tautulli/ks.yaml
   # - ./jellyseerr/ks.yaml
-  # - ./prowlarr/ks.yaml
   # - ./recyclarr/ks.yaml
-  # - ./radarr/ks.yaml
   # - ./nzbget/ks.yaml
   # # - ./sabnzbd/ks.yaml
-  # - ./sonarr/ks.yaml
