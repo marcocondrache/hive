@@ -4,13 +4,8 @@
     {
       description: "Actions Runner Controller Group",
       groupName: "actions-runner-controller",
-      matchDatasources: [
-        "docker"
-      ],
-      matchPackageNames: [
-        "/gha-runner-scale-set-controller/",
-        "/gha-runner-scale-set/"
-      ],
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/gha-runner-scale-set-controller/", "/gha-runner-scale-set/"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
@@ -19,32 +14,48 @@
     {
       description: "Flux Operator Group",
       groupName: "flux-operator",
-      matchDatasources: [
-        "docker"
-      ],
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/flux-operator/", "/flux-instance/", "/flux-operator-manifests/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 3,
+    },
+    {
+      description: "Kubernetes Group",
+      groupName: "kubernetes",
+      matchDatasources: ["docker"],
       matchPackageNames: [
-        "/flux-operator/",
-        "/flux-instance/"
+        "/kube-apiserver/",
+        "/kube-controller-manager/",
+        "/kube-proxy/",
+        "/kube-scheduler/",
+        "/kubelet/",
       ],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
-      minimumGroupSize: 4, // https://github.com/renovatebot/renovate/discussions/35005
+      minimumGroupSize: 5,
     },
     {
       description: "Rook-Ceph Group",
       groupName: "rook-ceph",
-      matchDatasources: [
-        "docker"
-      ],
-      matchPackageNames: [
-        "/rook-ceph/",
-        "/rook-ceph-cluster/"
-      ],
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/rook-ceph/", "/rook-ceph-cluster/"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
       minimumGroupSize: 2,
-    }
+    },
+    {
+      description: "Talos Group",
+      groupName: "talos",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/installer/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
   ],
 }
