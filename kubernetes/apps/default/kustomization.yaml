@@ -21,3 +21,4 @@ resources:
   - ./seerr/ks.yaml
   - ./tautulli/ks.yaml
   - ./sabnzbd/ks.yaml
+  - ./firefly/ks.yaml

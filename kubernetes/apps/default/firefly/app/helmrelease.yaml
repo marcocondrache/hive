@@ -1,0 +1,125 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: firefly
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: firefly
+  interval: 1h
+  values:
+    controllers:
+      cronjob:
+        type: cronjob
+        cronjob:
+          backoffLimit: 6
+          concurrencyPolicy: Forbid
+          failedJobsHistory: 1
+          schedule: "0 3 * * *"
+          startingDeadlineSeconds: 30
+          successfulJobsHistory: 1
+          suspend: false
+        containers:
+          cronjob:
+            image:
+              repository: mirror.gcr.io/curlimages/curl
+              tag: 8.19.0@sha256:b066cbf876d50a5d024927878a586c4a39c985325ded195e2e231f4abdddf3c8
+            command:
+              - curl
+              - --silent
+              - --show-error
+              - http://firefly:8080/api/v1/cron/$(STATIC_CRON_TOKEN)
+            env:
+              STATIC_CRON_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: "{{ .Release.Name }}-secret"
+                    key: STATIC_CRON_TOKEN
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 32Mi
+      firefly:
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/fireflyiii/core
+              tag: 6.5.9@sha256:fe4ecec4c2ba2b2978a32b3defaf270407f9fddf0e789a18648121ab84bb68d2
+            env:
+              TZ: Europe/Rome
+              TRUSTED_PROXIES: "**"
+              APP_URL: https://firefly.marcocondrache.com
+              DB_CONNECTION: sqlite
+            envFrom:
+              - secretRef:
+                  name: "{{ .Release.Name }}-secret"
+            probes:
+              liveness:
+                enabled: true
+                spec:
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8080
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 256Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 33
+        runAsGroup: 33
+        fsGroup: 33
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: firefly
+        ports:
+          http:
+            port: 8080
+    route:
+      app:
+        annotations:
+          gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 200"]
+        hostnames:
+          - "{{ .Release.Name }}.marcocondrache.com"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /var/www/html/storage/database
+      upload:
+        type: emptyDir
+        globalMounts:
+          - path: /var/www/html/storage/upload
+      tmp:
+        type: emptyDir
