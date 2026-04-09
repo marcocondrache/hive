@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: firefly
+  name: actual
 spec:
   components:
     - ../../../../components/volsync
@@ -11,12 +11,10 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   interval: 1h
-  path: ./kubernetes/apps/default/firefly/app
+  path: ./kubernetes/apps/default/actual/app
   postBuild:
     substitute:
-      APP: firefly
-      VOLSYNC_PUID: "33"
-      VOLSYNC_PGID: "33"
+      APP: actual
   prune: true
   sourceRef:
     kind: GitRepository
