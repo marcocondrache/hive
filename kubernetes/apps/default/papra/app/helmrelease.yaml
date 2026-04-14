@@ -14,19 +14,6 @@ spec:
       papra:
         annotations:
           reloader.stakater.com/auto: "true"
-
-        strategy: RollingUpdate
-
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups:
-              - 3000
-
         containers:
           app:
             image:
@@ -44,7 +31,6 @@ spec:
                   secretKeyRef:
                     name: "{{ .Release.Name }}-secret"
                     key: PAPRA_SECRET
-
             probes:
               liveness:
                 enabled: true
@@ -54,38 +40,25 @@ spec:
                 enabled: true
                 spec:
                   failureThreshold: 30
-                  periodSeconds: 5
+                  periodSeconds: 10
             resources:
               requests:
                 cpu: 25m
               limits:
                 memory: 512Mi
-
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [3000]
     service:
       app:
-        controller: papra
-        primary: true
         ports:
           http:
             port: *port
-
-    persistence:
-      data:
-        existingClaim: "{{ .Release.Name }}"
-        advancedMounts:
-          papra:
-            app:
-              - path: /app/app-data
-
-      nas:
-        type: nfs
-        server: nas.hive.internal
-        path: /mnt/tank/hive/papra
-        advancedMounts:
-          papra:
-            app:
-              - path: /app/ingestion
-
     route:
       app:
         hostnames:
@@ -93,8 +66,14 @@ spec:
         parentRefs:
           - name: envoy-internal
             namespace: network
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
+    persistence:
+      data:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /app/app-data
+      nas:
+        type: nfs
+        server: nas.hive.internal
+        path: /mnt/tank/hive/papra
+        globalMounts:
+          - path: /app/ingestion
