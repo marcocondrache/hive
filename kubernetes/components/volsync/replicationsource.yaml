@@ -21,7 +21,7 @@ spec:
       - mountPath: repository
         volumeSource:
           nfs:
-            path: /mnt/tank/hive/volsync-kopia
+            path: /mnt/fast/hive/volsync-kopia
             server: nas.hive.internal
     parallelism: 2
     repository: ${APP}-volsync-secret
