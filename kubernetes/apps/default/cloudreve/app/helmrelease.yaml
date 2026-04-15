@@ -1,0 +1,90 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudreve
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: cloudreve
+  interval: 1h
+  values:
+    controllers:
+      cloudreve:
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/cloudreve/cloudreve
+              tag: 4.15.0@sha256:a713a0421219af320e81f482c80a68576b049c39544df31734ffecdb8804f6da
+            env:
+              TZ: Europe/Rome
+            probes:
+              liveness:
+                enabled: true
+                spec:
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 5212
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.marcocondrache.com"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+    persistence:
+      data:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /cloudreve/data
+      config-file:
+        type: configMap
+        name: cloudreve-configmap
+        globalMounts:
+          - path: /cloudreve/data/conf.ini
+            subPath: conf.ini
+      uploads:
+        type: nfs
+        server: nas.hive.internal
+        path: /mnt/tank/hive/files
+        globalMounts:
+          - path: /uploads
+      tmp:
+        type: emptyDir

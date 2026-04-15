@@ -22,3 +22,4 @@ resources:
   - ./tautulli/ks.yaml
   - ./sabnzbd/ks.yaml
   - ./actual/ks.yaml
+  - ./cloudreve/ks.yaml
