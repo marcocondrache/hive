@@ -12,6 +12,7 @@ resources:
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
   - ./deduparr/ks.yaml
+  - ./recyclarr/ks.yaml
   - ./zigbee/ks.yaml
   - ./mosquitto/ks.yaml
   - ./home-assistant/ks.yaml
