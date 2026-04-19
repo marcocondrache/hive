@@ -11,6 +11,7 @@ resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
+  - ./deduparr/ks.yaml
   - ./zigbee/ks.yaml
   - ./mosquitto/ks.yaml
   - ./home-assistant/ks.yaml
