@@ -94,6 +94,7 @@ spec:
           - name: envoy-internal
             namespace: network
       spec:
+        useStrictSecurity: true
         externalURL: https://vmalertmanager.marcocondrache.com
         image:
           repository: quay.io/prometheus/alertmanager
