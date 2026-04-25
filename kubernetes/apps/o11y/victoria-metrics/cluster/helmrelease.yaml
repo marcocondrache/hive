@@ -120,15 +120,6 @@ spec:
       forceDeployDatasource: true
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
-    kubeControllerManager:
-      vmScrape:
-        spec:
-          endpoints:
-            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-              port: http-metrics
-              scheme: https
-              tlsConfig:
-                insecureSkipVerify: true
     kubeEtcd:
       service:
         selector:
@@ -139,15 +130,6 @@ spec:
         spec:
           endpoints:
             - scheme: http
-    kubeScheduler:
-      vmScrape:
-        spec:
-          endpoints:
-            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-              port: http-metrics
-              scheme: https
-              tlsConfig:
-                insecureSkipVerify: true
     kubelet:
       vmScrape:
         spec:
