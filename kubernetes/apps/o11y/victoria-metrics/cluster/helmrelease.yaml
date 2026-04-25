@@ -120,20 +120,6 @@ spec:
       forceDeployDatasource: true
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
-    kubeApiServer:
-      vmScrape:
-        spec:
-          metricRelabelConfigs:
-            - # Drop high cardinality labels
-              action: drop
-              sourceLabels:
-                - __name__
-              regex: (apiserver|etcd|rest_client)_request(|_sli|_slo)_duration_seconds_bucket
-            - # Drop high cardinality labels
-              action: drop
-              sourceLabels:
-                - __name__
-              regex: (apiserver_response_sizes_bucket|apiserver_watch_events_sizes_bucket)
     kubeControllerManager:
       vmScrape:
         spec:
