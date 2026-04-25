@@ -11,30 +11,16 @@ spec:
   interval: 1h
   values:
     fullnameOverride: victoria-metrics
-    server:
-      retentionPeriod: 100y
-      persistentVolume:
+    global:
+      image:
+        registry: quay.io
+    crds:
+      enabled: true
+    admissionWebhooks:
+      enabled: true
+      certManager:
         enabled: true
-        storageClassName: ceph-block
-        size: 50Gi
-      route:
-        enabled: true
-        hostnames:
-          - victoria-metrics.marcocondrache.com
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-        extraRules:
-          - filters:
-              - type: RequestRedirect
-                requestRedirect:
-                  path:
-                    type: ReplaceFullPath
-                    replaceFullPath: /vmui/
-                  statusCode: 302
-            matches:
-              - path:
-                  type: Exact
-                  value: /
-      serviceMonitor:
-        enabled: true
+    operator:
+      enable_converter_ownership: true
+    serviceMonitor:
+      enabled: true
