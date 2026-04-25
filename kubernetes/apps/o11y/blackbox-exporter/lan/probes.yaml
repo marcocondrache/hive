@@ -12,7 +12,7 @@ spec:
     staticConfig:
       static:
         - nas.hive.internal
-        - zigbee.controllers.internal
+        - queen.hive.internal
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan
@@ -22,8 +22,9 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: Probe
 metadata:
-  name: lan-tcp
+  name: lan-nfs
 spec:
+  jobName: nfs_probe
   module: tcp_connect
   prober:
     url: blackbox-exporter-lan.o11y.svc.cluster.local:9115
@@ -31,6 +32,25 @@ spec:
     staticConfig:
       static:
         - nas.hive.internal:2049
+  metricRelabelings:
+    - targetLabel: service
+      replacement: blackbox-exporter-lan
+      action: replace
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/probe_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: lan-zigbee
+spec:
+  jobName: zigbee_probe
+  module: icmp
+  prober:
+    url: blackbox-exporter-lan.o11y.svc.cluster.local:9115
+  targets:
+    staticConfig:
+      static:
+        - zigbee.controllers.internal
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan
