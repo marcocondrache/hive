@@ -55,7 +55,7 @@ spec:
           limits:
             memory: 1Gi
       storage:
-        devicePathFilter: /dev/disk/by-id/nvme-Samsung_SSD_990_PRO_1TB_S7HDNF0Y611456Y.*
+        deviceFilter: "^nvme[0-9]+n[0-9]+$"
         config:
           osdsPerDevice: "1"
         useAllDevices: false
