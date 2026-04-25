@@ -25,7 +25,7 @@ spec:
       route:
         enabled: true
         hostnames:
-          - vlogs.turbo.ac
+          - vlogs.marcocondrache.com
         parentRefs:
           - name: envoy-internal
             namespace: network
