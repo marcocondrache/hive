@@ -18,10 +18,9 @@
         ':timezone(Europe/Rome)',
     ],
     dependencyDashboardTitle: 'Renovate Dashboard 🤖',
-    suppressNotifications: [
-        'prEditedNotification',
-        'prIgnoreNotification',
-    ],
+    registryAliases: {
+        "mirror.gcr.io": "docker.io",
+    },
     ignorePaths: [
         '**/*.sops.*',
         '**/resources/**',
