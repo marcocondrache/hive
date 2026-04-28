@@ -12,8 +12,6 @@ resources:
   - ./k8s-gpu-dra-driver/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  - ./descheduler/ks.yaml
-  - ./irqbalance/ks.yaml
   - ./metrics-server/ks.yaml
   - ./snapshot-controller/ks.yaml
   - ./reloader/ks.yaml
