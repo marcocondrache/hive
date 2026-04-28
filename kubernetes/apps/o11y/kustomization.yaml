@@ -13,7 +13,6 @@ resources:
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./prometheus-adapter/ks.yaml
-  - ./kromgo/ks.yaml
   - ./silence-operator/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./nut-exporter/ks.yaml
