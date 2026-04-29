@@ -55,7 +55,7 @@ spec:
           limits:
             memory: 1Gi
       storage:
-        deviceFilter: "^nvme[0-9]+n[0-9]+$"
+        devicePathFilter: "^/dev/disk/by-path/pci-.*-nvme-1$"
         config:
           osdsPerDevice: "1"
         useAllDevices: false
