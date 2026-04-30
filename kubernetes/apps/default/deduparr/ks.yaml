@@ -5,8 +5,13 @@ kind: Kustomization
 metadata:
   name: deduparr
 spec:
+  components:
+    - ../../../../components/zeroscaler
   interval: 1h
   path: ./kubernetes/apps/default/deduparr/app
+  postBuild:
+    substitute:
+      APP: deduparr
   prune: true
   sourceRef:
     kind: GitRepository
