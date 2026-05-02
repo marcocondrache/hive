@@ -7,7 +7,7 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - nas.hive.internal:9100
+        - expanse.internal:9100
   metricsPath: /metrics
   relabelings:
     - action: replace
@@ -22,7 +22,7 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - nas.hive.internal:9633
+        - expanse.internal:9633
   metricsPath: /metrics
   relabelings:
     - action: replace
@@ -33,13 +33,15 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: onepassword-connect
+  name: jetkvm
 spec:
   staticConfigs:
     - targets:
-        - nas.hive.internal:7070
+        - jetkvm-0.internal
+        - jetkvm-1.internal
+        - jetkvm-2.internal
   metricsPath: /metrics
   relabelings:
     - action: replace
       targetLabel: job
-      replacement: onepassword-connect
+      replacement: jetkvm
