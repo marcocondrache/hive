@@ -193,15 +193,25 @@ selector:
   match: mac(link.permanent_addr) == "58:47:ca:7f:c1:0d"
 ---
 apiVersion: v1alpha1
-kind: LinkConfig
-name: net0
+kind: BondConfig
+name: bond0
+links:
+  - net0
+bondMode: active-backup
 mtu: 9000
-up: true
 ---
 apiVersion: v1alpha1
 kind: DHCPv4Config
-name: net0
+name: bond0
 clientIdentifier: mac
+---
+apiVersion: v1alpha1
+kind: VLANConfig
+name: bond0.4
+vlanID: 4
+vlanMode: 802.1q
+parent: bond0
+mtu: 9000
 ---
 apiVersion: v1alpha1
 kind: VolumeConfig
