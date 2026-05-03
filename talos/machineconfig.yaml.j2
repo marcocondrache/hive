@@ -64,7 +64,6 @@ machine:
     nodeIP:
       validSubnets:
         - 10.0.30.0/24
-        - 2a0d:3344:245b:2702::/64
   nodeLabels:
     node.kubernetes.io/gpu: "true"
     topology.kubernetes.io/region: main
@@ -151,7 +150,6 @@ cluster:
   etcd:
     advertisedSubnets:
       - 10.0.30.0/24
-      - 2a0d:3344:245b:2702::/64
     ca:
       crt: op://hive/talos/CERT_ETCD_CRT
       key: op://hive/talos/CERT_ETCD_KEY
