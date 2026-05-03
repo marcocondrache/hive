@@ -27,6 +27,7 @@ spec:
     ipv6NativeRoutingCIDR: fdf3:0f3a:242e:42::/108
 
     routingMode: native
+    devices: bond+
 
     autoDirectNodeRoutes: true
 
