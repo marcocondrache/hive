@@ -24,5 +24,6 @@ resources:
   - ./seerr/ks.yaml
   - ./tautulli/ks.yaml
   - ./sabnzbd/ks.yaml
+  - ./shelfmark/ks.yaml
   - ./actual/ks.yaml
   - ./cloudreve/ks.yaml
