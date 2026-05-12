@@ -48,6 +48,7 @@ spec:
     loadBalancer:
       mode: dsr
       algorithm: maglev
+      acceleration: best-effort
 
     rollOutCiliumPods: true
 
