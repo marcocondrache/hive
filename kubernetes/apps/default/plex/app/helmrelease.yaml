@@ -23,6 +23,7 @@ spec:
               TZ: Europe/Rome
               PLEX_ADVERTISE_URL: https://plex.marcocondrache.com:443,http://10.0.90.10:32400
               PLEX_NO_AUTH_NETWORKS: 10.0.20.0/24,10.0.100.0/24
+              XDG_CACHE_HOME: /cache
             probes:
               liveness:
                 enabled: true
@@ -112,5 +113,7 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
+      cache:
+        type: emptyDir
       tmp:
         type: emptyDir
