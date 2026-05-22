@@ -1,6 +1,4 @@
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
-  talhelper:
-    url: github:budimanjojo/talhelper
 allow_unfree: true

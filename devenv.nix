@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  inputs,
   ...
 }:
 let
@@ -22,7 +21,6 @@ in
   };
 
   packages = [
-    pkgs.go-task
     pkgs.helmfile
     pkgs.yamlfmt
     pkgs._1password-cli
@@ -41,7 +39,6 @@ in
     pkgs.gum
     pkgs.kustomize
     pkgs.kubectl-node-shell
-
-    inputs.talhelper.packages.${pkgs.system}.default
+    pkgs.vals
   ];
 }
