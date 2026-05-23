@@ -24,7 +24,7 @@ spec:
               ENABLE_REDIS_POOLING: true
               HLS_TEMP_DIR: /hls/tmp
               HLS_BROADCAST_DIR: /hls/broadcast
-              LOG_LEVEL: INFO
+              LOG_LEVEL: DEBUG
               PORT: &port 38085
               REDIS_DB: 6
               REDIS_ENABLED: true
