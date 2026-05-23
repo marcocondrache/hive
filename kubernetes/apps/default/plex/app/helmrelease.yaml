@@ -113,6 +113,9 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
+      transcode:
+        type: emptyDir
+        medium: Memory
       cache:
         type: emptyDir
       tmp:
