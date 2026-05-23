@@ -10,6 +10,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
+  - ./autobrr/ks.yaml
   - ./bazarr/ks.yaml
   - ./deduparr/ks.yaml
   - ./recyclarr/ks.yaml
