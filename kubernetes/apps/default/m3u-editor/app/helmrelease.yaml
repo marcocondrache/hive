@@ -3,31 +3,43 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: threadfin
+  name: m3u-editor
 spec:
   chartRef:
     kind: OCIRepository
-    name: threadfin
+    name: m3u-editor
   interval: 1h
   values:
     controllers:
-      threadfin:
+      m3u-editor:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: mirror.gcr.io/fyb3roptik/threadfin
-              tag: 1.2.37@sha256:96122ab220e14b881cbd40d7f8c7b022e1f9c6ecfe05aca2ab801e0321dc0d61
+              repository: mirror.gcr.io/sparkison/m3u-editor
+              tag: 0.11.43@sha256:77a08ed5dea1d525e9befea5b70db8a7f5e59d5f3c686475d97898879df36a78
             env:
-              THREADFIN_BRANCH: main
-              THREADFIN_DEBUG: 0
-              THREADFIN_PORT: &port 34400
+              APP_PORT: &port 36400
+              APP_URL: http://m3u.marcocondrache.com
+              DB_CONNECTION: sqlite
+              ENABLE_POSTGRES: false
+              M3U_PROXY_ENABLED: true
+              M3U_PROXY_HOST: 127.0.0.1
+              M3U_PROXY_LOG_LEVEL: ERROR
+              M3U_PROXY_PORT: 8085
+              NGINX_ENABLED: true
+              REDIS_ENABLED: true
+              SESSION_DRIVER: database
               TZ: Europe/Rome
             probes:
               liveness:
                 enabled: true
+                custom: true
                 spec:
+                  httpGet:
+                    path: /up
+                    port: *port
                   periodSeconds: 30
                   timeoutSeconds: 5
                   failureThreshold: 5
@@ -36,7 +48,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /up
                     port: *port
                   periodSeconds: 10
                   timeoutSeconds: 5
@@ -48,13 +60,11 @@ spec:
                   periodSeconds: 10
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 100m
               limits:
-                memory: 512Mi
+                memory: 2Gi
     defaultPodOptions:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
@@ -65,9 +75,6 @@ spec:
             "mac": "3e:d0:83:c0:8e:13"
           }]
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
@@ -78,7 +85,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
+          - m3u.marcocondrache.com
         parentRefs:
           - name: envoy-internal
             namespace: network
@@ -86,6 +93,9 @@ spec:
       config:
         existingClaim: "{{ .Release.Name }}"
         globalMounts:
-          - path: /home/threadfin/conf
+          - path: /var/www/config
+            subPath: config
+          - path: /var/www/html/storage/app/public
+            subPath: storage-public
       tmp:
         type: emptyDir
