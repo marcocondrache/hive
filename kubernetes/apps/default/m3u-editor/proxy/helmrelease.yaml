@@ -78,6 +78,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        clusterIP: 10.43.221.85
         ports:
           http:
             port: *port

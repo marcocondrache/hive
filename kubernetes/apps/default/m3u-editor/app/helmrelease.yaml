@@ -26,7 +26,7 @@ spec:
               DISABLE_SYNC_LOGS: true
               ENABLE_POSTGRES: false
               M3U_PROXY_ENABLED: false
-              M3U_PROXY_HOST: m3u-proxy.default.svc.cluster.local
+              M3U_PROXY_HOST: 10.43.221.85
               M3U_PROXY_PORT: 38085
               NGINX_ENABLED: true
               REDIS_ENABLED: false
