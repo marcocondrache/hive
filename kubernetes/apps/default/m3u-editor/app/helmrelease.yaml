@@ -23,6 +23,7 @@ spec:
               APP_PORT: &port 36400
               APP_URL: http://m3u.marcocondrache.com
               DB_CONNECTION: sqlite
+              DISABLE_SYNC_LOGS: true
               ENABLE_POSTGRES: false
               HLS_TEMP_DIR: /hls
               M3U_PROXY_ENABLED: true
