@@ -3,44 +3,43 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: m3u-editor
+  name: m3u-proxy
 spec:
   chartRef:
     kind: OCIRepository
-    name: m3u-editor
+    name: m3u-proxy
   interval: 1h
   values:
     controllers:
-      m3u-editor:
+      m3u-proxy:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: mirror.gcr.io/sparkison/m3u-editor
-              tag: 0.11.43@sha256:77a08ed5dea1d525e9befea5b70db8a7f5e59d5f3c686475d97898879df36a78
+              repository: mirror.gcr.io/sparkison/m3u-proxy
+              tag: 0.4.14@sha256:232abde531626b63e008ce01f1c55d5e31349223f7ba29553fbf9712c32721e6
             env:
-              APP_PORT: &port 36400
-              APP_URL: http://m3u.marcocondrache.com
-              DB_CONNECTION: sqlite
-              DISABLE_SYNC_LOGS: true
-              ENABLE_POSTGRES: false
-              M3U_PROXY_ENABLED: false
-              M3U_PROXY_HOST: m3u-proxy.default.svc.cluster.local
-              M3U_PROXY_PORT: 38085
-              NGINX_ENABLED: true
-              REDIS_ENABLED: false
+              CLEANUP_INTERVAL: 120
+              ENABLE_REDIS_POOLING: true
+              HLS_TEMP_DIR: /hls/tmp
+              HLS_BROADCAST_DIR: /hls/broadcast
+              LOG_LEVEL: INFO
+              PORT: &port 38085
+              REDIS_DB: 6
+              REDIS_ENABLED: true
               REDIS_HOST: m3u-editor-dragonfly.default.svc.cluster.local
-              REDIS_SERVER_PORT: 6379
-              SESSION_DRIVER: database
+              REDIS_POOL_MAX_CONNECTIONS: 25
+              REDIS_PORT: 6379
+              STREAM_TIMEOUT: 180
+              STRICT_LIVE_TS: true
               TZ: Europe/Rome
             probes:
               liveness:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /up
+                  tcpSocket:
                     port: *port
                   periodSeconds: 30
                   timeoutSeconds: 5
@@ -49,8 +48,7 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /up
+                  tcpSocket:
                     port: *port
                   periodSeconds: 10
                   timeoutSeconds: 5
@@ -64,17 +62,17 @@ spec:
               allowPrivilegeEscalation: false
             resources:
               requests:
-                cpu: 100m
+                cpu: 50m
               limits:
-                memory: 2Gi
+                memory: 512Mi
     defaultPodOptions:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
           [{
             "name": "vpn",
             "namespace": "kube-system",
-            "ips": ["10.0.100.10/24"],
-            "mac": "3e:d0:83:c0:8e:13"
+            "ips": ["10.0.100.11/24"],
+            "mac": "3e:d0:83:c0:8e:14"
           }]
       securityContext:
         fsGroup: 1000
@@ -84,20 +82,9 @@ spec:
         ports:
           http:
             port: *port
-    route:
-      app:
-        hostnames:
-          - m3u.marcocondrache.com
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
     persistence:
-      config:
-        existingClaim: "{{ .Release.Name }}"
-        globalMounts:
-          - path: /var/www/config
-            subPath: config
-          - path: /var/www/html/storage/app/public
-            subPath: storage-public
+      hls:
+        type: emptyDir
+        medium: Memory
       tmp:
         type: emptyDir

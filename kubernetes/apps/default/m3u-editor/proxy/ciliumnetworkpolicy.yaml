@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/cilium.io/ciliumnetworkpolicy_v2.json
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: m3u-proxy-deny-ipv6-egress
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: m3u-proxy
+  egressDeny:
+    - toCIDRSet:
+        - cidr: "::/0"
+  egress:
+    - toEntities:
+        - all
