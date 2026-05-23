@@ -24,6 +24,8 @@ spec:
               APP_URL: http://m3u.marcocondrache.com
               DB_CONNECTION: sqlite
               ENABLE_POSTGRES: false
+              HLS_BROADCAST_DIR: /tmp/m3u-editor/hls-segments
+              HLS_TEMP_DIR: /tmp/m3u-editor/hls-segments
               M3U_PROXY_ENABLED: true
               M3U_PROXY_HOST: 127.0.0.1
               M3U_PROXY_LOG_LEVEL: ERROR
@@ -66,7 +68,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 1Gi
+                memory: 2Gi
     defaultPodOptions:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
