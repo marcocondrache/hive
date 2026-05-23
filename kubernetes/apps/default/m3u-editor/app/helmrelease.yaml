@@ -24,8 +24,7 @@ spec:
               APP_URL: http://m3u.marcocondrache.com
               DB_CONNECTION: sqlite
               ENABLE_POSTGRES: false
-              HLS_BROADCAST_DIR: /tmp/m3u-editor/hls-segments
-              HLS_TEMP_DIR: /tmp/m3u-editor/hls-segments
+              HLS_TEMP_DIR: /hls
               M3U_PROXY_ENABLED: true
               M3U_PROXY_HOST: 127.0.0.1
               M3U_PROXY_LOG_LEVEL: ERROR
@@ -101,5 +100,8 @@ spec:
             subPath: config
           - path: /var/www/html/storage/app/public
             subPath: storage-public
+      hls:
+        type: emptyDir
+        medium: Memory
       tmp:
         type: emptyDir
