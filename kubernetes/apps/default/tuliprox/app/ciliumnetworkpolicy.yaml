@@ -3,11 +3,11 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: m3u-proxy-deny-ipv6-egress
+  name: tuliprox-deny-ipv6-egress
 spec:
   endpointSelector:
     matchLabels:
-      app.kubernetes.io/instance: m3u-proxy
+      app.kubernetes.io/instance: tuliprox
   egressDeny:
     - toCIDRSet:
         - cidr: "::/0"
