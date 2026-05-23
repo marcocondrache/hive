@@ -7,9 +7,12 @@ metadata:
 spec:
   components:
     - ../../../../components/volsync
+    - ../../../../components/dragonfly
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: dragonfly-operator
+      namespace: dragonfly-system
   interval: 1h
   path: ./kubernetes/apps/default/m3u-editor/app
   postBuild:
