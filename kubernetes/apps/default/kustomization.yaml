@@ -26,5 +26,6 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./shelfmark/ks.yaml
   - ./m3u-editor/ks.yaml
+  - ./tuliprox/ks.yaml
   - ./actual/ks.yaml
   - ./cloudreve/ks.yaml
