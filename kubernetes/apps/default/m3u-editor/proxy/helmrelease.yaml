@@ -22,7 +22,7 @@ spec:
             env:
               CLEANUP_INTERVAL: 120
               ENABLE_REDIS_POOLING: true
-              HLS_TEMP_DIR: /hls/tmp
+              HLS_TEMP_DIR: /hls
               HLS_BROADCAST_DIR: /hls/broadcast
               LOG_LEVEL: DEBUG
               PORT: &port 38085
