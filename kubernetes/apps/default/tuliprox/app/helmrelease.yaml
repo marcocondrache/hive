@@ -18,7 +18,7 @@ spec:
           app:
             image:
               repository: ghcr.io/euzu/tuliprox
-              tag: 3.3.0@sha256:3940211e60f2800b57be286d06fb7ffca8726e9e7a0d4be835cea040f84b0f2b
+              tag: 3.3.39@sha256:74a775d9fce3ac1e8eff9dc633110eff4ce47a9426b213a79f3c08443cbda931
             env:
               TZ: Europe/Rome
               TULIPROX_DOMAIN: tuliprox.marcocondrache.com
