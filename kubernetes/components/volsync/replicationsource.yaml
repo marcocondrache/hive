@@ -26,7 +26,7 @@ spec:
         volumeSource:
           nfs:
             path: /mnt/fast/hive/volsync-kopia
-            server: nas.hive.internal
+            server: nas.labx.internal
     parallelism: 2
     repository: ${APP}-volsync-secret
     retain:

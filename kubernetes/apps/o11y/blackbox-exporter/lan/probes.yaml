@@ -11,8 +11,8 @@ spec:
   targets:
     staticConfig:
       static:
-        - nas.hive.internal
-        - queen.hive.internal
+        - nas.labx.internal
+        - queen.labx.internal
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan
@@ -31,7 +31,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - nas.hive.internal:2049
+        - nas.labx.internal:2049
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan

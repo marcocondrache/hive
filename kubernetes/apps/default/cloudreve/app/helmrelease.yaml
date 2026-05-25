@@ -82,7 +82,7 @@ spec:
             subPath: conf.ini
       uploads:
         type: nfs
-        server: nas.hive.internal
+        server: nas.labx.internal
         path: /mnt/tank/hive/files
         globalMounts:
           - path: /uploads

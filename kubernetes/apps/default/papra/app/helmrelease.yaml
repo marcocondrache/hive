@@ -73,7 +73,7 @@ spec:
           - path: /app/app-data
       nas:
         type: nfs
-        server: nas.hive.internal
+        server: nas.labx.internal
         path: /mnt/tank/hive/papra
         globalMounts:
           - path: /app/ingestion

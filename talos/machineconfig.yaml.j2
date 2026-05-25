@@ -101,7 +101,7 @@ cluster:
     {% endif %}
   clusterName: hive
   controlPlane:
-    endpoint: https://k8s.hive.internal:6443
+    endpoint: https://k8s.labx.internal:6443
   discovery:
     enabled: true
     registries:
@@ -134,7 +134,7 @@ cluster:
       rules:
         - level: Metadata
     certSANs:
-      - k8s.hive.internal
+      - k8s.labx.internal
     disablePodSecurityPolicy: true
     extraArgs:
       enable-aggregator-routing: "true"

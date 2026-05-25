@@ -79,7 +79,7 @@ spec:
         existingClaim: "{{ .Release.Name }}"
       media:
         type: nfs
-        server: nas.hive.internal
+        server: nas.labx.internal
         path: /mnt/tank/hive/media
         globalMounts:
           - path: /media
