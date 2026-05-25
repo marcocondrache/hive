@@ -9,7 +9,7 @@ metadata:
       conditions: ["[STATUS] == 404"]
 spec:
   hostnames:
-    - "flux.marcocondrache.com"
+    - "flux.labx.sh"
   parentRefs:
     - name: envoy-external
       namespace: network

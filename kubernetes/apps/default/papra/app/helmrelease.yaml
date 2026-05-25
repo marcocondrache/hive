@@ -21,7 +21,7 @@ spec:
               tag: 26.4.2-rootless
             env:
               PORT: &port 8000
-              APP_BASE_URL: https://papra.marcocondrache.com
+              APP_BASE_URL: https://papra.labx.sh
               DOCUMENTS_OCR_LANGUAGES: eng,ita,ron
               INGESTION_FOLDER_IS_ENABLED: true
               INGESTION_FOLDER_POST_PROCESSING_STRATEGY: delete
@@ -62,7 +62,7 @@ spec:
     route:
       app:
         hostnames:
-          - papra.marcocondrache.com
+          - papra.labx.sh
         parentRefs:
           - name: envoy-internal
             namespace: network

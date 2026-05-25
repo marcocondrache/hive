@@ -90,8 +90,8 @@ spec:
         annotations:
           gatus.home-operations.com/enabled: "false"
         hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
-          - status.marcocondrache.com
+          - "{{ .Release.Name }}.labx.sh"
+          - status.labx.sh
         parentRefs:
           - name: envoy-external
             namespace: network

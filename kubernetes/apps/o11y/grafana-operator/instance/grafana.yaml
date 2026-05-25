@@ -58,7 +58,7 @@ spec:
   httpRoute:
     spec:
       hostnames:
-        - grafana.marcocondrache.com
+        - grafana.labx.sh
       parentRefs:
         - name: envoy-internal
           namespace: network

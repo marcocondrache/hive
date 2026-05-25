@@ -27,7 +27,7 @@ spec:
       route:
         enabled: true
         hostnames:
-          - vlogs.marcocondrache.com
+          - vlogs.labx.sh
         parentRefs:
           - name: envoy-internal
             namespace: network

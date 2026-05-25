@@ -56,7 +56,7 @@ spec:
       app:
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: mosquitto.marcocondrache.com
+          external-dns.alpha.kubernetes.io/hostname: mosquitto.labx.sh
           gatus.home-operations.com/endpoint: |-
             group: services
           lbipam.cilium.io/ips: 10.0.90.4

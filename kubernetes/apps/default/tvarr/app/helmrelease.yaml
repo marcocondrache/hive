@@ -22,7 +22,7 @@ spec:
               PGID: "1000"
               TZ: Europe/Rome
               TVARR_SERVER_PORT: &port 8080
-              TVARR_SERVER_BASE_URL: https://tvarr.marcocondrache.com
+              TVARR_SERVER_BASE_URL: https://tvarr.labx.sh
               TVARR_DATABASE_DSN: /data/tvarr.db
               TVARR_STORAGE_BASE_DIR: /data
               TVARR_LOGGING_LEVEL: info
@@ -90,7 +90,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
+          - "{{ .Release.Name }}.labx.sh"
         parentRefs:
           - name: envoy-internal
             namespace: network

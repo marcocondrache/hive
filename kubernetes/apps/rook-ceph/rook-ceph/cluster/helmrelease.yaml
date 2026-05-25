@@ -68,7 +68,7 @@ spec:
     route:
       dashboard:
         host:
-          name: rook.marcocondrache.com
+          name: rook.labx.sh
           path: /
           pathType: PathPrefix
         parentRefs:

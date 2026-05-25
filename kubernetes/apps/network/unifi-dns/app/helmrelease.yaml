@@ -45,7 +45,7 @@ spec:
     txtOwnerId: main
     txtPrefix: k8s.main.
     domainFilters:
-      - marcocondrache.com
+      - labx.sh
     serviceMonitor:
       enabled: true
     podAnnotations:

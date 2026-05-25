@@ -19,7 +19,7 @@ spec:
               tag: 5.0.3@sha256:53064020792b2e21305c892c11aaa1eb32af2141cbd59119b52df226d664cd05
             env:
               SABNZBD__PORT: &port 80
-              SABNZBD__HOST_WHITELIST_ENTRIES: sabnzbd.marcocondrache.com
+              SABNZBD__HOST_WHITELIST_ENTRIES: sabnzbd.labx.sh
               TZ: Europe/Rome
             envFrom:
               - secretRef:
@@ -70,7 +70,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
+          - "{{ .Release.Name }}.labx.sh"
         parentRefs:
           - name: envoy-internal
             namespace: network

@@ -21,7 +21,7 @@ spec:
               tag: 1.43.2.10687@sha256:be00a2ad851ea3193cd870636f908eb6425ad89390f23cdb08daa35ab5cceacc
             env:
               TZ: Europe/Rome
-              PLEX_ADVERTISE_URL: https://plex.marcocondrache.com:443,http://10.0.90.10:32400,http://plex.default.svc.cluster.local:32400
+              PLEX_ADVERTISE_URL: https://plex.labx.sh:443,http://10.0.90.10:32400,http://plex.default.svc.cluster.local:32400
               PLEX_NO_AUTH_NETWORKS: 10.0.20.0/24,10.0.100.0/24
               XDG_CACHE_HOME: /cache
             probes:
@@ -82,7 +82,7 @@ spec:
           gatus.home-operations.com/endpoint: |-
             path: /identity
         hostnames:
-          - "{{ .Release.Name }}.marcocondrache.com"
+          - "{{ .Release.Name }}.labx.sh"
         parentRefs:
           - name: envoy-external
             namespace: network

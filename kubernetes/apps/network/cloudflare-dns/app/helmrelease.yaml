@@ -39,7 +39,7 @@ spec:
     txtOwnerId: default
     txtPrefix: k8s.
     domainFilters:
-      - marcocondrache.com
+      - labx.sh
     serviceMonitor:
       enabled: true
     podAnnotations:

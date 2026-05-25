@@ -3,11 +3,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: marcocondrache-com
+  name: labx-sh
 spec:
   dnsNames:
-    - marcocondrache.com
-    - "*.marcocondrache.com"
+    - labx.sh
+    - "*.labx.sh"
   duration: 160h
   issuerRef:
     kind: ClusterIssuer
@@ -16,6 +16,6 @@ spec:
     algorithm: ECDSA
     size: 256
     rotationPolicy: Always
-  secretName: marcocondrache-com-tls
+  secretName: labx-sh-tls
   usages:
     - digital signature

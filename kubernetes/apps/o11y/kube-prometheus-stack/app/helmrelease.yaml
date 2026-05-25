@@ -20,14 +20,14 @@ spec:
         main:
           enabled: true
           hostnames:
-            - alertmanager.marcocondrache.com
+            - alertmanager.labx.sh
           parentRefs:
             - name: envoy-internal
               namespace: network
       alertmanagerSpec:
         alertmanagerConfiguration:
           name: alertmanager
-        externalUrl: https://alertmanager.marcocondrache.com
+        externalUrl: https://alertmanager.labx.sh
         storage:
           volumeClaimTemplate:
             spec:
@@ -46,12 +46,12 @@ spec:
         main:
           enabled: true
           hostnames:
-            - prometheus.marcocondrache.com
+            - prometheus.labx.sh
           parentRefs:
             - name: envoy-internal
               namespace: network
       prometheusSpec:
-        externalUrl: https://prometheus.marcocondrache.com
+        externalUrl: https://prometheus.labx.sh
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         ruleSelectorNilUsesHelmValues: false
