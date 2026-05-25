@@ -2,9 +2,9 @@
 version: v1alpha1
 machine:
   ca:
-    crt: op://hive/talos/CERT_OS_CRT
+    crt: ref+op://hive/talos/CERT_OS_CRT
     {% if ENV.CONTROLPLANE %}
-    key: op://hive/talos/CERT_OS_KEY
+    key: ref+op://hive/talos/CERT_OS_KEY
     {% endif %}
   features:
     apidCheckExtKeyUsage: true
@@ -92,12 +92,12 @@ machine:
     sunrpc.tcp_slot_table_entries: "128"
     user.max_user_namespaces: "11255"
     vm.nr_hugepages: "1024"
-  token: op://hive/talos/TRUSTDINFO_TOKEN
+  token: ref+op://hive/talos/TRUSTDINFO_TOKEN
 cluster:
   ca:
-    crt: op://hive/talos/CERT_K8S_CRT
+    crt: ref+op://hive/talos/CERT_K8S_CRT
     {% if ENV.CONTROLPLANE %}
-    key: op://hive/talos/CERT_K8S_KEY
+    key: ref+op://hive/talos/CERT_K8S_KEY
     {% endif %}
   clusterName: hive
   controlPlane:
@@ -109,7 +109,7 @@ cluster:
         disabled: true
       service:
         disabled: false
-  id: op://hive/talos/CLUSTER_ID
+  id: ref+op://hive/talos/CLUSTER_ID
   network:
     cni:
       name: none
@@ -120,12 +120,12 @@ cluster:
     serviceSubnets:
       - 10.43.0.0/16
       - fdf3:0f3a:242e:43::/108
-  secret: op://hive/talos/CLUSTER_SECRET
-  token: op://hive/talos/BOOTSTRAPTOKEN
+  secret: ref+op://hive/talos/CLUSTER_SECRET
+  token: ref+op://hive/talos/BOOTSTRAPTOKEN
   {% if ENV.CONTROLPLANE %}
   aggregatorCA:
-    crt: op://hive/talos/CERT_K8SAGGREGATOR_CRT
-    key: op://hive/talos/CERT_K8SAGGREGATOR_KEY
+    crt: ref+op://hive/talos/CERT_K8SAGGREGATOR_CRT
+    key: ref+op://hive/talos/CERT_K8SAGGREGATOR_KEY
   allowSchedulingOnControlPlanes: true
   apiServer:
     auditPolicy:
@@ -152,8 +152,8 @@ cluster:
     advertisedSubnets:
       - 10.0.30.0/24
     ca:
-      crt: op://hive/talos/CERT_ETCD_CRT
-      key: op://hive/talos/CERT_ETCD_KEY
+      crt: ref+op://hive/talos/CERT_ETCD_CRT
+      key: ref+op://hive/talos/CERT_ETCD_KEY
     extraArgs:
       listen-metrics-urls: http://0.0.0.0:2381
   proxy:
@@ -180,9 +180,9 @@ cluster:
     extraArgs:
       bind-address: 0.0.0.0
     image: registry.k8s.io/kube-scheduler:v1.36.1
-  secretboxEncryptionSecret: op://hive/talos/SECRETBOXENCRYPTIONSECRET
+  secretboxEncryptionSecret: ref+op://hive/talos/SECRETBOXENCRYPTIONSECRET
   serviceAccount:
-    key: op://hive/talos/CERT_K8SSERVICEACCOUNT_KEY
+    key: ref+op://hive/talos/CERT_K8SSERVICEACCOUNT_KEY
   {% endif %}
 ---
 apiVersion: v1alpha1
