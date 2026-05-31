@@ -21,8 +21,8 @@ in
   };
 
   packages = [
+    pkgs.oxfmt
     pkgs.helmfile
-    pkgs.yamlfmt
     pkgs._1password-cli
     pkgs.kubectl
     pkgs.fluxcd
@@ -31,7 +31,6 @@ in
     pkgs.cilium-cli
     pkgs.minijinja
     pkgs.talhelper
-    pkgs.kubefetch
     pkgs.talosctl
     pkgs.yq-go
     pkgs.hey
