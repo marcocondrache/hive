@@ -21,11 +21,11 @@ spec:
               tag: v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
             env:
               TZ: Europe/Rome
-              SOCKS5_ENABLED: "on"
-              SOCKS5_LISTENING_ADDRESS: ":1080"
+              HTTPPROXY: "on"
+              HTTPPROXY_LISTENING_ADDRESS: ":8080"
               DNS_UPSTREAM_IPV6: "on"
               HEALTH_SERVER_ADDRESS: ":9999"
-              FIREWALL_INPUT_PORTS: 9999,1080
+              FIREWALL_INPUT_PORTS: 9999,8080
             envFrom:
               - secretRef:
                   name: "{{ .Release.Name }}-secret"
@@ -68,8 +68,8 @@ spec:
           - IPv4
           - IPv6
         ports:
-          socks5:
-            port: 1080
+          httpProxy:
+            port: 8080
             protocol: TCP
     persistence:
       gluetun:
