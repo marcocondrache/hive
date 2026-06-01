@@ -9,6 +9,8 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: qbittorrent
       app.kubernetes.io/name: qbittorrent
+  enableDefaultDeny:
+    egress: false
   egressDeny:
     - toCIDR:
         - "2000::/3"
