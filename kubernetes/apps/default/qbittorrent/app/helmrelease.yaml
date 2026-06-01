@@ -60,7 +60,7 @@ spec:
             "namespace": "kube-system",
             "interface": "vpn0",
             "ips": ["10.0.100.30/24"],
-            "mac": "b8:27:eb:51:03:30"
+            "mac": "06:6B:38:73:64:1E"
           }]
       terminationGracePeriodSeconds: 300
       securityContext:
