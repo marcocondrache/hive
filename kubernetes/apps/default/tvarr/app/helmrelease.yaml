@@ -23,6 +23,7 @@ spec:
               TVARR_SERVER_BASE_URL: https://tvarr.labx.sh
               TVARR_DATABASE_DSN: /data/tvarr.db
               TVARR_STORAGE_BASE_DIR: /data
+              TVARR_LOGGING_FORMAT: text
             probes:
               liveness:
                 enabled: true
@@ -51,7 +52,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 2Gi
+                memory: 1Gi
     defaultPodOptions:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
