@@ -11,4 +11,4 @@ spec:
       app.kubernetes.io/name: qbittorrent
   egressDeny:
     - toCIDR:
-        - "::/0"
+        - "2000::/3"
