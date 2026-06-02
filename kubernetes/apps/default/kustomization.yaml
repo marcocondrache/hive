@@ -26,6 +26,7 @@ resources:
   - ./tautulli/ks.yaml
   - ./sabnzbd/ks.yaml
   - ./actual/ks.yaml
+  - ./pdf/ks.yaml
   - ./agregarr/ks.yaml
   - ./tvarr/ks.yaml
   - ./qui/ks.yaml

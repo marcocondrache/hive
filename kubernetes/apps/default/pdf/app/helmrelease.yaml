@@ -1,0 +1,93 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pdf
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: pdf
+  interval: 1h
+  values:
+    controllers:
+      pdf:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/alam00000/bentopdf-simple
+              tag: 2.8.5@sha256:268f3e4a1aeed5d7035b58ab1d679da85b7c559ac3d3c08eb2177520c3647e1f
+            env:
+              TZ: Europe/Rome
+            probes:
+              liveness:
+                enabled: true
+                spec:
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 8080
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.labx.sh"
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+            filters:
+              - type: ResponseHeaderModifier
+                responseHeaderModifier:
+                  set:
+                    - name: Cross-Origin-Opener-Policy
+                      value: same-origin
+                    - name: Cross-Origin-Embedder-Policy
+                      value: require-corp
+    persistence:
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /etc/nginx/tmp
+            subPath: etc-tmp
+          - path: /var/cache/nginx
+            subPath: cache
+          - path: /var/lib/nginx/tmp
+            subPath: var-tmp
