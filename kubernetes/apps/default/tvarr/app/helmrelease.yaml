@@ -15,8 +15,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/jmylchreest/tvarr
-              tag: 0.0.26@sha256:3daf9046c1f7d6a9d69c5f75e0a0ab2a646ddc84856378f96a2c1e7e92262596
+              repository: ghcr.io/marcocondrache/tvarr
+              tag: sha-6007643
             env:
               TZ: Europe/Rome
               TVARR_SERVER_PORT: &port 8080
