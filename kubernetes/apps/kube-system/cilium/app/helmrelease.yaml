@@ -88,10 +88,6 @@ spec:
       datapathMode: netkit
       preallocateMaps: true
 
-    encryption:
-      enabled: true
-      type: wireguard
-
     ipv4:
       enabled: true
     ipv6:
