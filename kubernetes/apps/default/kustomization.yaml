@@ -30,3 +30,4 @@ resources:
   - ./tvarr/ks.yaml
   - ./qui/ks.yaml
   - ./qbittorrent/ks.yaml
+  - ./notifier/ks.yaml
