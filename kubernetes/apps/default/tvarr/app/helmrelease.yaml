@@ -16,7 +16,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marcocondrache/tvarr
-              tag: sha-6007643
+              tag: sha-0491615
             env:
               TZ: Europe/Rome
               TVARR_SERVER_PORT: &port 8080
@@ -54,6 +54,8 @@ spec:
               limits:
                 memory: 1Gi
     defaultPodOptions:
+      imagePullSecrets:
+        - name: tvarr-pull-secret
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
           [{
