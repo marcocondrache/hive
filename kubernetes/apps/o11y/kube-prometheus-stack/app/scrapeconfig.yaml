@@ -28,18 +28,3 @@ spec:
     - action: replace
       targetLabel: job
       replacement: smartctl-exporter
----
-# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: onepassword-connect
-spec:
-  staticConfigs:
-    - targets:
-        - nas.labx.internal:7070
-  metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: onepassword-connect
