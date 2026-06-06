@@ -32,4 +32,3 @@ resources:
   - ./qui/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./notifier/ks.yaml
-  - ./dufs/ks.yaml
