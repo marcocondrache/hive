@@ -109,7 +109,7 @@ spec:
       media:
         type: nfs
         server: nas.labx.internal
-        path: /mnt/tank/hive/media
+        path: /mnt/tank/media
         globalMounts:
           - path: /media
             readOnly: true
