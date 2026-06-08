@@ -10,7 +10,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./certificates/ks.yaml
-  - ./cloudflare-tunnel/ks.yaml
+  - ./towonel-agent/ks.yaml
   - ./cloudflare-dns/ks.yaml
   - ./echo/ks.yaml
   - ./envoy-gateway/ks.yaml
