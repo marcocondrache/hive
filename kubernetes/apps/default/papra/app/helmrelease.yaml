@@ -71,9 +71,3 @@ spec:
         existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /app/app-data
-      nas:
-        type: nfs
-        server: nas.labx.internal
-        path: /mnt/tank/hive/papra
-        globalMounts:
-          - path: /app/ingestion
