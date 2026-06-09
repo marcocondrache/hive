@@ -20,7 +20,6 @@ resources:
   - ./plex/ks.yaml
   - ./radarr/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./opengist/ks.yaml
   - ./sonarr/ks.yaml
   - ./seerr/ks.yaml
   - ./tautulli/ks.yaml
