@@ -12,6 +12,9 @@ spec:
   values:
     config:
       repo: github://marcocondrache/hive
+      statusChecks: true
+      prComments: true
+      publicUrl: https://{{ .Release.Name }}.labx.sh
     secret:
       existingSecret: konflate-webhook-token-secret
     httpRoute:
