@@ -27,7 +27,7 @@ resources:
   - ./actual/ks.yaml
   - ./pdf/ks.yaml
   - ./agregarr/ks.yaml
-  - ./tvarr/ks.yaml
+  # - ./tvarr/ks.yaml
   - ./qui/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./notifier/ks.yaml
