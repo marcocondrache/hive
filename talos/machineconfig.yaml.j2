@@ -224,9 +224,7 @@ name: EPHEMERAL
 provisioning:
   diskSelector:
     match: disk.transport == "nvme" && system_disk
-  grow: false
-  minSize: 500GiB
-  maxSize: 500GiB
+  maxSize: 50%
 ---
 apiVersion: v1alpha1
 kind: UserVolumeConfig
@@ -235,7 +233,6 @@ provisioning:
   diskSelector:
     match: disk.transport == "nvme" && system_disk
   minSize: 300GiB
-  grow: true
 ---
 apiVersion: v1alpha1
 kind: WatchdogTimerConfig
