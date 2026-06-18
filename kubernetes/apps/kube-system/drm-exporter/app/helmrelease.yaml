@@ -10,6 +10,8 @@ spec:
     name: drm-exporter
   interval: 1h
   values:
+    config:
+      logLevel: trace
     dra:
       enabled: true
       deviceClassName: gpu.amd.com
