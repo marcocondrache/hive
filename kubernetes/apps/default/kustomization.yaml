@@ -28,4 +28,4 @@ resources:
   - ./pdf/ks.yaml
   - ./agregarr/ks.yaml
   # - ./tvarr/ks.yaml
-  - ./notifier/ks.yaml
+  - ./chaski/ks.yaml
