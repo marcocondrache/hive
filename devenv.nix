@@ -10,6 +10,7 @@ in
   name = "hive";
 
   dotenv.enable = true;
+  stdenv = pkgs.stdenvNoCC;
 
   env = {
     "HELM_PLUGINS" = config.env.DEVENV_PROFILE;
