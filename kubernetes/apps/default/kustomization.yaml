@@ -17,6 +17,7 @@ resources:
   - ./mosquitto/ks.yaml
   - ./home-assistant/ks.yaml
   - ./papra/ks.yaml
+  - ./lubelogger/ks.yaml
   - ./plex/ks.yaml
   - ./radarr/ks.yaml
   - ./prowlarr/ks.yaml
