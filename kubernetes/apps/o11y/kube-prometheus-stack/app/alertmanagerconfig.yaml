@@ -14,6 +14,12 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
+      - receiver: home-assistant
+        continue: true
+        matchers:
+          - name: home_assistant
+            value: "true"
+            matchType: =
       - receiver: heartbeat
         groupInterval: 2m
         groupWait: 0s
@@ -49,6 +55,12 @@ spec:
 
   receivers:
     - name: blackhole
+    - name: home-assistant
+      webhookConfigs:
+        - sendResolved: true
+          urlSecret:
+            name: alertmanager-secret
+            key: ALERTMANAGER_HOME_ASSISTANT_URL
     - name: heartbeat
       webhookConfigs:
         - urlSecret:

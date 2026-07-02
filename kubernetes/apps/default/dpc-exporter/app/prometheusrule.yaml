@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/monitoring.coreos.com/prometheusrule_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: dpc-exporter-rules
+spec:
+  groups:
+    - name: dpc-exporter.rules
+      rules:
+        - alert: DpcHailApproaching
+          expr: |-
+            dpc_hail_probability{scope="area"} > 0.5
+          for: 0m
+          annotations:
+            summary: >-
+              Hail cell approaching: DPC probability of hail {{ $value | humanizePercentage }} within the monitored radius
+          labels:
+            severity: warning
+            home_assistant: "true"
+
+        - alert: DpcHailImminent
+          expr: |-
+            dpc_hail_probability{scope="area"} > 0.8
+          for: 0m
+          annotations:
+            summary: >-
+              Imminent hail: DPC probability of hail {{ $value | humanizePercentage }} within the monitored radius
+          labels:
+            severity: critical
+            home_assistant: "true"
+
+        - alert: DpcHeavyRain
+          expr: |-
+            dpc_rain_intensity_mmh{scope="center"} > 30
+          for: 5m
+          annotations:
+            summary: >-
+              Heavy rain at location: {{ $value | printf "%.0f" }} mm/h surface rainfall intensity
+          labels:
+            severity: warning
+            home_assistant: "true"
+
+        - alert: DpcExporterStale
+          expr: |-
+            time() - dpc_frame_timestamp_seconds > 900
+          for: 5m
+          annotations:
+            summary: >-
+              dpc-exporter data is stale: last DPC frame is {{ $value | humanizeDuration }} old
+          labels:
+            severity: critical
